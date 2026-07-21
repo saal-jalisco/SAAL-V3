@@ -6,118 +6,23 @@
     <title>SAAL - Modo Lector</title>
     <link rel="stylesheet" href="css/estilo.css">
     <style>
-        body {
-            background: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container-lector {
-            max-width: 700px;
-            width: 100%;
-            background: white;
-            border-radius: 30px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .header-lector {
-            background: #e85f2f;
-            color: white;
-            padding: 20px;
-            border-radius: 20px 20px 0 0;
-            margin: -25px -25px 20px -25px;
-        }
+        body { background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container-lector { max-width: 700px; width: 100%; background: white; border-radius: 30px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .header-lector { background: #e85f2f; color: white; padding: 20px; border-radius: 20px 20px 0 0; margin: -25px -25px 20px -25px; }
         .header-lector h1 { font-size: 1.8rem; margin: 0; }
         .header-lector p { opacity: 0.9; margin: 5px 0 0; }
-        .codigo-input {
-            margin: 20px 0;
-        }
-        .codigo-input label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #404f55;
-        }
-        .codigo-input input {
-            width: 100%;
-            max-width: 200px;
-            padding: 14px;
-            font-size: 1.5rem;
-            text-align: center;
-            letter-spacing: 8px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .codigo-input input:focus {
-            border-color: #e85f2f;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(232,95,47,0.2);
-        }
-        .btn-validar {
-            background: #e85f2f;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.2s;
-            width: 100%;
-            max-width: 200px;
-        }
-        .btn-validar:hover {
-            background: #d35400;
-        }
-        .texto-lectura-lector {
-            background: #fff8e7;
-            border-left: 8px solid #3498db;
-            padding: 20px;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin: 20px 0;
-            font-family: 'Georgia', serif;
-            border-radius: 16px;
-            text-align: left;
-        }
-        .mensaje-error {
-            color: #e74c3c;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .mensaje-exito {
-            color: #27ae60;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .instruccion-lector {
-            background: #e8f0fe;
-            padding: 16px;
-            border-radius: 12px;
-            margin: 16px 0;
-            font-size: 0.95rem;
-        }
-        .btn-regresar-lector {
-            display: inline-block;
-            margin-top: 15px;
-            background: #404f55;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .btn-regresar-lector:hover {
-            background: #2c3e50;
-        }
+        .codigo-input { margin: 20px 0; }
+        .codigo-input label { display: block; font-weight: bold; margin-bottom: 8px; color: #404f55; }
+        .codigo-input input { width: 100%; max-width: 200px; padding: 14px; font-size: 1.5rem; text-align: center; letter-spacing: 8px; border: 2px solid #ddd; border-radius: 12px; font-weight: bold; text-transform: uppercase; }
+        .codigo-input input:focus { border-color: #e85f2f; outline: none; box-shadow: 0 0 0 3px rgba(232,95,47,0.2); }
+        .btn-validar { background: #e85f2f; color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; width: 100%; max-width: 200px; }
+        .btn-validar:hover { background: #d35400; }
+        .texto-lectura-lector { background: #fff8e7; border-left: 8px solid #3498db; padding: 20px; font-size: 1.2rem; line-height: 1.6; margin: 20px 0; font-family: 'Georgia', serif; border-radius: 16px; text-align: left; }
+        .mensaje-error { color: #e74c3c; font-weight: bold; margin-top: 10px; }
+        .mensaje-exito { color: #27ae60; font-weight: bold; margin-top: 10px; }
+        .instruccion-lector { background: #e8f0fe; padding: 16px; border-radius: 12px; margin: 16px 0; font-size: 0.95rem; }
+        .btn-regresar-lector { display: inline-block; margin-top: 15px; background: #404f55; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .btn-regresar-lector:hover { background: #2c3e50; }
     </style>
 </head>
 <body>
@@ -149,6 +54,7 @@
     <div id="pantallaTexto" style="display:none;">
         <div class="instruccion-lector" style="background:#d4edda;">
             <p>📢 <strong>¡Texto cargado!</strong> Lee en voz alta con calma.</p>
+            <p id="tituloTextoMostrado" style="font-size:0.8rem; opacity:0.8;"></p>
         </div>
 
         <div id="textoMostrado" class="texto-lectura-lector"></div>
@@ -159,8 +65,27 @@
     </div>
 </div>
 
+<script src="js/datos.js"></script>
 <script>
-    // ===== MODO LECTOR - SAAL =====
+    // ============================================================
+    // MODO LECTOR - SAAL (Versión mejorada)
+    // Busca el texto en el banco de textos por su título y contenido
+    // ============================================================
+
+    // Función para buscar un texto en el banco de textos por su título y contenido
+    function buscarTextoPorTituloYContenido(titulo, contenido) {
+        // Recorrer todos los grados en el banco de textos
+        for (const grado in bancoTextos) {
+            const textos = bancoTextos[grado];
+            for (const texto of textos) {
+                if (texto.titulo === titulo && texto.contenido === contenido) {
+                    return texto;
+                }
+            }
+        }
+        return null;
+    }
+
     function validarCodigo() {
         const input = document.getElementById('codigoSesionInput');
         const codigo = input.value.trim().toUpperCase();
@@ -184,21 +109,30 @@
             const datos = JSON.parse(datosGuardados);
             const texto = datos.texto;
 
+            if (!texto || !texto.titulo || !texto.contenido) {
+                mensaje.innerHTML = '<p class="mensaje-error">❌ El texto no está disponible. Intenta de nuevo.</p>';
+                return;
+            }
+
+            // Buscar el texto en el banco de textos para validar que existe
+            const textoEncontrado = buscarTextoPorTituloYContenido(texto.titulo, texto.contenido);
+
+            if (!textoEncontrado) {
+                mensaje.innerHTML = '<p class="mensaje-error">❌ El texto no se encontró en el sistema. Verifica con tu maestro.</p>';
+                return;
+            }
+
             // Mostrar el texto
-            document.getElementById('textoMostrado').innerHTML = `<p>${texto.contenido}</p>`;
+            document.getElementById('textoMostrado').innerHTML = `<p>${textoEncontrado.contenido}</p>`;
+            document.getElementById('tituloTextoMostrado').textContent = `📖 ${textoEncontrado.titulo} (${textoEncontrado.palabras || '?'} palabras)`;
             document.getElementById('pantallaCodigo').style.display = 'none';
             document.getElementById('pantallaTexto').style.display = 'block';
             mensaje.innerHTML = '';
             input.value = '';
 
-            // Opcional: mostrar el título del texto
-            const titulo = texto.titulo || 'Texto de lectura';
-            document.querySelector('#pantallaTexto .instruccion-lector').innerHTML =
-                `<p>📢 <strong>¡Texto cargado!</strong> Lee en voz alta con calma.</p>
-                 <p style="font-size:0.8rem; opacity:0.8;">📖 ${titulo} (${texto.palabras || '?'} palabras)</p>`;
-
         } catch (e) {
             mensaje.innerHTML = '<p class="mensaje-error">❌ Error al cargar el texto. Intenta de nuevo.</p>';
+            console.error(e);
         }
     }
 
