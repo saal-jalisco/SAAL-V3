@@ -6,7 +6,7 @@
 // ===== TEXTOS DE 1° SECUNDARIA =====
 const bancoTextos = {
     secundaria1: [
-        // ---- Texto 1: "El origen del chocolate" (579 palabras) ----
+        // ---- Texto 1: "El origen del chocolate" ----
         {
             titulo: "El origen del chocolate",
             palabras: 579,
@@ -35,8 +35,7 @@ El chocolate es mucho más que un dulce. Es el resultado de una historia milenar
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
         },
-
-        // ---- Texto 2: "El ecoturismo" (585 palabras) ----
+        // ---- Texto 2: "El ecoturismo" ----
         {
             titulo: "El ecoturismo",
             palabras: 585,
@@ -63,8 +62,7 @@ En conclusión, el ecoturismo representa una forma de viajar que combina el plac
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
         },
-
-        // ---- Texto 3: "La historia de los números" (564 palabras) ----
+        // ---- Texto 3: "La historia de los números" ----
         {
             titulo: "La historia de los números",
             palabras: 564,
@@ -91,8 +89,7 @@ La historia de los números es la historia del pensamiento humano. Cada paso en 
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
         },
-
-        // ---- Texto 4: "El viaje de los vikingos" (576 palabras) ----
+        // ---- Texto 4: "El viaje de los vikingos" ----
         {
             titulo: "El viaje de los vikingos",
             palabras: 576,
@@ -121,9 +118,7 @@ En resumen, los vikingos fueron mucho más que temibles guerreros. Fueron explor
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
         },
-
-        // ---- Texto 5: "Cuento en forma de carta" (566 palabras) ----
-        // ---- (del manual de secundaria que me compartiste) ----
+        // ---- Texto 5: "Cuento en forma de carta" ----
         {
             titulo: "Cuento en forma de carta",
             palabras: 566,
