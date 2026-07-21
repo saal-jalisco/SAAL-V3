@@ -25,8 +25,29 @@
             <p>📢 <strong>¡Hola! Vamos a hacer una lectura en voz alta.</strong></p>
             <p>Lee el texto con calma. No es un examen, solo queremos ver cómo lees.</p>
             <p class="texto-ayuda">⏱️ El tiempo no está asociado con tu desempeño.</p>
-            <p class="texto-ayuda">🎲 <strong>Texto aleatorio:</strong> Cada alumno puede recibir un texto diferente.</p>
             <button class="btn-accion" onclick="mostrarTexto()">📖 Ver el texto y comenzar</button>
+        </div>
+    </div>
+
+    <!-- ===== NUEVO: SELECTOR DE MODO DE TEXTO (visible solo para el aplicador) ===== -->
+    <div id="selectorTextoArea" style="display: block;">
+        <div class="selector-texto">
+            <h3>📄 Selecciona el modo de texto</h3>
+            <div class="opciones-texto">
+                <button class="btn-texto activo" id="btnTextoFijo" onclick="seleccionarModoTexto('fijo')">
+                    📌 Texto fijo
+                    <span class="texto-ayuda">El mismo texto para todos los alumnos</span>
+                </button>
+                <button class="btn-texto" id="btnTextoAleatorio" onclick="seleccionarModoTexto('aleatorio')">
+                    🎲 Texto aleatorio
+                    <span class="texto-ayuda">Cada alumno recibe un texto diferente</span>
+                </button>
+            </div>
+            <div class="info-texto">
+                <p>📖 <strong>Texto seleccionado:</strong> <span id="nombreTextoSeleccionado">Cargando...</span></p>
+                <p class="texto-ayuda">🔹 <span id="modoTextoActual">Modo fijo</span> · <span id="palabrasTextoActual">0 palabras</span></p>
+            </div>
+            <button class="btn-cambiar-texto" onclick="cambiarTexto()">🔄 Cambiar texto</button>
         </div>
     </div>
 
@@ -79,21 +100,60 @@
     // ===== CARGAR DATOS DEL ALUMNO =====
     document.getElementById('nombreAlumno').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
 
-    // ===== SELECCIÓN ALEATORIA DE TEXTO =====
-    function seleccionarTextoAleatorio() {
-        const textos = bancoTextos[GRADO];
-        if (!textos || textos.length === 0) {
+    // ===== VARIABLES DE TEXTO =====
+    let modoTexto = 'fijo'; // 'fijo' o 'aleatorio'
+    let textoActual = null;
+    let indiceTextoActual = 0;
+    let textosDisponibles = [];
+
+    function cargarTextos() {
+        textosDisponibles = bancoTextos[GRADO] || [];
+        if (textosDisponibles.length === 0) {
             alert('No hay textos disponibles para este grado.');
-            return null;
+            return;
         }
-        const indice = Math.floor(Math.random() * textos.length);
-        return textos[indice];
+        indiceTextoActual = 0;
+        textoActual = textosDisponibles[0];
+        actualizarInfoTexto();
     }
 
-    // ===== TEXTO SELECCIONADO =====
-    let textoActual = seleccionarTextoAleatorio();
-    if (textoActual) {
-        document.getElementById('nombreTexto').textContent = textoActual.titulo + ' (' + textoActual.palabras + ' palabras)';
+    function actualizarInfoTexto() {
+        if (textoActual) {
+            document.getElementById('nombreTextoSeleccionado').textContent = textoActual.titulo;
+            document.getElementById('nombreTexto').textContent = textoActual.titulo + ' (' + textoActual.palabras + ' palabras)';
+            document.getElementById('palabrasTextoActual').textContent = textoActual.palabras + ' palabras';
+            document.getElementById('modoTextoActual').textContent = modoTexto === 'fijo' ? 'Modo fijo' : '🎲 Modo aleatorio';
+        }
+    }
+
+    function seleccionarModoTexto(modo) {
+        modoTexto = modo;
+        document.getElementById('btnTextoFijo').classList.toggle('activo', modo === 'fijo');
+        document.getElementById('btnTextoAleatorio').classList.toggle('activo', modo === 'aleatorio');
+        seleccionarNuevoTexto();
+    }
+
+    function seleccionarNuevoTexto() {
+        if (textosDisponibles.length === 0) return;
+        
+        if (modoTexto === 'aleatorio') {
+            const nuevoIndice = Math.floor(Math.random() * textosDisponibles.length);
+            textoActual = textosDisponibles[nuevoIndice];
+        } else {
+            // Modo fijo: avanzar al siguiente texto en orden (ciclo)
+            indiceTextoActual = (indiceTextoActual + 1) % textosDisponibles.length;
+            textoActual = textosDisponibles[indiceTextoActual];
+        }
+        actualizarInfoTexto();
+        // Si el texto ya está visible, actualizarlo
+        const textoElement = document.getElementById('textoLectura');
+        if (textoElement && textoActual) {
+            textoElement.innerHTML = `<p>${textoActual.contenido}</p>`;
+        }
+    }
+
+    function cambiarTexto() {
+        seleccionarNuevoTexto();
     }
 
     // ===== MOSTRAR TEXTO =====
@@ -289,7 +349,6 @@
         const parent = btn.parentElement;
         parent.querySelectorAll('.btn-respuesta').forEach(b => b.classList.remove('seleccionada'));
         btn.classList.add('seleccionada');
-        // Aquí se puede conectar con la lógica de puntuación de comprensión
     }
 
     // ===== GENERAR FICHA =====
@@ -305,6 +364,7 @@
                 <p><strong>Alumno(a):</strong> ${nombre}</p>
                 <p><strong>Grado:</strong> ${NOMBRE_GRADO}</p>
                 <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
+                <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Texto fijo' : '🎲 Texto aleatorio'}</p>
                 <p><strong>Fecha:</strong> ${fecha}</p>
                 <hr>
                 <h3>Resultado general:</h3>
@@ -325,7 +385,7 @@
                 </ul>
                 <hr>
                 <p style="font-size: 0.8rem;">SAAL: Sistema de Alerta y Acompañamiento LEO - Jalisco</p>
-                <p style="font-size: 0.7rem;">Versión 3.0 - Prueba de selección aleatoria</p>
+                <p style="font-size: 0.7rem;">Versión 3.0</p>
             </div>
         `;
 
@@ -340,6 +400,9 @@
             window.location.reload();
         }
     }
+
+    // ===== INICIALIZAR =====
+    cargarTextos();
 </script>
 </body>
 </html>
