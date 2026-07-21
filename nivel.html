@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAAL - Nivel educativo</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="container">
+    <a href="datos.html" class="boton-regresar">← Datos del alumno</a>
+    <div class="header">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
+        </div>
+        <h1>📖 SAAL</h1>
+        <p>Selecciona el nivel educativo</p>
+        <p class="subtitulo">Alumno: <span id="nombreDisplay"></span></p>
+    </div>
+
+    <div class="menu-principal">
+        <a href="primaria.html" class="btn-nivel-sistema">🎓 Primaria</a>
+        <a href="secundaria.html" class="btn-nivel-sistema">🎓 Secundaria</a>
+    </div>
+</div>
+<script>
+    document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+
+    // Si no hay nombre, redirigir a datos
+    if (!localStorage.getItem('nombreAlumno')) {
+        window.location.href = 'datos.html';
+    }
+</script>
+</body>
+</html>
