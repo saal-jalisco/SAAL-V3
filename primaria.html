@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAAL - Primaria</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="container">
+    <a href="datos.html" class="boton-regresar">← Datos del alumno</a>
+    <div class="header">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
+        </div>
+        <h1>📖 SAAL</h1>
+        <p>Selecciona el grado de primaria</p>
+        <p class="subtitulo">Alumno: <span id="nombreDisplay"></span></p>
+    </div>
+
+    <div class="menu-grados">
+        <a href="grado1.html" class="btn-grado">🎓 1° grado</a>
+        <a href="grado2.html" class="btn-grado">🎓 2° grado</a>
+        <a href="grado3.html" class="btn-grado">🎓 3° grado</a>
+        <a href="grado4.html" class="btn-grado">🎓 4° grado</a>
+        <a href="grado5.html" class="btn-grado">🎓 5° grado</a>
+        <a href="grado6.html" class="btn-grado">🎓 6° grado</a>
+    </div>
+</div>
+<script>
+    // Mostrar el nombre del alumno desde localStorage
+    document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+</script>
+</body>
+</html>

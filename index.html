@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAAL - Inicio</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e85f2f">
+</head>
+<body>
+<div class="container-portada">
+    <div class="header-portada">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
+        </div>
+        <h1>📖 SAAL</h1>
+        <p>Sistema de Alerta y Acompañamiento LEO</p>
+        <p class="subtitulo">Evaluación de habilidades lectoras</p>
+        <p class="version">Versión 3.0</p>
+    </div>
+
+    <div class="menu-principal">
+        <!-- Botón para comenzar (redirige a datos.html) -->
+        <a href="datos.html" class="btn-iniciar">🚀 Comenzar evaluación</a>
+    </div>
+
+    <div class="info-portada">
+        <p>Antes de empezar, necesitamos algunos datos del alumno y del aplicador.</p>
+        <p class="texto-ayuda" style="margin-top:10px;">📘 <a href="#" onclick="mostrarGuia()">Guía rápida para docentes</a></p>
+    </div>
+</div>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(() => console.log('Service Worker registrado'))
+            .catch(err => console.log('Error SW:', err));
+    }
+    function mostrarGuia() {
+        alert("📘 Guía rápida para docentes:\n\n1. Prepara un espacio tranquilo.\n2. Elige cómo leerá el alumno (impreso o pantalla).\n3. Si usas dos dispositivos, usa el código de sesión.\n4. Marca la rúbrica mientras escuchas.\n5. Haz las preguntas de comprensión oralmente.\n6. Genera la ficha diagnóstica.\n\n📎 Enlace: " + window.location.href);
+    }
+</script>
+</body>
+</html>

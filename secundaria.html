@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAAL - Secundaria</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="container">
+    <a href="datos.html" class="boton-regresar">← Datos del alumno</a>
+    <div class="header">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
+        </div>
+        <h1>📖 SAAL</h1>
+        <p>Selecciona el grado de secundaria</p>
+        <p class="subtitulo">Alumno: <span id="nombreDisplay"></span></p>
+    </div>
+
+    <div class="menu-grados">
+        <a href="grado1sec.html" class="btn-grado">🎓 1° secundaria</a>
+        <a href="grado2sec.html" class="btn-grado">🎓 2° secundaria</a>
+        <a href="grado3sec.html" class="btn-grado">🎓 3° secundaria</a>
+    </div>
+</div>
+<script>
+    document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+</script>
+</body>
+</html>
