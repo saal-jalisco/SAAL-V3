@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <a href="datos.html" class="boton-regresar">← Datos del alumno</a>
+    <a href="nivel.html" class="boton-regresar">← Nivel educativo</a>
     <div class="header">
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
@@ -19,17 +19,22 @@
     </div>
 
     <div class="menu-grados">
-        <a href="grado1.html" class="btn-grado">🎓 1° grado</a>
-        <a href="grado2.html" class="btn-grado">🎓 2° grado</a>
-        <a href="grado3.html" class="btn-grado">🎓 3° grado</a>
-        <a href="grado4.html" class="btn-grado">🎓 4° grado</a>
-        <a href="grado5.html" class="btn-grado">🎓 5° grado</a>
-        <a href="grado6.html" class="btn-grado">🎓 6° grado</a>
+        <button class="btn-grado" onclick="seleccionarGrado(1)">🎓 1° grado</button>
+        <button class="btn-grado" onclick="seleccionarGrado(2)">🎓 2° grado</button>
+        <button class="btn-grado" onclick="seleccionarGrado(3)">🎓 3° grado</button>
+        <button class="btn-grado" onclick="seleccionarGrado(4)">🎓 4° grado</button>
+        <button class="btn-grado" onclick="seleccionarGrado(5)">🎓 5° grado</button>
+        <button class="btn-grado" onclick="seleccionarGrado(6)">🎓 6° grado</button>
     </div>
 </div>
 <script>
-    // Mostrar el nombre del alumno desde localStorage
     document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+
+    function seleccionarGrado(grado) {
+        localStorage.setItem('grado', grado);
+        localStorage.setItem('nivel', 'primaria');
+        window.location.href = `grado${grado}.html`;
+    }
 </script>
 </body>
 </html>
