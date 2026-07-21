@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAAL - 1° Secundaria</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<div class="container">
+    <a href="secundaria.html" class="boton-regresar">← Seleccionar otro grado</a>
+    <div class="header">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
+        </div>
+        <h1>📖 SAAL</h1>
+        <p>Evaluación de lectura - 1° secundaria</p>
+        <p class="subtitulo" id="nombreAlumnoDisplay">Alumno: <span id="nombreAlumno"></span></p>
+        <p id="textoSeleccionadoDisplay" style="font-size:0.9rem; opacity:0.9; margin-top:5px;">📖 Texto: <span id="nombreTexto">Cargando...</span></p>
+    </div>
+
+    <!-- ===== INSTRUCCIONES INICIALES ===== -->
+    <div class="instrucciones-iniciales" id="instruccionesIniciales">
+        <div class="mensaje-instruccion">
+            <p>📢 <strong>¡Hola! Vamos a hacer una lectura en voz alta.</strong></p>
+            <p>Lee el texto con calma. No es un examen, solo queremos ver cómo lees.</p>
+            <p class="texto-ayuda">⏱️ El tiempo no está asociado con tu desempeño.</p>
+            <p class="texto-ayuda">🎲 <strong>Texto aleatorio:</strong> Cada alumno puede recibir un texto diferente.</p>
+            <button class="btn-accion" onclick="mostrarTexto()">📖 Ver el texto y comenzar</button>
+        </div>
+    </div>
+
+    <!-- ===== ÁREA DE LECTURA ===== -->
+    <div id="areaLectura" style="display:none;">
+        <div class="texto-lectura" id="textoLectura"></div>
+
+        <!-- Timer -->
+        <div class="timer-container">
+            <div class="timer">
+                <span id="minutos">00</span>:<span id="segundos">00</span>
+                <button id="btnTimer" class="btn-timer" onclick="controlarTimer()">▶ Iniciar</button>
+                <button class="btn-timer btn-reiniciar" onclick="reiniciarTimer()">↻ Reiniciar</button>
+            </div>
+            <div class="timer-info">
+                <p>⏱️ Tiempo de lectura</p>
+                <p class="texto-ayuda">⚠️ El tiempo no está asociado con el desempeño.</p>
+            </div>
+        </div>
+
+        <button class="btn-accion btn-rubrica" onclick="mostrarRubrica()">📋 Terminar lectura, ir a la rúbrica</button>
+    </div>
+
+    <!-- ===== RÚBRICA ===== -->
+    <div id="areaRubrica" style="display:none;">
+        <div class="aviso-rubrica">
+            <p>📋 Ahora marca cada componente según el desempeño del alumno durante la lectura.</p>
+        </div>
+
+        <!-- Componentes (se generan desde JavaScript) -->
+        <div id="componentesRubrica"></div>
+
+        <button class="btn-accion btn-finalizar" onclick="generarFicha()">📄 Generar ficha diagnóstica</button>
+    </div>
+
+    <!-- ===== FICHA ===== -->
+    <div id="ficha-area" style="display:none;" class="ficha-diagnostico">
+        <div id="ficha-contenido"></div>
+        <button class="btn-accion" onclick="window.print();">🖨️ Guardar como PDF / Imprimir</button>
+        <button class="btn-accion btn-secundario" onclick="reiniciarEvaluacion()">🔄 Nueva evaluación</button>
+    </div>
+</div>
+
+<script src="js/datos.js"></script>
+<script>
+    // ===== CONFIGURACIÓN =====
+    const GRADO = 'secundaria1';
+    const NOMBRE_GRADO = '1° secundaria';
+
+    // ===== CARGAR DATOS DEL ALUMNO =====
+    document.getElementById('nombreAlumno').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+
+    // ===== SELECCIÓN ALEATORIA DE TEXTO =====
+    function seleccionarTextoAleatorio() {
+        const textos = bancoTextos[GRADO];
+        if (!textos || textos.length === 0) {
+            alert('No hay textos disponibles para este grado.');
+            return null;
+        }
+        const indice = Math.floor(Math.random() * textos.length);
+        return textos[indice];
+    }
+
+    // ===== TEXTO SELECCIONADO =====
+    let textoActual = seleccionarTextoAleatorio();
+    if (textoActual) {
+        document.getElementById('nombreTexto').textContent = textoActual.titulo + ' (' + textoActual.palabras + ' palabras)';
+    }
+
+    // ===== MOSTRAR TEXTO =====
+    function mostrarTexto() {
+        document.getElementById('instruccionesIniciales').style.display = 'none';
+        document.getElementById('areaLectura').style.display = 'block';
+        if (textoActual) {
+            document.getElementById('textoLectura').innerHTML = `<p>${textoActual.contenido}</p>`;
+        }
+    }
+
+    // ===== TEMPORIZADOR =====
+    let timerActivo = false;
+    let segundos = 0;
+    let minutos = 0;
+    let intervalo = null;
+
+    function controlarTimer() {
+        const btn = document.getElementById('btnTimer');
+        if (timerActivo) {
+            clearInterval(intervalo);
+            timerActivo = false;
+            btn.textContent = '▶ Continuar';
+            btn.classList.remove('detener');
+        } else {
+            if (segundos === 0 && minutos === 0) {
+                intervalo = setInterval(actualizarTimer, 1000);
+            } else {
+                intervalo = setInterval(actualizarTimer, 1000);
+            }
+            timerActivo = true;
+            btn.textContent = '⏹️ Detener';
+            btn.classList.add('detener');
+        }
+    }
+
+    function actualizarTimer() {
+        segundos++;
+        if (segundos === 60) {
+            segundos = 0;
+            minutos++;
+        }
+        document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
+        document.getElementById('segundos').textContent = String(segundos).padStart(2, '0');
+    }
+
+    function reiniciarTimer() {
+        clearInterval(intervalo);
+        timerActivo = false;
+        segundos = 0;
+        minutos = 0;
+        document.getElementById('minutos').textContent = '00';
+        document.getElementById('segundos').textContent = '00';
+        const btn = document.getElementById('btnTimer');
+        btn.textContent = '▶ Iniciar';
+        btn.classList.remove('detener');
+    }
+
+    // ===== MOSTRAR RÚBRICA =====
+    function mostrarRubrica() {
+        if (timerActivo) {
+            clearInterval(intervalo);
+            timerActivo = false;
+            document.getElementById('btnTimer').textContent = '▶ Iniciar';
+        }
+        document.getElementById('areaLectura').style.display = 'none';
+        document.getElementById('areaRubrica').style.display = 'block';
+        generarComponentesRubrica();
+        cargarPreguntas();
+    }
+
+    // ===== GENERAR COMPONENTES DE RÚBRICA =====
+    function generarComponentesRubrica() {
+        const componentes = [
+            { id: 'fluidez', nombre: 'Fluidez' },
+            { id: 'precision', nombre: 'Precisión' },
+            { id: 'atencionPalabras', nombre: 'Atención a palabras complejas' },
+            { id: 'usoVoz', nombre: 'Uso de la voz' },
+            { id: 'seguridad', nombre: 'Seguridad y disposición' }
+        ];
+
+        const container = document.getElementById('componentesRubrica');
+        let html = '';
+
+        componentes.forEach(comp => {
+            html += `
+                <div class="componente">
+                    <h3>${comp.nombre}</h3>
+                    <div class="botones-nivel">
+                        <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="3" onclick="seleccionarNivel('${comp.id}', 3)">
+                            <span class="nivel-icono">🟢</span>
+                            <span class="nivel-texto">Logrado</span>
+                        </button>
+                        <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="2" onclick="seleccionarNivel('${comp.id}', 2)">
+                            <span class="nivel-icono">🟡</span>
+                            <span class="nivel-texto">En proceso</span>
+                        </button>
+                        <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="1" onclick="seleccionarNivel('${comp.id}', 1)">
+                            <span class="nivel-icono">🔴</span>
+                            <span class="nivel-texto">Requiere apoyo</span>
+                        </button>
+                    </div>
+                    <div class="descripciones-siempre-visibles">
+                        ${generarDescripciones(comp.id)}
+                    </div>
+                </div>
+            `;
+        });
+
+        // Agregar comprensión al final
+        html += `
+            <div class="componente" id="comprensionArea">
+                <h3>Comprensión lectora</h3>
+                <p class="texto-ayuda">📝 Responde a las preguntas de comprensión que se muestran a continuación.</p>
+                <div id="preguntasComprension"></div>
+                <div class="botones-nivel" style="margin-top:15px;">
+                    <button class="btn-nivel circular" data-componente="comprension" data-nivel="3" onclick="seleccionarNivel('comprension', 3)">
+                        <span class="nivel-icono">🟢</span>
+                        <span class="nivel-texto">Logrado</span>
+                    </button>
+                    <button class="btn-nivel circular" data-componente="comprension" data-nivel="2" onclick="seleccionarNivel('comprension', 2)">
+                        <span class="nivel-icono">🟡</span>
+                        <span class="nivel-texto">En proceso</span>
+                    </button>
+                    <button class="btn-nivel circular" data-componente="comprension" data-nivel="1" onclick="seleccionarNivel('comprension', 1)">
+                        <span class="nivel-icono">🔴</span>
+                        <span class="nivel-texto">Requiere apoyo</span>
+                    </button>
+                </div>
+                <div class="descripciones-siempre-visibles">
+                    ${generarDescripciones('comprension')}
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    function generarDescripciones(componente) {
+        const desc = descripcionesRubrica[componente];
+        if (!desc) return '';
+        return `
+            <div class="descripcion-item nivel-3">✅ <strong>Logrado:</strong> ${desc[3]}</div>
+            <div class="descripcion-item nivel-2">🟡 <strong>En proceso:</strong> ${desc[2]}</div>
+            <div class="descripcion-item nivel-1">🔴 <strong>Requiere apoyo:</strong> ${desc[1]}</div>
+        `;
+    }
+
+    // ===== SELECCIONAR NIVEL =====
+    let puntajesActuales = {
+        fluidez: 0,
+        precision: 0,
+        atencionPalabras: 0,
+        usoVoz: 0,
+        seguridad: 0,
+        comprension: 0
+    };
+
+    function seleccionarNivel(componente, nivel) {
+        puntajesActuales[componente] = parseInt(nivel);
+        document.querySelectorAll(`.btn-nivel[data-componente="${componente}"]`).forEach(btn => {
+            btn.classList.remove('seleccionado');
+            if (btn.getAttribute('data-nivel') == nivel) {
+                btn.classList.add('seleccionado');
+            }
+        });
+    }
+
+    // ===== CARGAR PREGUNTAS =====
+    function cargarPreguntas() {
+        const container = document.getElementById('preguntasComprension');
+        if (!textoActual || !textoActual.preguntas) {
+            container.innerHTML = '<p class="texto-ayuda">No hay preguntas disponibles para este texto.</p>';
+            return;
+        }
+
+        let html = '';
+        textoActual.preguntas.forEach((pregunta, index) => {
+            html += `
+                <div class="pregunta-item">
+                    <p><strong>Pregunta ${index + 1}:</strong> ${pregunta}</p>
+                    <div class="respuesta-opciones">
+                        <button class="btn-respuesta" onclick="marcarRespuesta(this, true)">✅ Correcta</button>
+                        <button class="btn-respuesta" onclick="marcarRespuesta(this, false)">❌ Incorrecta</button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function marcarRespuesta(btn, correcta) {
+        const parent = btn.parentElement;
+        parent.querySelectorAll('.btn-respuesta').forEach(b => b.classList.remove('seleccionada'));
+        btn.classList.add('seleccionada');
+        // Aquí se puede conectar con la lógica de puntuación de comprensión
+    }
+
+    // ===== GENERAR FICHA =====
+    function generarFicha() {
+        const nombre = localStorage.getItem('nombreAlumno') || 'Alumno';
+        const fecha = new Date().toLocaleDateString('es-MX');
+        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+        const nivel = total >= 15 ? '🟢 Nivel esperado' : total >= 10 ? '🟡 En desarrollo' : '🔴 Requiere apoyo';
+
+        let htmlFicha = `
+            <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px;">
+                <h2 style="color: #e85f2f;">📋 SAAL - Ficha diagnóstica de lectura</h2>
+                <p><strong>Alumno(a):</strong> ${nombre}</p>
+                <p><strong>Grado:</strong> ${NOMBRE_GRADO}</p>
+                <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
+                <p><strong>Fecha:</strong> ${fecha}</p>
+                <hr>
+                <h3>Resultado general:</h3>
+                <p style="font-size: 1.5rem;">Puntaje total: ${total} / 18</p>
+                <p>${nivel}</p>
+                <h3>Puntaje por componente:</h3>
+                <ul>
+                    <li>Fluidez: ${puntajesActuales.fluidez}/3</li>
+                    <li>Precisión: ${puntajesActuales.precision}/3</li>
+                    <li>Atención a palabras complejas: ${puntajesActuales.atencionPalabras}/3</li>
+                    <li>Uso de la voz: ${puntajesActuales.usoVoz}/3</li>
+                    <li>Seguridad y disposición: ${puntajesActuales.seguridad}/3</li>
+                    <li>Comprensión: ${puntajesActuales.comprension}/3</li>
+                </ul>
+                <h3>Recomendaciones:</h3>
+                <ul>
+                    <li>🟢 Sigue practicando la lectura en voz alta todos los días.</li>
+                </ul>
+                <hr>
+                <p style="font-size: 0.8rem;">SAAL: Sistema de Alerta y Acompañamiento LEO - Jalisco</p>
+                <p style="font-size: 0.7rem;">Versión 3.0 - Prueba de selección aleatoria</p>
+            </div>
+        `;
+
+        document.getElementById('ficha-contenido').innerHTML = htmlFicha;
+        document.getElementById('ficha-area').style.display = 'block';
+        document.getElementById('areaRubrica').style.display = 'none';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function reiniciarEvaluacion() {
+        if (confirm('¿Quieres realizar una nueva evaluación?')) {
+            window.location.reload();
+        }
+    }
+</script>
+</body>
+</html>
