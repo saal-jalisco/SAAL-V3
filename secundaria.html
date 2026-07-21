@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <a href="datos.html" class="boton-regresar">← Datos del alumno</a>
+    <a href="nivel.html" class="boton-regresar">← Nivel educativo</a>
     <div class="header">
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
@@ -19,13 +19,19 @@
     </div>
 
     <div class="menu-grados">
-        <a href="grado1sec.html" class="btn-grado">🎓 1° secundaria</a>
-        <a href="grado2sec.html" class="btn-grado">🎓 2° secundaria</a>
-        <a href="grado3sec.html" class="btn-grado">🎓 3° secundaria</a>
+        <button class="btn-grado" onclick="seleccionarGrado(1)">🎓 1° secundaria</button>
+        <button class="btn-grado" onclick="seleccionarGrado(2)">🎓 2° secundaria</button>
+        <button class="btn-grado" onclick="seleccionarGrado(3)">🎓 3° secundaria</button>
     </div>
 </div>
 <script>
     document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
+
+    function seleccionarGrado(grado) {
+        localStorage.setItem('grado', grado);
+        localStorage.setItem('nivel', 'secundaria');
+        window.location.href = `grado${grado}sec.html`;
+    }
 </script>
 </body>
 </html>
