@@ -8,7 +8,7 @@
     <style>
         body { background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         .container-lector { max-width: 700px; width: 100%; background: white; border-radius: 30px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
-        .header-lector { background: #e85f2f; color: white; padding: 20px; border-radius: 20px 20px 0 0; margin: -25px -25px 20px -25px; }
+        .header-lector { background: #3498db; color: white; padding: 20px; border-radius: 20px 20px 0 0; margin: -25px -25px 20px -25px; }
         .header-lector h1 { font-size: 1.8rem; margin: 0; }
         .header-lector p { opacity: 0.9; margin: 5px 0 0; }
         .codigo-input { margin: 20px 0; }
@@ -19,7 +19,6 @@
         .btn-validar:hover { background: #d35400; }
         .texto-lectura-lector { background: #fff8e7; border-left: 8px solid #3498db; padding: 20px; font-size: 1.2rem; line-height: 1.6; margin: 20px 0; font-family: 'Georgia', serif; border-radius: 16px; text-align: left; }
         .mensaje-error { color: #e74c3c; font-weight: bold; margin-top: 10px; }
-        .mensaje-exito { color: #27ae60; font-weight: bold; margin-top: 10px; }
         .instruccion-lector { background: #e8f0fe; padding: 16px; border-radius: 12px; margin: 16px 0; font-size: 0.95rem; }
         .btn-regresar-lector { display: inline-block; margin-top: 15px; background: #404f55; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
         .btn-regresar-lector:hover { background: #2c3e50; }
@@ -67,18 +66,10 @@
 
 <script src="js/datos.js"></script>
 <script>
-    // ============================================================
-    // MODO LECTOR - SAAL (Versión sin localStorage)
-    // Busca el texto en el banco de textos por su código
-    // ============================================================
-
-    // Función para encontrar el texto asociado a un código de sesión
     function buscarTextoPorCodigo(codigo) {
-        // Recorrer todos los grados en el banco de textos
         for (const grado in bancoTextos) {
             const textos = bancoTextos[grado];
             for (const texto of textos) {
-                // Generar el mismo código que se genera en el aplicador
                 const tituloLimpio = texto.titulo
                     .normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
@@ -106,7 +97,6 @@
             return;
         }
 
-        // Buscar el texto en el banco de textos usando el código
         const textoEncontrado = buscarTextoPorCodigo(codigo);
 
         if (!textoEncontrado) {
@@ -114,7 +104,6 @@
             return;
         }
 
-        // Mostrar el texto
         document.getElementById('textoMostrado').innerHTML = `<p>${textoEncontrado.contenido}</p>`;
         document.getElementById('tituloTextoMostrado').textContent = `📖 ${textoEncontrado.titulo} (${textoEncontrado.palabras || '?'} palabras)`;
         document.getElementById('pantallaCodigo').style.display = 'none';
@@ -130,14 +119,10 @@
         document.getElementById('mensajeValidacion').innerHTML = '';
     }
 
-    // Permitir Enter en el campo de código
     document.getElementById('codigoSesionInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            validarCodigo();
-        }
+        if (e.key === 'Enter') { validarCodigo(); }
     });
 
-    // Enfocar el campo al cargar
     window.onload = function() {
         document.getElementById('codigoSesionInput').focus();
     };
