@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SAAL - Modo Lector</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        body {
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container-lector {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header-lector {
+            background: #e85f2f;
+            color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            margin: -25px -25px 20px -25px;
+        }
+        .header-lector h1 { font-size: 1.8rem; margin: 0; }
+        .header-lector p { opacity: 0.9; margin: 5px 0 0; }
+        .codigo-input {
+            margin: 20px 0;
+        }
+        .codigo-input label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #404f55;
+        }
+        .codigo-input input {
+            width: 100%;
+            max-width: 200px;
+            padding: 14px;
+            font-size: 1.5rem;
+            text-align: center;
+            letter-spacing: 8px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .codigo-input input:focus {
+            border-color: #e85f2f;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(232,95,47,0.2);
+        }
+        .btn-validar {
+            background: #e85f2f;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+            width: 100%;
+            max-width: 200px;
+        }
+        .btn-validar:hover {
+            background: #d35400;
+        }
+        .texto-lectura-lector {
+            background: #fff8e7;
+            border-left: 8px solid #3498db;
+            padding: 20px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            font-family: 'Georgia', serif;
+            border-radius: 16px;
+            text-align: left;
+        }
+        .mensaje-error {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .mensaje-exito {
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .instruccion-lector {
+            background: #e8f0fe;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .btn-regresar-lector {
+            display: inline-block;
+            margin-top: 15px;
+            background: #404f55;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .btn-regresar-lector:hover {
+            background: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-lector" id="appLector">
+    <div class="header-lector">
+        <h1>📖 SAAL</h1>
+        <p>Modo Lector</p>
+    </div>
+
+    <!-- Pantalla de ingreso de código -->
+    <div id="pantallaCodigo">
+        <div class="instruccion-lector">
+            <p>📱 <strong>Ingresa el código de sesión</strong> que te compartió tu maestro o aplicador.</p>
+        </div>
+
+        <div class="codigo-input">
+            <label for="codigoSesionInput">Código de sesión</label>
+            <input type="text" id="codigoSesionInput" placeholder="Ej: A3B9" maxlength="4" autofocus>
+        </div>
+
+        <button class="btn-validar" onclick="validarCodigo()">🔑 Validar código</button>
+        <div id="mensajeValidacion"></div>
+
+        <a href="index.html" class="btn-regresar-lector">← Volver al inicio</a>
+    </div>
+
+    <!-- Pantalla de texto (oculta inicialmente) -->
+    <div id="pantallaTexto" style="display:none;">
+        <div class="instruccion-lector" style="background:#d4edda;">
+            <p>📢 <strong>¡Texto cargado!</strong> Lee en voz alta con calma.</p>
+        </div>
+
+        <div id="textoMostrado" class="texto-lectura-lector"></div>
+        <p style="font-size:0.8rem; color:#777; margin-top:10px;">🔹 Cuando termines, avísale a tu maestro.</p>
+
+        <button class="btn-validar" style="background:#404f55;" onclick="volverACodigo()">🔙 Volver a ingresar código</button>
+        <a href="index.html" class="btn-regresar-lector">← Volver al inicio</a>
+    </div>
+</div>
+
+<script>
+    // ===== MODO LECTOR - SAAL =====
+    function validarCodigo() {
+        const input = document.getElementById('codigoSesionInput');
+        const codigo = input.value.trim().toUpperCase();
+        const mensaje = document.getElementById('mensajeValidacion');
+
+        if (codigo.length !== 4) {
+            mensaje.innerHTML = '<p class="mensaje-error">⚠️ El código debe tener 4 caracteres.</p>';
+            return;
+        }
+
+        // Buscar el código en localStorage
+        const clave = 'sesion_' + codigo;
+        const datosGuardados = localStorage.getItem(clave);
+
+        if (!datosGuardados) {
+            mensaje.innerHTML = '<p class="mensaje-error">❌ Código no válido. Verifica con tu maestro.</p>';
+            return;
+        }
+
+        try {
+            const datos = JSON.parse(datosGuardados);
+            const texto = datos.texto;
+
+            // Mostrar el texto
+            document.getElementById('textoMostrado').innerHTML = `<p>${texto.contenido}</p>`;
+            document.getElementById('pantallaCodigo').style.display = 'none';
+            document.getElementById('pantallaTexto').style.display = 'block';
+            mensaje.innerHTML = '';
+            input.value = '';
+
+            // Opcional: mostrar el título del texto
+            const titulo = texto.titulo || 'Texto de lectura';
+            document.querySelector('#pantallaTexto .instruccion-lector').innerHTML =
+                `<p>📢 <strong>¡Texto cargado!</strong> Lee en voz alta con calma.</p>
+                 <p style="font-size:0.8rem; opacity:0.8;">📖 ${titulo} (${texto.palabras || '?'} palabras)</p>`;
+
+        } catch (e) {
+            mensaje.innerHTML = '<p class="mensaje-error">❌ Error al cargar el texto. Intenta de nuevo.</p>';
+        }
+    }
+
+    function volverACodigo() {
+        document.getElementById('pantallaTexto').style.display = 'none';
+        document.getElementById('pantallaCodigo').style.display = 'block';
+        document.getElementById('codigoSesionInput').focus();
+        document.getElementById('mensajeValidacion').innerHTML = '';
+    }
+
+    // Permitir Enter en el campo de código
+    document.getElementById('codigoSesionInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            validarCodigo();
+        }
+    });
+
+    // Enfocar el campo al cargar
+    window.onload = function() {
+        document.getElementById('codigoSesionInput').focus();
+    };
+</script>
+
+</body>
+</html>
