@@ -21,23 +21,19 @@
     </div>
 
     <div class="menu-principal">
-        <a href="datos.html" class="btn-iniciar">🚀 Comenzar evaluación</a>
+        <a href="aplicador.html" class="btn-rol-inicio" style="background: #e85f2f;">
+            👨‍🏫 Aplicador
+            <span class="texto-ayuda">Docente o encargado de aplicar la evaluación</span>
+        </a>
+        <a href="lector.html" class="btn-rol-inicio" style="background: #3498db;">
+            📖 Lector
+            <span class="texto-ayuda">Alumno que leerá el texto</span>
+        </a>
     </div>
 
     <div class="info-portada">
-        <p>Antes de empezar, necesitamos algunos datos del alumno y del aplicador.</p>
-        <p class="texto-ayuda" style="margin-top:10px;">📘 <a href="#" onclick="mostrarGuia()">Guía rápida para docentes</a></p>
+        <p>Selecciona tu rol para comenzar.</p>
     </div>
 </div>
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('Service Worker registrado'))
-            .catch(err => console.log('Error SW:', err));
-    }
-    function mostrarGuia() {
-        alert("📘 Guía rápida para docentes:\n\n1. Prepara un espacio tranquilo.\n2. Elige cómo leerá el alumno (impreso o pantalla).\n3. Si usas dos dispositivos, usa el código de sesión.\n4. Marca la rúbrica mientras escuchas.\n5. Haz las preguntas de comprensión oralmente.\n6. Genera la ficha diagnóstica.\n\n📎 Enlace: " + window.location.href);
-    }
-</script>
 </body>
 </html>
