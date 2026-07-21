@@ -6,7 +6,6 @@
     <title>SAAL - 1° Secundaria</title>
     <link rel="stylesheet" href="css/estilo.css">
     <style>
-        /* ===== MEJORAS MÓVILES ===== */
         .header h1 { font-size: 1.6rem; }
         .header p { font-size: 0.9rem; }
         .logos .logo-cemej { height: 40px; }
@@ -191,9 +190,6 @@
     let textosDisponibles = [];
     let codigoSesion = null;
 
-    // ============================================================
-    // CARGAR TEXTOS
-    // ============================================================
     function cargarTextos() {
         textosDisponibles = bancoTextos[GRADO] || [];
         if (textosDisponibles.length === 0) {
@@ -214,9 +210,6 @@
         }
     }
 
-    // ============================================================
-    // SELECCIONAR MODO DE TEXTO
-    // ============================================================
     function seleccionarModoTexto(modo) {
         modoTexto = modo;
         document.getElementById('btnTextoFijo').classList.toggle('activo', modo === 'fijo');
@@ -238,7 +231,6 @@
         if (textoElement && textoActual) {
             textoElement.innerHTML = `<p>${textoActual.contenido}</p>`;
         }
-        // Limpiar código de sesión al cambiar de texto
         document.getElementById('codigoSesion').textContent = '---';
         codigoSesion = null;
     }
@@ -247,39 +239,28 @@
         seleccionarNuevoTexto();
     }
 
-    // ============================================================
-    // GENERAR CÓDIGO DE SESIÓN (DETERMINÍSTICO)
-    // ============================================================
     function generarCodigoSesion() {
         if (!textoActual) {
             alert('Primero selecciona un texto.');
             return;
         }
 
-        // Generar un código determinístico a partir del título del texto
         const tituloLimpio = textoActual.titulo
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .toUpperCase()
             .replace(/[^A-Z0-9]/g, '');
 
-        // Tomar las primeras 4 letras del título
         let codigo = tituloLimpio.substring(0, 4);
-
-        // Si el código tiene menos de 4 caracteres, rellenar con números
         while (codigo.length < 4) {
             codigo += Math.floor(Math.random() * 10);
         }
 
         codigoSesion = codigo;
         document.getElementById('codigoSesion').textContent = codigoSesion;
-
         alert('✅ Código de sesión generado: ' + codigoSesion + '\n\n📖 Texto: ' + textoActual.titulo + '\n\nCompártelo con el alumno.');
     }
 
-    // ============================================================
-    // MOSTRAR TEXTO
-    // ============================================================
     function mostrarTexto() {
         document.getElementById('instruccionesIniciales').style.display = 'none';
         document.getElementById('areaLectura').style.display = 'block';
@@ -288,9 +269,7 @@
         }
     }
 
-    // ============================================================
-    // TEMPORIZADOR
-    // ============================================================
+    // ===== TEMPORIZADOR =====
     let timerActivo = false;
     let segundos = 0;
     let minutos = 0;
@@ -333,9 +312,7 @@
         btn.classList.remove('detener');
     }
 
-    // ============================================================
-    // MOSTRAR RÚBRICA
-    // ============================================================
+    // ===== MOSTRAR RÚBRICA =====
     function mostrarRubrica() {
         if (timerActivo) { clearInterval(intervalo); timerActivo = false; document.getElementById('btnTimer').textContent = '▶'; }
         document.getElementById('areaLectura').style.display = 'none';
@@ -344,9 +321,6 @@
         cargarPreguntas();
     }
 
-    // ============================================================
-    // GENERAR COMPONENTES DE RÚBRICA
-    // ============================================================
     function generarComponentesRubrica() {
         const componentes = [
             { id: 'fluidez', nombre: 'Fluidez' },
@@ -366,15 +340,15 @@
                     <div class="botones-nivel" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:8px 0;">
                         <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="3" onclick="seleccionarNivel('${comp.id}', 3)">
                             <span class="nivel-icono">🟢</span>
-                            <span class="nivel-texto">Logrado</span>
+                            <span class="nivel-texto">Deseable</span>
                         </button>
                         <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="2" onclick="seleccionarNivel('${comp.id}', 2)">
                             <span class="nivel-icono">🟡</span>
-                            <span class="nivel-texto">En proceso</span>
+                            <span class="nivel-texto">En progreso</span>
                         </button>
                         <button class="btn-nivel circular" data-componente="${comp.id}" data-nivel="1" onclick="seleccionarNivel('${comp.id}', 1)">
                             <span class="nivel-icono">🔴</span>
-                            <span class="nivel-texto">Requiere apoyo</span>
+                            <span class="nivel-texto">Atención prioritaria</span>
                         </button>
                     </div>
                     <div class="descripciones-siempre-visibles" style="margin-top:10px; padding:10px; background:#f9f9f9; border-radius:12px; border:1px solid #e0e0e0;">
@@ -392,15 +366,15 @@
                 <div class="botones-nivel" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:12px 0;">
                     <button class="btn-nivel circular" data-componente="comprension" data-nivel="3" onclick="seleccionarNivel('comprension', 3)">
                         <span class="nivel-icono">🟢</span>
-                        <span class="nivel-texto">Logrado</span>
+                        <span class="nivel-texto">Deseable</span>
                     </button>
                     <button class="btn-nivel circular" data-componente="comprension" data-nivel="2" onclick="seleccionarNivel('comprension', 2)">
                         <span class="nivel-icono">🟡</span>
-                        <span class="nivel-texto">En proceso</span>
+                        <span class="nivel-texto">En progreso</span>
                     </button>
                     <button class="btn-nivel circular" data-componente="comprension" data-nivel="1" onclick="seleccionarNivel('comprension', 1)">
                         <span class="nivel-icono">🔴</span>
-                        <span class="nivel-texto">Requiere apoyo</span>
+                        <span class="nivel-texto">Atención prioritaria</span>
                     </button>
                 </div>
                 <div class="descripciones-siempre-visibles" style="margin-top:10px; padding:10px; background:#f9f9f9; border-radius:12px; border:1px solid #e0e0e0;">
@@ -416,15 +390,13 @@
         const desc = descripcionesRubrica[componente];
         if (!desc) return '';
         return `
-            <div class="descripcion-item nivel-3">✅ <strong>Logrado:</strong> ${desc[3]}</div>
-            <div class="descripcion-item nivel-2">🟡 <strong>En proceso:</strong> ${desc[2]}</div>
-            <div class="descripcion-item nivel-1">🔴 <strong>Requiere apoyo:</strong> ${desc[1]}</div>
+            <div class="descripcion-item nivel-3">✅ <strong>Deseable:</strong> ${desc[3]}</div>
+            <div class="descripcion-item nivel-2">🔄 <strong>En progreso:</strong> ${desc[2]}</div>
+            <div class="descripcion-item nivel-1">🚨 <strong>Atención prioritaria:</strong> ${desc[1]}</div>
         `;
     }
 
-    // ============================================================
-    // SELECCIONAR NIVEL
-    // ============================================================
+    // ===== SELECCIONAR NIVEL =====
     let puntajesActuales = {
         fluidez: 0, precision: 0, atencionPalabras: 0, usoVoz: 0, seguridad: 0, comprension: 0
     };
@@ -439,9 +411,7 @@
         });
     }
 
-    // ============================================================
-    // CARGAR PREGUNTAS
-    // ============================================================
+    // ===== CARGAR PREGUNTAS =====
     function cargarPreguntas() {
         const container = document.getElementById('preguntasComprension');
         if (!textoActual || !textoActual.preguntas) {
@@ -469,14 +439,12 @@
         btn.classList.add('seleccionada');
     }
 
-    // ============================================================
-    // GENERAR FICHA
-    // ============================================================
+    // ===== GENERAR FICHA =====
     function generarFicha() {
         const nombre = localStorage.getItem('nombreAlumno') || 'Alumno';
         const fecha = new Date().toLocaleDateString('es-MX');
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
-        const nivel = total >= 15 ? '🟢 Nivel esperado' : total >= 10 ? '🟡 En desarrollo' : '🔴 Requiere apoyo';
+        const nivel = total >= 15 ? '⭐ Deseable' : total >= 10 ? '🔄 En progreso' : '🚨 Atención prioritaria';
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
