@@ -29,29 +29,11 @@
         </div>
 
         <div class="campo">
-            <label>Grado escolar *</label>
-            <select id="gradoEscolar" required>
-                <option value="">Selecciona el grado</option>
-                <option value="primaria1">1° Primaria</option>
-                <option value="primaria2">2° Primaria</option>
-                <option value="primaria3">3° Primaria</option>
-                <option value="primaria4">4° Primaria</option>
-                <option value="primaria5">5° Primaria</option>
-                <option value="primaria6">6° Primaria</option>
-                <option value="secundaria1">1° Secundaria</option>
-                <option value="secundaria2">2° Secundaria</option>
-                <option value="secundaria3">3° Secundaria</option>
-            </select>
-        </div>
-
-        <div class="campo">
             <label>Turno</label>
             <select id="turno">
                 <option value="">Selecciona el turno</option>
                 <option value="matutino">Matutino</option>
                 <option value="vespertino">Vespertino</option>
-                <option value="nocturno">Nocturno</option>
-                <option value="intermedio">Intermedio</option>
             </select>
         </div>
 
@@ -92,43 +74,31 @@
 
 <script>
     function guardarDatos() {
-        // Validar campos obligatorios
         const nombre = document.getElementById('nombreAlumno').value.trim();
-        const grado = document.getElementById('gradoEscolar').value;
         const aplicador = document.getElementById('aplicador').value;
         const dispositivo = document.querySelector('input[name="dispositivo"]:checked');
 
         if (!nombre) { alert("Escribe el nombre del alumno."); return false; }
-        if (!grado) { alert("Selecciona el grado escolar."); return false; }
         if (!aplicador) { alert("Selecciona quién aplica la evaluación."); return false; }
         if (!dispositivo) { alert("Selecciona desde dónde leerá el alumno."); return false; }
 
-        // Guardar datos en localStorage para usarlos en la evaluación
         localStorage.setItem('nombreAlumno', nombre);
         localStorage.setItem('curp', document.getElementById('curpAlumno').value.trim());
-        localStorage.setItem('grado', grado);
         localStorage.setItem('turno', document.getElementById('turno').value);
         localStorage.setItem('aplicador', aplicador);
         localStorage.setItem('dispositivo', dispositivo.value);
         localStorage.setItem('cct', document.getElementById('cct').value.trim());
         localStorage.setItem('zonaEscolar', document.getElementById('zonaEscolar').value.trim());
 
-        // Redirigir según el grado seleccionado
-        const gradoValue = grado;
-        if (gradoValue.startsWith('primaria')) {
-            window.location.href = 'primaria.html';
-        } else if (gradoValue.startsWith('secundaria')) {
-            window.location.href = 'secundaria.html';
-        }
-        return false; // Evita el envío real del formulario
+        // Redirigir a la selección de nivel educativo
+        window.location.href = 'nivel.html';
+        return false;
     }
 
-    // Cargar datos guardados si existen (para regresar)
     window.onload = function() {
         if (localStorage.getItem('nombreAlumno')) {
             document.getElementById('nombreAlumno').value = localStorage.getItem('nombreAlumno');
             document.getElementById('curpAlumno').value = localStorage.getItem('curp') || '';
-            document.getElementById('gradoEscolar').value = localStorage.getItem('grado') || '';
             document.getElementById('turno').value = localStorage.getItem('turno') || '';
             document.getElementById('aplicador').value = localStorage.getItem('aplicador') || '';
             document.getElementById('cct').value = localStorage.getItem('cct') || '';
