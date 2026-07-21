@@ -7,9 +7,177 @@
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e85f2f">
+    <style>
+        /* ===== ESTILOS EXCLUSIVOS PARA LA PÁGINA DE INICIO ===== */
+        body {
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container-portada {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .header-portada {
+            background: #e85f2f;
+            color: white;
+            padding: 40px 30px 30px 30px;
+            text-align: center;
+        }
+
+        .header-portada .logos {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .header-portada .logo-cemej {
+            height: 55px;
+            background: white;
+            padding: 6px 16px;
+            border-radius: 12px;
+        }
+
+        .header-portada h1 {
+            font-size: 2.2rem;
+            margin: 10px 0 5px 0;
+            font-weight: 700;
+        }
+
+        .header-portada p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin: 5px 0;
+        }
+
+        .header-portada .subtitulo {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .header-portada .version {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-top: 10px;
+        }
+
+        /* ===== MENÚ PRINCIPAL ===== */
+        .menu-principal {
+            padding: 30px 25px 25px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .btn-rol-inicio {
+            display: block;
+            padding: 22px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.25s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-rol-inicio .icono-grande {
+            font-size: 2.6rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .btn-rol-inicio .titulo-boton {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: block;
+            color: white;
+        }
+
+        .btn-rol-inicio .descripcion-boton {
+            font-size: 0.85rem;
+            display: block;
+            opacity: 0.85;
+            margin-top: 4px;
+            color: white;
+        }
+
+        .btn-rol-inicio.aplicador {
+            background: linear-gradient(145deg, #e85f2f, #d35400);
+        }
+
+        .btn-rol-inicio.aplicador:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(232, 95, 47, 0.4);
+        }
+
+        .btn-rol-inicio.lector {
+            background: linear-gradient(145deg, #3498db, #2c7fb8);
+        }
+
+        .btn-rol-inicio.lector:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .info-portada {
+            padding: 0 25px 30px 25px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .info-portada .texto-ayuda {
+            font-size: 0.8rem;
+            color: #b0b0b0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .header-portada {
+                padding: 30px 20px 20px 20px;
+            }
+            .header-portada h1 {
+                font-size: 1.8rem;
+            }
+            .menu-principal {
+                padding: 20px 18px 20px 18px;
+                gap: 14px;
+            }
+            .btn-rol-inicio {
+                padding: 18px 16px;
+            }
+            .btn-rol-inicio .icono-grande {
+                font-size: 2.2rem;
+            }
+            .btn-rol-inicio .titulo-boton {
+                font-size: 1.2rem;
+            }
+            .info-portada {
+                padding: 0 20px 25px 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
+
 <div class="container-portada">
+    <!-- ===== ENCABEZADO ===== -->
     <div class="header-portada">
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
@@ -20,20 +188,27 @@
         <p class="version">Versión 3.0</p>
     </div>
 
+    <!-- ===== BOTONES DE ROL ===== -->
     <div class="menu-principal">
-        <a href="aplicador.html" class="btn-rol-inicio" style="background: #e85f2f;">
-            👨‍🏫 Aplicador
-            <span class="texto-ayuda">Docente o encargado de aplicar la evaluación</span>
+        <a href="aplicador.html" class="btn-rol-inicio aplicador">
+            <span class="icono-grande">👨‍🏫</span>
+            <span class="titulo-boton">Aplicador</span>
+            <span class="descripcion-boton">Docente o encargado de aplicar la evaluación</span>
         </a>
-        <a href="lector.html" class="btn-rol-inicio" style="background: #3498db;">
-            📖 Lector
-            <span class="texto-ayuda">Alumno que leerá el texto</span>
+
+        <a href="lector.html" class="btn-rol-inicio lector">
+            <span class="icono-grande">📖</span>
+            <span class="titulo-boton">Lector</span>
+            <span class="descripcion-boton">Alumno que leerá el texto</span>
         </a>
     </div>
 
+    <!-- ===== PIE DE PÁGINA ===== -->
     <div class="info-portada">
         <p>Selecciona tu rol para comenzar.</p>
+        <p class="texto-ayuda">SAAL · Jalisco LEO</p>
     </div>
 </div>
+
 </body>
 </html>
