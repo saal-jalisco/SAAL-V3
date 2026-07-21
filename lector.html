@@ -68,17 +68,27 @@
 <script src="js/datos.js"></script>
 <script>
     // ============================================================
-    // MODO LECTOR - SAAL (Versión mejorada)
-    // Busca el texto en el banco de textos por su título y contenido
+    // MODO LECTOR - SAAL (Versión sin localStorage)
+    // Busca el texto en el banco de textos por su código
     // ============================================================
 
-    // Función para buscar un texto en el banco de textos por su título y contenido
-    function buscarTextoPorTituloYContenido(titulo, contenido) {
+    // Función para encontrar el texto asociado a un código de sesión
+    function buscarTextoPorCodigo(codigo) {
         // Recorrer todos los grados en el banco de textos
         for (const grado in bancoTextos) {
             const textos = bancoTextos[grado];
             for (const texto of textos) {
-                if (texto.titulo === titulo && texto.contenido === contenido) {
+                // Generar el mismo código que se genera en el aplicador
+                const tituloLimpio = texto.titulo
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toUpperCase()
+                    .replace(/[^A-Z0-9]/g, '');
+                let codigoGenerado = tituloLimpio.substring(0, 4);
+                while (codigoGenerado.length < 4) {
+                    codigoGenerado += '0';
+                }
+                if (codigoGenerado === codigo) {
                     return texto;
                 }
             }
@@ -96,44 +106,21 @@
             return;
         }
 
-        // Buscar el código en localStorage
-        const clave = 'sesion_' + codigo;
-        const datosGuardados = localStorage.getItem(clave);
+        // Buscar el texto en el banco de textos usando el código
+        const textoEncontrado = buscarTextoPorCodigo(codigo);
 
-        if (!datosGuardados) {
+        if (!textoEncontrado) {
             mensaje.innerHTML = '<p class="mensaje-error">❌ Código no válido. Verifica con tu maestro.</p>';
             return;
         }
 
-        try {
-            const datos = JSON.parse(datosGuardados);
-            const texto = datos.texto;
-
-            if (!texto || !texto.titulo || !texto.contenido) {
-                mensaje.innerHTML = '<p class="mensaje-error">❌ El texto no está disponible. Intenta de nuevo.</p>';
-                return;
-            }
-
-            // Buscar el texto en el banco de textos para validar que existe
-            const textoEncontrado = buscarTextoPorTituloYContenido(texto.titulo, texto.contenido);
-
-            if (!textoEncontrado) {
-                mensaje.innerHTML = '<p class="mensaje-error">❌ El texto no se encontró en el sistema. Verifica con tu maestro.</p>';
-                return;
-            }
-
-            // Mostrar el texto
-            document.getElementById('textoMostrado').innerHTML = `<p>${textoEncontrado.contenido}</p>`;
-            document.getElementById('tituloTextoMostrado').textContent = `📖 ${textoEncontrado.titulo} (${textoEncontrado.palabras || '?'} palabras)`;
-            document.getElementById('pantallaCodigo').style.display = 'none';
-            document.getElementById('pantallaTexto').style.display = 'block';
-            mensaje.innerHTML = '';
-            input.value = '';
-
-        } catch (e) {
-            mensaje.innerHTML = '<p class="mensaje-error">❌ Error al cargar el texto. Intenta de nuevo.</p>';
-            console.error(e);
-        }
+        // Mostrar el texto
+        document.getElementById('textoMostrado').innerHTML = `<p>${textoEncontrado.contenido}</p>`;
+        document.getElementById('tituloTextoMostrado').textContent = `📖 ${textoEncontrado.titulo} (${textoEncontrado.palabras || '?'} palabras)`;
+        document.getElementById('pantallaCodigo').style.display = 'none';
+        document.getElementById('pantallaTexto').style.display = 'block';
+        mensaje.innerHTML = '';
+        input.value = '';
     }
 
     function volverACodigo() {
