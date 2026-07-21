@@ -5,6 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SAAL - 1° Secundaria</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        /* Mejoras móviles específicas para grado1sec */
+        .header h1 { font-size: 1.6rem; }
+        .header p { font-size: 0.9rem; }
+        .logos .logo-cemej { height: 40px; }
+        .instrucciones-iniciales { padding: 16px; }
+        .instrucciones-iniciales p { font-size: 0.95rem; }
+        .selector-texto { padding: 12px; }
+        .selector-texto h3 { font-size: 1rem; }
+        .btn-texto { padding: 10px 12px; font-size: 0.85rem; min-width: 120px; }
+        .btn-texto .texto-ayuda { font-size: 0.65rem; }
+        .info-texto { font-size: 0.85rem; padding: 8px 12px; }
+        .btn-cambiar-texto { font-size: 0.8rem; padding: 6px 14px; }
+        .sincronizacion-dispositivos { padding: 12px; }
+        .sincronizacion-dispositivos h3 { font-size: 1rem; }
+        .codigo-sesion { font-size: 1.2rem; }
+        .btn-generar-codigo { font-size: 0.85rem; padding: 6px 14px; }
+        .texto-lectura { font-size: 1rem; padding: 16px; }
+        .timer { font-size: 2rem; }
+        .btn-timer { font-size: 0.9rem; padding: 6px 16px; }
+        .btn-accion { font-size: 1rem; padding: 12px 20px; max-width: 100%; }
+        .componente h3 { font-size: 1rem; }
+        .btn-nivel.circular { width: 60px; height: 60px; font-size: 0.65rem; }
+        .btn-nivel.circular .nivel-icono { font-size: 1.2rem; }
+        .btn-nivel.circular .nivel-texto { font-size: 0.5rem; }
+        .descripcion-item { font-size: 0.8rem; padding: 6px 10px; }
+        .pregunta-item p { font-size: 0.9rem; }
+        .btn-respuesta { font-size: 0.8rem; padding: 6px 14px; }
+
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .header { padding: 12px; margin: -10px -10px 10px -10px; }
+            .boton-regresar { font-size: 0.8rem; padding: 6px 14px; }
+            .opciones-texto { flex-direction: column; gap: 6px; }
+            .btn-texto { min-width: unset; }
+            .codigo-sesion { flex-direction: column; gap: 8px; align-items: stretch; }
+            .codigo-sesion span { font-size: 1.8rem; text-align: center; }
+            .btn-generar-codigo { width: 100%; }
+            .timer { font-size: 1.8rem; gap: 8px; flex-wrap: wrap; justify-content: center; }
+            .btn-timer { font-size: 0.8rem; padding: 4px 12px; }
+            .botones-nivel { gap: 8px; }
+            .btn-nivel.circular { width: 50px; height: 50px; }
+            .btn-nivel.circular .nivel-icono { font-size: 1rem; }
+            .btn-nivel.circular .nivel-texto { font-size: 0.45rem; }
+            .descripciones-siempre-visibles { padding: 8px; }
+            .descripcion-item { font-size: 0.7rem; padding: 4px 8px; }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -19,35 +67,35 @@
         <h1>📖 SAAL</h1>
         <p>Evaluación de lectura - 1° secundaria</p>
         <p class="subtitulo" id="nombreAlumnoDisplay">Alumno: <span id="nombreAlumno"></span></p>
-        <p id="textoSeleccionadoDisplay" style="font-size:0.9rem; opacity:0.9; margin-top:5px;">📖 Texto: <span id="nombreTexto">Cargando...</span></p>
+        <p id="textoSeleccionadoDisplay" style="font-size:0.8rem; opacity:0.9; margin-top:5px;">📖 Texto: <span id="nombreTexto">Cargando...</span></p>
     </div>
 
     <!-- ===== INSTRUCCIONES INICIALES ===== -->
     <div class="instrucciones-iniciales" id="instruccionesIniciales">
         <div class="mensaje-instruccion">
-            <p>📢 <strong>¡Hola! Vamos a hacer una lectura en voz alta.</strong></p>
-            <p>Lee el texto con calma. No es un examen, solo queremos ver cómo lees.</p>
-            <p class="texto-ayuda">⏱️ El tiempo no está asociado con tu desempeño.</p>
-            <button class="btn-accion" onclick="mostrarTexto()">📖 Ver el texto y comenzar</button>
+            <p>📢 <strong>¡Hola! Lee en voz alta.</strong></p>
+            <p>No es un examen, solo queremos ver cómo lees.</p>
+            <p class="texto-ayuda" style="font-size:0.8rem;">⏱️ El tiempo no afecta tu desempeño.</p>
+            <button class="btn-accion" onclick="mostrarTexto()">📖 Ver texto y comenzar</button>
         </div>
     </div>
 
     <!-- ===== SELECTOR DE MODO DE TEXTO ===== -->
     <div id="selectorTextoArea">
         <div class="selector-texto">
-            <h3>📄 Selecciona el modo de texto</h3>
+            <h3>📄 Modo de texto</h3>
             <div class="opciones-texto">
                 <button class="btn-texto activo" id="btnTextoFijo" onclick="seleccionarModoTexto('fijo')">
-                    📌 Texto fijo
-                    <span class="texto-ayuda">El mismo texto para todos los alumnos</span>
+                    📌 Fijo
+                    <span class="texto-ayuda">Mismo texto para todos</span>
                 </button>
                 <button class="btn-texto" id="btnTextoAleatorio" onclick="seleccionarModoTexto('aleatorio')">
-                    🎲 Texto aleatorio
-                    <span class="texto-ayuda">Cada alumno recibe un texto diferente</span>
+                    🎲 Aleatorio
+                    <span class="texto-ayuda">Texto diferente por alumno</span>
                 </button>
             </div>
             <div class="info-texto">
-                <p>📖 <strong>Texto seleccionado:</strong> <span id="nombreTextoSeleccionado">Cargando...</span></p>
+                <p>📖 <strong>Texto:</strong> <span id="nombreTextoSeleccionado">Cargando...</span></p>
                 <p class="texto-ayuda">🔹 <span id="modoTextoActual">Modo fijo</span> · <span id="palabrasTextoActual">0 palabras</span></p>
             </div>
             <button class="btn-cambiar-texto" onclick="cambiarTexto()">🔄 Cambiar texto</button>
@@ -56,14 +104,14 @@
 
     <!-- ===== SINCRONIZACIÓN DE DOS DISPOSITIVOS ===== -->
     <div class="sincronizacion-dispositivos">
-        <h3>📲 Sincronizar con otro dispositivo</h3>
-        <p class="texto-ayuda">Si el alumno leerá en otro dispositivo, genera un código de sesión para compartir el mismo texto.</p>
+        <h3>📲 Compartir en otro dispositivo</h3>
+        <p class="texto-ayuda" style="font-size:0.8rem;">Genera un código para que el alumno vea el mismo texto.</p>
         <div class="codigo-sesion">
-            <span id="codigoSesion" style="font-size:1.5rem; font-weight:bold; color:#e85f2f;">---</span>
+            <span id="codigoSesion" style="font-size:1.8rem; font-weight:bold; color:#e85f2f; background:#f0f4f8; padding:4px 16px; border-radius:8px;">---</span>
             <button class="btn-generar-codigo" onclick="generarCodigoSesion()">🔑 Generar código</button>
         </div>
-        <div class="instrucciones-lector">
-            <p>📱 <strong>Para el alumno:</strong> Abre SAAL en tu dispositivo, selecciona "Modo lector" e ingresa el código de sesión.</p>
+        <div class="instrucciones-lector" style="font-size:0.8rem; margin-top:6px;">
+            <p>📱 <strong>Alumno:</strong> Abre SAAL → "Modo lector" → ingresa el código.</p>
         </div>
     </div>
 
@@ -76,21 +124,21 @@
             <div class="timer">
                 <span id="minutos">00</span>:<span id="segundos">00</span>
                 <button id="btnTimer" class="btn-timer" onclick="controlarTimer()">▶ Iniciar</button>
-                <button class="btn-timer btn-reiniciar" onclick="reiniciarTimer()">↻ Reiniciar</button>
+                <button class="btn-timer btn-reiniciar" onclick="reiniciarTimer()">↻</button>
             </div>
             <div class="timer-info">
-                <p>⏱️ Tiempo de lectura</p>
-                <p class="texto-ayuda">⚠️ El tiempo no está asociado con el desempeño.</p>
+                <p style="font-size:0.8rem;">⏱️ Tiempo de lectura</p>
+                <p class="texto-ayuda" style="font-size:0.7rem;">⚠️ El tiempo no afecta el desempeño.</p>
             </div>
         </div>
 
-        <button class="btn-accion btn-rubrica" onclick="mostrarRubrica()">📋 Terminar lectura, ir a la rúbrica</button>
+        <button class="btn-accion btn-rubrica" onclick="mostrarRubrica()">📋 Ir a la rúbrica</button>
     </div>
 
     <!-- ===== RÚBRICA ===== -->
     <div id="areaRubrica" style="display:none;">
         <div class="aviso-rubrica">
-            <p>📋 Ahora marca cada componente según el desempeño del alumno durante la lectura.</p>
+            <p style="font-size:0.9rem;">📋 Marca cada componente según el desempeño del alumno.</p>
         </div>
 
         <div id="componentesRubrica"></div>
@@ -109,24 +157,20 @@
 <script src="js/datos.js"></script>
 <script>
     // ============================================================
-    // SAAL - 1° SECUNDARIA
+    // SAAL - 1° SECUNDARIA (VERSIÓN MEJORADA PARA MÓVIL)
     // ============================================================
 
-    // ===== CONFIGURACIÓN =====
     const GRADO = 'secundaria1';
     const NOMBRE_GRADO = '1° secundaria';
 
-    // ===== CARGAR DATOS DEL ALUMNO =====
     document.getElementById('nombreAlumno').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
 
-    // ===== VARIABLES DE TEXTO =====
     let modoTexto = 'fijo';
     let textoActual = null;
     let indiceTextoActual = 0;
     let textosDisponibles = [];
     let codigoSesion = null;
 
-    // ===== CARGAR TEXTOS DESDE datos.js =====
     function cargarTextos() {
         textosDisponibles = bancoTextos[GRADO] || [];
         if (textosDisponibles.length === 0) {
@@ -147,7 +191,6 @@
         }
     }
 
-    // ===== SELECCIONAR MODO DE TEXTO =====
     function seleccionarModoTexto(modo) {
         modoTexto = modo;
         document.getElementById('btnTextoFijo').classList.toggle('activo', modo === 'fijo');
@@ -157,7 +200,6 @@
 
     function seleccionarNuevoTexto() {
         if (textosDisponibles.length === 0) return;
-
         if (modoTexto === 'aleatorio') {
             const nuevoIndice = Math.floor(Math.random() * textosDisponibles.length);
             textoActual = textosDisponibles[nuevoIndice];
@@ -166,7 +208,6 @@
             textoActual = textosDisponibles[indiceTextoActual];
         }
         actualizarInfoTexto();
-
         const textoElement = document.getElementById('textoLectura');
         if (textoElement && textoActual) {
             textoElement.innerHTML = `<p>${textoActual.contenido}</p>`;
@@ -177,7 +218,6 @@
         seleccionarNuevoTexto();
     }
 
-    // ===== GENERAR CÓDIGO DE SESIÓN =====
     function generarCodigoSesion() {
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let codigo = '';
@@ -186,18 +226,12 @@
         }
         codigoSesion = codigo;
         document.getElementById('codigoSesion').textContent = codigoSesion;
-
         if (textoActual) {
-            localStorage.setItem('sesion_' + codigoSesion, JSON.stringify({
-                texto: textoActual,
-                modo: modoTexto
-            }));
+            localStorage.setItem('sesion_' + codigoSesion, JSON.stringify({ texto: textoActual, modo: modoTexto }));
         }
-
-        alert('✅ Código de sesión generado: ' + codigoSesion + '\nCompártelo con el alumno para que vea el mismo texto.');
+        alert('✅ Código: ' + codigoSesion + '\nCompártelo con el alumno.');
     }
 
-    // ===== MOSTRAR TEXTO =====
     function mostrarTexto() {
         document.getElementById('instruccionesIniciales').style.display = 'none';
         document.getElementById('areaLectura').style.display = 'block';
@@ -217,7 +251,7 @@
         if (timerActivo) {
             clearInterval(intervalo);
             timerActivo = false;
-            btn.textContent = '▶ Continuar';
+            btn.textContent = '▶';
             btn.classList.remove('detener');
         } else {
             if (segundos === 0 && minutos === 0) {
@@ -226,17 +260,14 @@
                 intervalo = setInterval(actualizarTimer, 1000);
             }
             timerActivo = true;
-            btn.textContent = '⏹️ Detener';
+            btn.textContent = '⏹';
             btn.classList.add('detener');
         }
     }
 
     function actualizarTimer() {
         segundos++;
-        if (segundos === 60) {
-            segundos = 0;
-            minutos++;
-        }
+        if (segundos === 60) { segundos = 0; minutos++; }
         document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
         document.getElementById('segundos').textContent = String(segundos).padStart(2, '0');
     }
@@ -244,22 +275,17 @@
     function reiniciarTimer() {
         clearInterval(intervalo);
         timerActivo = false;
-        segundos = 0;
-        minutos = 0;
+        segundos = 0; minutos = 0;
         document.getElementById('minutos').textContent = '00';
         document.getElementById('segundos').textContent = '00';
         const btn = document.getElementById('btnTimer');
-        btn.textContent = '▶ Iniciar';
+        btn.textContent = '▶';
         btn.classList.remove('detener');
     }
 
     // ===== MOSTRAR RÚBRICA =====
     function mostrarRubrica() {
-        if (timerActivo) {
-            clearInterval(intervalo);
-            timerActivo = false;
-            document.getElementById('btnTimer').textContent = '▶ Iniciar';
-        }
+        if (timerActivo) { clearInterval(intervalo); timerActivo = false; document.getElementById('btnTimer').textContent = '▶'; }
         document.getElementById('areaLectura').style.display = 'none';
         document.getElementById('areaRubrica').style.display = 'block';
         generarComponentesRubrica();
@@ -307,9 +333,9 @@
         html += `
             <div class="componente" id="comprensionArea">
                 <h3>Comprensión lectora</h3>
-                <p class="texto-ayuda">📝 Responde a las preguntas de comprensión que se muestran a continuación.</p>
+                <p class="texto-ayuda" style="font-size:0.8rem;">📝 Responde a las preguntas de comprensión.</p>
                 <div id="preguntasComprension"></div>
-                <div class="botones-nivel" style="margin-top:15px;">
+                <div class="botones-nivel" style="margin-top:12px;">
                     <button class="btn-nivel circular" data-componente="comprension" data-nivel="3" onclick="seleccionarNivel('comprension', 3)">
                         <span class="nivel-icono">🟢</span>
                         <span class="nivel-texto">Logrado</span>
@@ -344,12 +370,7 @@
 
     // ===== SELECCIONAR NIVEL =====
     let puntajesActuales = {
-        fluidez: 0,
-        precision: 0,
-        atencionPalabras: 0,
-        usoVoz: 0,
-        seguridad: 0,
-        comprension: 0
+        fluidez: 0, precision: 0, atencionPalabras: 0, usoVoz: 0, seguridad: 0, comprension: 0
     };
 
     function seleccionarNivel(componente, nivel) {
@@ -366,15 +387,14 @@
     function cargarPreguntas() {
         const container = document.getElementById('preguntasComprension');
         if (!textoActual || !textoActual.preguntas) {
-            container.innerHTML = '<p class="texto-ayuda">No hay preguntas disponibles para este texto.</p>';
+            container.innerHTML = '<p class="texto-ayuda">No hay preguntas disponibles.</p>';
             return;
         }
-
         let html = '';
         textoActual.preguntas.forEach((pregunta, index) => {
             html += `
                 <div class="pregunta-item">
-                    <p><strong>Pregunta ${index + 1}:</strong> ${pregunta}</p>
+                    <p style="font-size:0.9rem;"><strong>Pregunta ${index + 1}:</strong> ${pregunta}</p>
                     <div class="respuesta-opciones">
                         <button class="btn-respuesta" onclick="marcarRespuesta(this, true)">✅ Correcta</button>
                         <button class="btn-respuesta" onclick="marcarRespuesta(this, false)">❌ Incorrecta</button>
@@ -400,32 +420,31 @@
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px;">
-                <h2 style="color: #e85f2f;">📋 SAAL - Ficha diagnóstica de lectura</h2>
+                <h2 style="color: #e85f2f;">📋 SAAL - Ficha diagnóstica</h2>
                 <p><strong>Alumno(a):</strong> ${nombre}</p>
                 <p><strong>Grado:</strong> ${NOMBRE_GRADO}</p>
                 <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
-                <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Texto fijo' : '🎲 Texto aleatorio'}</p>
+                <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Fijo' : '🎲 Aleatorio'}</p>
                 <p><strong>Fecha:</strong> ${fecha}</p>
                 <hr>
-                <h3>Resultado general:</h3>
-                <p style="font-size: 1.5rem;">Puntaje total: ${total} / 18</p>
+                <h3>Resultado:</h3>
+                <p style="font-size:1.5rem;">Puntaje: ${total} / 18</p>
                 <p>${nivel}</p>
-                <h3>Puntaje por componente:</h3>
-                <ul>
+                <h3>Puntajes:</h3>
+                <ul style="font-size:0.9rem;">
                     <li>Fluidez: ${puntajesActuales.fluidez}/3</li>
                     <li>Precisión: ${puntajesActuales.precision}/3</li>
-                    <li>Atención a palabras complejas: ${puntajesActuales.atencionPalabras}/3</li>
-                    <li>Uso de la voz: ${puntajesActuales.usoVoz}/3</li>
-                    <li>Seguridad y disposición: ${puntajesActuales.seguridad}/3</li>
+                    <li>Atención: ${puntajesActuales.atencionPalabras}/3</li>
+                    <li>Voz: ${puntajesActuales.usoVoz}/3</li>
+                    <li>Seguridad: ${puntajesActuales.seguridad}/3</li>
                     <li>Comprensión: ${puntajesActuales.comprension}/3</li>
                 </ul>
                 <h3>Recomendaciones:</h3>
-                <ul>
-                    <li>🟢 Sigue practicando la lectura en voz alta todos los días.</li>
+                <ul style="font-size:0.9rem;">
+                    <li>🟢 Sigue practicando la lectura en voz alta.</li>
                 </ul>
                 <hr>
-                <p style="font-size: 0.8rem;">SAAL: Sistema de Alerta y Acompañamiento LEO - Jalisco</p>
-                <p style="font-size: 0.7rem;">Versión 3.0</p>
+                <p style="font-size:0.7rem;">SAAL - Jalisco | Versión 3.0</p>
             </div>
         `;
 
