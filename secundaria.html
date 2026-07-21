@@ -27,6 +27,10 @@
 <script>
     document.getElementById('nombreDisplay').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
 
+    if (!localStorage.getItem('nombreAlumno')) {
+        window.location.href = 'datos.html';
+    }
+
     function seleccionarGrado(grado) {
         localStorage.setItem('grado', grado);
         localStorage.setItem('nivel', 'secundaria');
