@@ -2,13 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SAAL - 1° Secundaria</title>
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
 <div class="container">
+    <!-- Botón de regreso -->
     <a href="secundaria.html" class="boton-regresar">← Seleccionar otro grado</a>
+
+    <!-- Encabezado -->
     <div class="header">
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
@@ -29,8 +32,8 @@
         </div>
     </div>
 
-    <!-- ===== NUEVO: SELECTOR DE MODO DE TEXTO (visible solo para el aplicador) ===== -->
-    <div id="selectorTextoArea" style="display: block;">
+    <!-- ===== SELECTOR DE MODO DE TEXTO ===== -->
+    <div id="selectorTextoArea">
         <div class="selector-texto">
             <h3>📄 Selecciona el modo de texto</h3>
             <div class="opciones-texto">
@@ -51,11 +54,24 @@
         </div>
     </div>
 
+    <!-- ===== SINCRONIZACIÓN DE DOS DISPOSITIVOS ===== -->
+    <div class="sincronizacion-dispositivos">
+        <h3>📲 Sincronizar con otro dispositivo</h3>
+        <p class="texto-ayuda">Si el alumno leerá en otro dispositivo, genera un código de sesión para compartir el mismo texto.</p>
+        <div class="codigo-sesion">
+            <span id="codigoSesion" style="font-size:1.5rem; font-weight:bold; color:#e85f2f;">---</span>
+            <button class="btn-generar-codigo" onclick="generarCodigoSesion()">🔑 Generar código</button>
+        </div>
+        <div class="instrucciones-lector">
+            <p>📱 <strong>Para el alumno:</strong> Abre SAAL en tu dispositivo, selecciona "Modo lector" e ingresa el código de sesión.</p>
+        </div>
+    </div>
+
     <!-- ===== ÁREA DE LECTURA ===== -->
     <div id="areaLectura" style="display:none;">
         <div class="texto-lectura" id="textoLectura"></div>
 
-        <!-- Timer -->
+        <!-- Temporizador -->
         <div class="timer-container">
             <div class="timer">
                 <span id="minutos">00</span>:<span id="segundos">00</span>
@@ -77,13 +93,12 @@
             <p>📋 Ahora marca cada componente según el desempeño del alumno durante la lectura.</p>
         </div>
 
-        <!-- Componentes (se generan desde JavaScript) -->
         <div id="componentesRubrica"></div>
 
         <button class="btn-accion btn-finalizar" onclick="generarFicha()">📄 Generar ficha diagnóstica</button>
     </div>
 
-    <!-- ===== FICHA ===== -->
+    <!-- ===== FICHA DIAGNÓSTICA ===== -->
     <div id="ficha-area" style="display:none;" class="ficha-diagnostico">
         <div id="ficha-contenido"></div>
         <button class="btn-accion" onclick="window.print();">🖨️ Guardar como PDF / Imprimir</button>
@@ -93,6 +108,10 @@
 
 <script src="js/datos.js"></script>
 <script>
+    // ============================================================
+    // SAAL - 1° SECUNDARIA
+    // ============================================================
+
     // ===== CONFIGURACIÓN =====
     const GRADO = 'secundaria1';
     const NOMBRE_GRADO = '1° secundaria';
@@ -101,11 +120,13 @@
     document.getElementById('nombreAlumno').textContent = localStorage.getItem('nombreAlumno') || 'No especificado';
 
     // ===== VARIABLES DE TEXTO =====
-    let modoTexto = 'fijo'; // 'fijo' o 'aleatorio'
+    let modoTexto = 'fijo';
     let textoActual = null;
     let indiceTextoActual = 0;
     let textosDisponibles = [];
+    let codigoSesion = null;
 
+    // ===== CARGAR TEXTOS DESDE datos.js =====
     function cargarTextos() {
         textosDisponibles = bancoTextos[GRADO] || [];
         if (textosDisponibles.length === 0) {
@@ -126,6 +147,7 @@
         }
     }
 
+    // ===== SELECCIONAR MODO DE TEXTO =====
     function seleccionarModoTexto(modo) {
         modoTexto = modo;
         document.getElementById('btnTextoFijo').classList.toggle('activo', modo === 'fijo');
@@ -135,17 +157,16 @@
 
     function seleccionarNuevoTexto() {
         if (textosDisponibles.length === 0) return;
-        
+
         if (modoTexto === 'aleatorio') {
             const nuevoIndice = Math.floor(Math.random() * textosDisponibles.length);
             textoActual = textosDisponibles[nuevoIndice];
         } else {
-            // Modo fijo: avanzar al siguiente texto en orden (ciclo)
             indiceTextoActual = (indiceTextoActual + 1) % textosDisponibles.length;
             textoActual = textosDisponibles[indiceTextoActual];
         }
         actualizarInfoTexto();
-        // Si el texto ya está visible, actualizarlo
+
         const textoElement = document.getElementById('textoLectura');
         if (textoElement && textoActual) {
             textoElement.innerHTML = `<p>${textoActual.contenido}</p>`;
@@ -154,6 +175,26 @@
 
     function cambiarTexto() {
         seleccionarNuevoTexto();
+    }
+
+    // ===== GENERAR CÓDIGO DE SESIÓN =====
+    function generarCodigoSesion() {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let codigo = '';
+        for (let i = 0; i < 4; i++) {
+            codigo += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+        }
+        codigoSesion = codigo;
+        document.getElementById('codigoSesion').textContent = codigoSesion;
+
+        if (textoActual) {
+            localStorage.setItem('sesion_' + codigoSesion, JSON.stringify({
+                texto: textoActual,
+                modo: modoTexto
+            }));
+        }
+
+        alert('✅ Código de sesión generado: ' + codigoSesion + '\nCompártelo con el alumno para que vea el mismo texto.');
     }
 
     // ===== MOSTRAR TEXTO =====
@@ -263,7 +304,6 @@
             `;
         });
 
-        // Agregar comprensión al final
         html += `
             <div class="componente" id="comprensionArea">
                 <h3>Comprensión lectora</h3>
