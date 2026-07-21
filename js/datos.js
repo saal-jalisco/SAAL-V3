@@ -1,67 +1,9 @@
 // ============================================================
-// SAAL - DATOS DE EVALUACIÓN
-// Versión 3.0 - Mayo 2025
+// SAAL - DATOS DE EVALUACIÓN (VERSIÓN PARA PRUEBA)
+// Solo 1° secundaria - 4 textos
 // ============================================================
 
-// ===== BANCO DE TEXTOS POR GRADO =====
-// Cada texto tiene: titulo, palabras (conteo verificado), contenido y preguntas
-
 const bancoTextos = {
-    // ---- 1° PRIMARIA (rango: 90-101 palabras) ----
-    primaria1: [
-        {
-            titulo: "La llegada de una hermanita",
-            palabras: 90,
-            contenido: `Los papás de Juan Pablo le dijeron que iba a tener una hermanita. Él no dijo nada.
-
-Sus papás se preocuparon. Juan Pablo no quiso cenar, y se fue dormir.
-
-Él estaba muy triste, lloró y lloró hasta que se quedó dormido.
-
-A media noche, los papás escucharon que alguien lloraba. Fueron hasta la habitación de su hijo y observaron que lloraba dormido.
-
-Sus papás lo despertaron y lo abrazaron fuerte. Él les contó porque no quería tener una hermanita les habló de sus temores.`,
-            preguntas: [
-                "¿De qué trata la lectura?",
-                "Juan Pablo estaba triste porque:",
-                "¿Qué hicieron los papás de Juan Pablo cuando lo observaron llorando?"
-            ],
-            opciones: [
-                null,
-                ["a) iba a tener una hermanita", "b) le robaron sus juguetes", "c) lo castigaron sus papás"],
-                ["a) Lo dejaron solo y lo castigaron", "b) Le dieron de cenar y lo recostaron", "c) Lo despertaron y lo abrazaron fuerte"]
-            ],
-            correctas: [null, 0, 2]
-        },
-        {
-            titulo: "Los delfines",
-            palabras: 101,
-            contenido: `En los mares y océanos viven muchísimas especies de animales y plantas. Entre ellos, unos de los más simpáticos y bonitos son los delfines.
-
-Los delfines viven en el mar, pero no son peces, sino mamíferos.
-
-Al nadar van sacando los lomos, con su aleta, siempre en grupos. Y cuando están contentos dan grandes saltos fuera del agua.
-
-Cuando se sumergen bajo el agua aguantan la respiración, como hacemos los seres humanos.
-
-Su hocico termina en punta y les sirve para defenderse de sus enemigos, incluso de los tiburones. Se impulsan con fuerza y golpean con su trompa a sus enemigos.`,
-            preguntas: [
-                "¿De qué trata la lectura?",
-                "¿Qué hacen los delfines cuando están contentos?",
-                "¿Para qué les sirve tener su hocico en punta?"
-            ],
-            opciones: [
-                null,
-                ["a) Nadan en el mar y los océanos", "b) Se sumergen bajo el agua", "c) Dan grandes saltos fuera del agua"],
-                ["a) Para respirar abajo del agua", "b) Para defenderse de sus enemigos", "c) Para comer peces"]
-            ],
-            correctas: [null, 2, 1]
-        },
-        // AÑADIR MÁS TEXTOS DE 1° PRIMARIA AQUÍ...
-        // (Los textos propuestos se agregarán después de la validación)
-    ],
-
-    // ---- 1° SECUNDARIA (rango: 555-585 palabras) ----
     secundaria1: [
         {
             titulo: "El origen del chocolate",
@@ -117,12 +59,11 @@ En conclusión, el ecoturismo representa una forma de viajar que combina el plac
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
         },
-        // AÑADIR MÁS TEXTOS DE 1° SECUNDARIA AQUÍ...
-        // ("La historia de los números" y "El viaje de los vikingos" se agregarán después)
+        // ... (los otros dos textos: "La historia de los números" y "El viaje de los vikingos" los agregamos después)
     ]
 };
 
-// ===== DESCRIPCIONES DE LA RÚBRICA POR COMPONENTE =====
+// ===== DESCRIPCIONES DE LA RÚBRICA =====
 const descripcionesRubrica = {
     fluidez: {
         3: "Lee palabras y frases completas. Respeta los signos de puntuación.",
