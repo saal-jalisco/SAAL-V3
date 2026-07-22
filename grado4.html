@@ -505,57 +505,57 @@
     }
 
     function generarHTMLPlan(plan) {
-    if (!plan.semanas || plan.semanas.length === 0) {
-        return `
-            <div style="padding:20px; text-align:center;">
-                <p style="font-size:1.2rem;">🎉 ¡El alumno está en nivel deseable en todos los componentes!</p>
-                <p>Se recomienda continuar con la práctica diaria de lectura.</p>
-            </div>
+        if (!plan.semanas || plan.semanas.length === 0) {
+            return `
+                <div style="padding:20px; text-align:center;">
+                    <p style="font-size:1.2rem;">🎉 ¡El alumno está en nivel deseable en todos los componentes!</p>
+                    <p>Se recomienda continuar con la práctica diaria de lectura.</p>
+                </div>
+            `;
+        }
+
+        let html = `
+            <h3 style="color:#2c3e50; margin-bottom:10px;">📋 Plan de intervención de 4 semanas</h3>
+            <p><strong>Alumno:</strong> ${plan.alumno}</p>
+            <p><strong>Grado:</strong> ${plan.grado}</p>
+            <p><strong>Fecha:</strong> ${plan.fecha}</p>
+            <p><strong>Duración:</strong> 15 minutos diarios</p>
+            <hr style="margin:12px 0;">
         `;
+
+        plan.semanas.forEach((semana, idx) => {
+            html += `<h4 style="color:#e85f2f; margin:15px 0 8px 0;">📌 Semana ${idx + 1}</h4>`;
+            
+            semana.dias.forEach(dia => {
+                if (dia.actividades.length === 0) return;
+                
+                html += `<div style="margin-bottom:10px; background:#f8f9fa; padding:10px; border-radius:10px; border-left:4px solid #3498db;">`;
+                html += `<p style="font-weight:bold; margin:0 0 6px 0;">📅 Día ${dia.dia}</p>`;
+                
+                dia.actividades.forEach(act => {
+                    html += `
+                        <div style="margin:4px 0 0 15px; padding:8px 12px; background:white; border-radius:8px; border:1px solid #e0e0e0;">
+                            <p style="margin:2px 0; font-weight:bold;">${act.area}: ${act.nombre}</p>
+                            <p style="margin:2px 0; font-size:0.85rem; color:#555;">📝 ${act.descripcion}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">📎 Materiales: ${act.materiales.join(', ')}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">⏱️ ${act.duracion} minutos</p>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            });
+        });
+
+        html += `
+            <hr style="margin:12px 0;">
+            <p style="font-size:0.75rem; color:#777;">Plan generado automáticamente por SAAL basado en los resultados del diagnóstico.</p>
+            <p style="font-size:0.75rem; color:#777;">Actividades extraídas del banco de actividades SAAL.</p>
+        `;
+
+        return html;
     }
 
-    let html = `
-        <h3 style="color:#2c3e50; margin-bottom:10px;">📋 Plan de intervención de 4 semanas</h3>
-        <p><strong>Alumno:</strong> ${plan.alumno}</p>
-        <p><strong>Grado:</strong> ${plan.grado}</p>
-        <p><strong>Fecha:</strong> ${plan.fecha}</p>
-        <p><strong>Duración:</strong> 15 minutos diarios</p>
-        <hr style="margin:12px 0;">
-    `;
-
-    plan.semanas.forEach((semana, idx) => {
-        html += `<h4 style="color:#e85f2f; margin:15px 0 8px 0;">📌 Semana ${idx + 1}</h4>`;
-        
-        semana.dias.forEach(dia => {
-            if (dia.actividades.length === 0) return;
-            
-            // Mostrar el día una sola vez con todas sus actividades
-            html += `<div style="margin-bottom:10px; background:#f8f9fa; padding:10px; border-radius:10px; border-left:4px solid #3498db;">`;
-            html += `<p style="font-weight:bold; margin:0 0 6px 0;">📅 Día ${dia.dia}</p>`;
-            
-            dia.actividades.forEach(act => {
-                html += `
-                    <div style="margin:4px 0 0 15px; padding:8px 12px; background:white; border-radius:8px; border:1px solid #e0e0e0;">
-                        <p style="margin:2px 0; font-weight:bold;">${act.area}: ${act.nombre}</p>
-                        <p style="margin:2px 0; font-size:0.85rem; color:#555;">📝 ${act.descripcion}</p>
-                        <p style="margin:2px 0; font-size:0.8rem; color:#777;">📎 Materiales: ${act.materiales.join(', ')}</p>
-                        <p style="margin:2px 0; font-size:0.8rem; color:#777;">⏱️ ${act.duracion} minutos</p>
-                    </div>
-                `;
-            });
-            
-            html += `</div>`;
-        });
-    });
-
-    html += `
-        <hr style="margin:12px 0;">
-        <p style="font-size:0.75rem; color:#777;">Plan generado automáticamente por SAAL basado en los resultados del diagnóstico.</p>
-        <p style="font-size:0.75rem; color:#777;">Actividades extraídas del banco de actividades SAAL.</p>
-    `;
-
-    return html;
-}
     // ============================================================
     // NUEVA EVALUACIÓN - REINICIA TODO EL FLUJO
     // ============================================================
