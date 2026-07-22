@@ -1139,57 +1139,33 @@ body {
    ============================================================ */
 
 @media print {
-    /* ===== CONFIGURACIÓN DE PÁGINA ===== */
     @page {
         size: portrait;
-        margin: 1.5cm;
+        margin: 2cm;
     }
 
-    /* ===== OCULTAR ELEMENTOS NO IMPRIMIBLES ===== */
     .boton-regresar,
-    .boton-calcular,
-    .boton-ficha,
-    .botones-nivel,
-    .no-print,
-    .pregunta .opciones input,
-    .respuesta-opciones,
-    .btn-timer,
-    .boton-continuar,
     .btn-accion,
-    .instrucciones-iniciales,
-    .timer-container,
+    .btn-intervencion,
+    .btn-secundario,
     .selector-texto,
     .sincronizacion-dispositivos,
-    .aviso-rubrica,
+    .timer-container,
+    .instrucciones-iniciales,
     .componente,
-    .componente .botones-nivel,
     .descripciones-siempre-visibles,
     .header .logos,
     .header .subtitulo,
-    .header p:not(.ficha-titulo),
-    .header h1,
-    .header .version,
     #nombreAlumnoDisplay,
     #textoSeleccionadoDisplay,
-    .instrucciones-iniciales,
-    .mensaje-instruccion,
-    #selectorTextoArea,
-    .sincronizacion-dispositivos,
-    .codigo-sesion,
-    .btn-generar-codigo,
-    .instrucciones-lector,
     #areaLectura,
-    .timer-container,
-    .btn-rubrica,
     #areaRubrica,
-    .componentesRubrica,
-    .btn-finalizar,
-    .btn-intervencion,
-    .btn-secundario {
+    .botones-nivel,
+    .btn-timer,
+    .no-print {
         display: none !important;
     }
 
-    /* ===== RESETEAR PÁGINA ===== */
     body {
         background: white !important;
         padding: 0 !important;
@@ -1210,11 +1186,10 @@ body {
         overflow: visible !important;
     }
 
-    /* ===== ENCABEZADO DE LA FICHA ===== */
     .header {
         background: #e85f2f !important;
         color: white !important;
-        padding: 12px 20px !important;
+        padding: 8px 20px !important;
         margin: 0 !important;
         border-radius: 0 !important;
         text-align: center !important;
@@ -1223,20 +1198,19 @@ body {
     }
 
     .header h1 {
-        font-size: 16pt !important;
+        font-size: 14pt !important;
         margin: 0 !important;
     }
 
     .header p {
-        font-size: 11pt !important;
+        font-size: 10pt !important;
         margin: 2px 0 !important;
     }
 
-    /* ===== FICHA DIAGNÓSTICA ===== */
     .ficha-diagnostico {
         display: block !important;
         border: none !important;
-        padding: 15px !important;
+        padding: 0 !important;
         margin: 0 !important;
         background: white !important;
         box-shadow: none !important;
@@ -1246,146 +1220,122 @@ body {
 
     .ficha-diagnostico #ficha-contenido {
         font-size: 11pt !important;
-        line-height: 1.5 !important;
+        line-height: 1.4 !important;
         color: #222 !important;
+        padding: 10px 0 !important;
     }
 
     .ficha-diagnostico #ficha-contenido h2 {
         color: #e85f2f !important;
-        font-size: 16pt !important;
+        font-size: 14pt !important;
         margin-top: 0 !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 6px !important;
         border-bottom: 2px solid #e85f2f !important;
-        padding-bottom: 6px !important;
+        padding-bottom: 4px !important;
     }
 
     .ficha-diagnostico #ficha-contenido h3 {
         font-size: 12pt !important;
-        margin-top: 10px !important;
+        margin-top: 8px !important;
         margin-bottom: 4px !important;
         color: #404f55 !important;
     }
 
-    .ficha-diagnostico #ficha-contenido p {
-        font-size: 11pt !important;
-        line-height: 1.4 !important;
-        margin: 3px 0 !important;
+    .ficha-diagnostico #ficha-contenido p,
+    .ficha-diagnostico #ficha-contenido li {
+        font-size: 10pt !important;
+        line-height: 1.3 !important;
+        margin: 2px 0 !important;
     }
 
     .ficha-diagnostico #ficha-contenido ul {
-        padding-left: 18px !important;
+        padding-left: 16px !important;
         margin: 4px 0 !important;
         list-style-type: disc !important;
     }
 
-    .ficha-diagnostico #ficha-contenido li {
-        font-size: 11pt !important;
-        line-height: 1.4 !important;
-        margin: 2px 0 !important;
-    }
-
     .ficha-diagnostico #ficha-contenido hr {
-        margin: 10px 0 !important;
+        margin: 8px 0 !important;
         border: none !important;
         border-top: 1px solid #ddd !important;
     }
 
-    /* ===== PLAN DE INTERVENCIÓN ===== */
     .plan-intervencion {
         display: block !important;
         border: 1px solid #3498db !important;
-        border-radius: 8px !important;
-        padding: 15px !important;
-        margin-top: 15px !important;
+        border-radius: 6px !important;
+        padding: 12px !important;
+        margin-top: 10px !important;
         background: white !important;
         page-break-before: always !important;
     }
 
     .plan-intervencion h3 {
-        font-size: 14pt !important;
+        font-size: 13pt !important;
         color: #2c3e50 !important;
-        margin-bottom: 8px !important;
+        margin: 0 0 6px 0 !important;
     }
 
     .plan-intervencion h4 {
-        font-size: 12pt !important;
+        font-size: 11pt !important;
         color: #e85f2f !important;
-        margin: 12px 0 6px 0 !important;
+        margin: 10px 0 4px 0 !important;
     }
 
     .plan-intervencion p {
-        font-size: 10pt !important;
-        margin: 2px 0 !important;
-    }
-
-    .plan-intervencion table {
-        width: 100% !important;
-        border-collapse: collapse !important;
         font-size: 9pt !important;
-        margin: 6px 0 !important;
+        margin: 2px 0 !important;
+        line-height: 1.3 !important;
     }
 
-    .plan-intervencion th {
-        background: #ecf0f1 !important;
-        padding: 4px 8px !important;
-        border: 1px solid #ccc !important;
-        text-align: left !important;
+    .plan-intervencion > div > div {
+        margin-bottom: 6px !important;
+        padding: 6px 10px !important;
+        background: #f8f9fa !important;
+        border-radius: 4px !important;
+        border-left: 3px solid #3498db !important;
+        page-break-inside: avoid !important;
+    }
+
+    .plan-intervencion > div > div p {
+        font-size: 9pt !important;
+        margin: 1px 0 !important;
+    }
+
+    .plan-intervencion > div > div p:first-child {
         font-weight: bold !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
-    .plan-intervencion td {
-        padding: 4px 8px !important;
-        border: 1px solid #ccc !important;
+    .plan-intervencion > div > div p:nth-child(2) {
+        font-size: 8.5pt !important;
+        color: #555 !important;
+    }
+
+    .plan-intervencion > div > div p:nth-child(3),
+    .plan-intervencion > div > div p:nth-child(4) {
+        font-size: 8pt !important;
+        color: #777 !important;
     }
 
     .plan-intervencion hr {
-        margin: 10px 0 !important;
+        margin: 8px 0 !important;
         border: none !important;
         border-top: 1px solid #ddd !important;
     }
 
-    .plan-intervencion .descripcion-actividad {
-        font-size: 9pt !important;
-        color: #555 !important;
-        margin: 2px 0 !important;
-    }
-
-    .plan-intervencion .materiales-actividad {
-        font-size: 8pt !important;
-        color: #777 !important;
-        margin: 2px 0 !important;
-    }
-
-    /* ===== EVITAR CORTES DE PÁGINA ===== */
     .ficha-diagnostico,
     .plan-intervencion,
-    .plan-intervencion table,
-    .plan-intervencion tr,
-    .plan-intervencion td,
-    .plan-intervencion th,
-    .plan-intervencion div {
+    .plan-intervencion > div,
+    .plan-intervencion > div > div {
         page-break-inside: avoid !important;
     }
 
-    /* ===== PIE DE PÁGINA ===== */
     .pie-ficha {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
         color: #999 !important;
         text-align: center !important;
-        margin-top: 12px !important;
+        margin-top: 10px !important;
         border-top: 1px solid #eee !important;
-        padding-top: 8px !important;
+        padding-top: 6px !important;
     }
-
-    /* ===== FORZAR NEGRITA EN ETIQUETAS ===== */
-    .ficha-diagnostico #ficha-contenido strong {
-        font-weight: bold !important;
-    }
-
-    /* ===== COLORES EN IMPRESIÓN ===== */
-    .nivel-deseable { color: #2ecc71 !important; }
-    .nivel-progreso { color: #f1c40f !important; }
-    .nivel-atencion { color: #e74c3c !important; }
 }
