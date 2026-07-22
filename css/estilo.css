@@ -924,8 +924,12 @@ body {
     }
 }
 
-/* ===== PRINT ===== */
+/* ============================================================
+   ESTILOS PARA IMPRESIÓN - FICHA DIAGNÓSTICA
+   ============================================================ */
+
 @media print {
+    /* Ocultar todo lo que no debe aparecer en la ficha */
     .boton-regresar,
     .boton-calcular,
     .boton-ficha,
@@ -937,31 +941,123 @@ body {
     .boton-continuar,
     .btn-accion,
     .instrucciones-iniciales,
-    .timer-container {
+    .timer-container,
+    .selector-texto,
+    .sincronizacion-dispositivos,
+    .aviso-rubrica,
+    .componente .botones-nivel,
+    .descripciones-siempre-visibles,
+    .header .logos,
+    .header .subtitulo,
+    .header p:not(.ficha-titulo) {
         display: none !important;
     }
 
-    .ficha-diagnostico {
-        border: none !important;
-        padding: 0 !important;
-    }
-
+    /* Resetear el contenedor para impresión */
     body {
         background: white !important;
         padding: 0 !important;
+        margin: 0 !important;
+        font-size: 12pt !important;
+        font-family: Arial, Helvetica, sans-serif !important;
     }
 
     .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
-        padding: 0 !important;
+        background: white !important;
+        overflow: visible !important;
     }
 
+    /* Encabezado de la ficha en impresión */
     .header {
         background: #e85f2f !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        color: white !important;
+        padding: 15px 20px !important;
         margin: 0 !important;
         border-radius: 0 !important;
+        text-align: center !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .header h1 {
+        font-size: 18pt !important;
+        margin: 0 !important;
+    }
+
+    .header .ficha-titulo {
+        display: block !important;
+        font-size: 14pt !important;
+        font-weight: normal !important;
+        opacity: 0.9 !important;
+    }
+
+    /* Área de la ficha */
+    .ficha-diagnostico {
+        display: block !important;
+        border: none !important;
+        padding: 20px !important;
+        margin: 0 !important;
+        background: white !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido {
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+        color: #222 !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido h2 {
+        color: #e85f2f !important;
+        font-size: 16pt !important;
+        margin-top: 0 !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido h3 {
+        font-size: 13pt !important;
+        margin-top: 12px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido p,
+    .ficha-diagnostico #ficha-contenido li {
+        font-size: 11pt !important;
+        line-height: 1.4 !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido ul {
+        padding-left: 20px !important;
+        margin: 6px 0 !important;
+    }
+
+    .ficha-diagnostico #ficha-contenido hr {
+        margin: 12px 0 !important;
+        border: 1px solid #ddd !important;
+    }
+
+    /* Forzar saltos de página si es necesario */
+    .page-break {
+        page-break-before: always !important;
+    }
+
+    /* Asegurar que no se corten los bordes */
+    .ficha-diagnostico #ficha-contenido > div {
+        border: 1px solid #ccc !important;
+        border-radius: 8px !important;
+        padding: 16px !important;
+        background: white !important;
+    }
+
+    /* Ajustes para evitar cortes */
+    .ficha-diagnostico,
+    .ficha-diagnostico * {
+        page-break-inside: avoid !important;
     }
 }
