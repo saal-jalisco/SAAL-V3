@@ -157,7 +157,8 @@
             <p style="font-size:0.9rem;">📋 Marca cada componente según el desempeño del alumno.</p>
         </div>
         <div id="componentesRubrica"></div>
-       <button class="btn-accion btn-finalizar" onclick="generarFicha()">📄 Generar ficha diagnóstica</button>
+        <button class="btn-accion btn-finalizar" onclick="generarFicha()">📄 Generar ficha diagnóstica</button>
+    </div>
 
     <div id="ficha-area" style="display:none;" class="ficha-diagnostico">
         <div id="ficha-contenido"></div>
@@ -172,7 +173,7 @@
 <script src="js/datos.js"></script>
 <script>
     // ============================================================
-    // SAAL - 4° PRIMARIA (6 COMPONENTES)
+    // SAAL - 4° PRIMARIA
     // ============================================================
 
     const GRADO = 'primaria4';
@@ -187,7 +188,7 @@
     let codigoSesion = null;
 
     // ============================================================
-    // ENVÍO DE DATOS A CEMEJ CON COLA DE PENDIENTES
+    // ENVÍO DE DATOS A CEMEJ
     // ============================================================
 
     const SCRIPT_URL = "https://script.google.com/a/macros/jaliscoedu.mx/s/AKfycbzBBO9n4RhTWlNVN9GrheL6iulEmrt4zxDaVU4XMxoyyeSfi6CYqNmDfbkYaHGcvoN7/exec";
@@ -198,7 +199,7 @@
             curp: localStorage.getItem('curp') || '',
             cct: cct,
             zona: zonaEscolar,
-            grado: grado + "° grado",
+            grado: grado,
             puntajeTotal: puntajeTotal,
             fluidez: puntajesActuales.fluidez,
             precision: puntajesActuales.precision,
@@ -217,23 +218,18 @@
         })
         .then(() => {
             console.log("✅ Datos enviados a CEMEJ correctamente");
-            alert('✅ Datos enviados correctamente a SAAL.');
         })
         .catch(() => {
             const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
             pendientes.push(payload);
             localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
-            console.warn("⚠️ Sin conexión. Los datos se guardaron y se enviarán automáticamente cuando haya internet.");
-            alert('⚠️ No hay conexión a internet. Los datos se guardaron y se enviarán automáticamente cuando haya señal.');
+            console.warn("⚠️ Sin conexión. Los datos se guardaron.");
         });
     }
 
     function reenviarPendientes() {
         const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
         if (pendientes.length === 0) return;
-
-        console.log(`📤 Reenviando ${pendientes.length} registros pendientes...`);
-
         pendientes.forEach((payload, index) => {
             fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -242,13 +238,12 @@
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                console.log(`✅ Registro ${index + 1} enviado correctamente`);
                 const nuevosPendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
                 const filtrados = nuevosPendientes.filter((_, i) => i !== index);
                 localStorage.setItem('enviosPendientes', JSON.stringify(filtrados));
             })
             .catch(() => {
-                console.warn(`⚠️ No se pudo reenviar el registro ${index + 1}, se mantiene en cola.`);
+                console.warn(`⚠️ No se pudo reenviar el registro ${index + 1}`);
             });
         });
     }
@@ -467,8 +462,7 @@
         const cct = localStorage.getItem('cct') || 'No especificado';
         const zonaEscolar = localStorage.getItem('zonaEscolar') || 'No especificado';
 
-        // 🔥 CORREGIDO: Usamos GRADO (string) en lugar de una variable "grado" que no existe
-        enviarDatosACEMEJ(GRADO, cct, zonaEscolar, total, nivel);
+        enviarDatosACEMEJ('4° primaria', cct, zonaEscolar, total, nivel);
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
@@ -513,7 +507,7 @@
     function generarYMostrarPlan() {
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
         if (total === 0) {
-            alert('Primero debes completar la evaluación (seleccionar todos los niveles de la rúbrica).');
+            alert('Primero debes completar la evaluación.');
             return;
         }
 
@@ -635,7 +629,7 @@
     }
 
     // ============================================================
-    // NUEVA EVALUACIÓN - REINICIA TODO EL FLUJO
+    // REINICIO DE EVALUACIÓN
     // ============================================================
     function reiniciarEvaluacion() {
         if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
