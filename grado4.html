@@ -196,7 +196,6 @@
     function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
     const payload = {
         fecha: new Date().toLocaleDateString('es-MX'),
-        curp: localStorage.getItem('curp') || '',
         cct: cct,
         zona: zonaEscolar,
         grado: grado,
@@ -218,14 +217,26 @@
     })
     .then(() => {
         console.log("✅ Datos enviados a CEMEJ correctamente");
-        alert('✅ Datos enviados correctamente a SAAL.');  // ✅ VENTANA EMERGENTE
+        const mensajeExito = document.createElement('div');
+        mensajeExito.style.cssText = 'background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #c3e6cb; text-align: center; font-weight: bold;';
+        mensajeExito.textContent = '✅ Datos enviados correctamente a SAAL.';
+        const fichaContenido = document.getElementById('ficha-contenido');
+        if (fichaContenido) {
+            fichaContenido.insertBefore(mensajeExito, fichaContenido.firstChild);
+        }
     })
     .catch(() => {
         const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
         pendientes.push(payload);
         localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
         console.warn("⚠️ Sin conexión. Los datos se guardaron.");
-        alert('⚠️ Sin conexión. Los datos se guardaron y se enviarán automáticamente cuando haya internet.');
+        const mensajeError = document.createElement('div');
+        mensajeError.style.cssText = 'background: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #ffeeba; text-align: center; font-weight: bold;';
+        mensajeError.textContent = '⚠️ Sin conexión. Los datos se guardarán automáticamente.';
+        const fichaContenido = document.getElementById('ficha-contenido');
+        if (fichaContenido) {
+            fichaContenido.insertBefore(mensajeError, fichaContenido.firstChild);
+        }
     });
 }
     function reenviarPendientes() {
