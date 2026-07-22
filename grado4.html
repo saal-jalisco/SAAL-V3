@@ -194,39 +194,40 @@
     const SCRIPT_URL = "https://script.google.com/a/macros/jaliscoedu.mx/s/AKfycbzBBO9n4RhTWlNVN9GrheL6iulEmrt4zxDaVU4XMxoyyeSfi6CYqNmDfbkYaHGcvoN7/exec";
 
     function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
-        const payload = {
-            fecha: new Date().toLocaleDateString('es-MX'),
-            curp: localStorage.getItem('curp') || '',
-            cct: cct,
-            zona: zonaEscolar,
-            grado: grado,
-            puntajeTotal: puntajeTotal,
-            fluidez: puntajesActuales.fluidez,
-            precision: puntajesActuales.precision,
-            atencion: puntajesActuales.atencionPalabras,
-            usovoz: puntajesActuales.usoVoz,
-            seguridad: puntajesActuales.seguridad,
-            comprension: puntajesActuales.comprension,
-            nivel: nivel
-        };
+    const payload = {
+        fecha: new Date().toLocaleDateString('es-MX'),
+        curp: localStorage.getItem('curp') || '',
+        cct: cct,
+        zona: zonaEscolar,
+        grado: grado,
+        puntajeTotal: puntajeTotal,
+        fluidez: puntajesActuales.fluidez,
+        precision: puntajesActuales.precision,
+        atencion: puntajesActuales.atencionPalabras,
+        usovoz: puntajesActuales.usoVoz,
+        seguridad: puntajesActuales.seguridad,
+        comprension: puntajesActuales.comprension,
+        nivel: nivel
+    };
 
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(() => {
-            console.log("✅ Datos enviados a CEMEJ correctamente");
-        })
-        .catch(() => {
-            const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
-            pendientes.push(payload);
-            localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
-            console.warn("⚠️ Sin conexión. Los datos se guardaron.");
-        });
-    }
-
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        console.log("✅ Datos enviados a CEMEJ correctamente");
+        alert('✅ Datos enviados correctamente a SAAL.');  // ✅ VENTANA EMERGENTE
+    })
+    .catch(() => {
+        const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+        pendientes.push(payload);
+        localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
+        console.warn("⚠️ Sin conexión. Los datos se guardaron.");
+        alert('⚠️ Sin conexión. Los datos se guardaron y se enviarán automáticamente cuando haya internet.');
+    });
+}
     function reenviarPendientes() {
         const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
         if (pendientes.length === 0) return;
