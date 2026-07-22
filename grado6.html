@@ -415,7 +415,7 @@
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    function reiniciarEvaluacion() {
+   function reiniciarEvaluacion() {
     if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
         // Limpiar datos del alumno almacenados
         localStorage.removeItem('nombreAlumno');
@@ -428,8 +428,8 @@
         localStorage.removeItem('grado');
         localStorage.removeItem('nivel');
         
-        // Redirigir a la pantalla de inicio
-        window.location.href = 'index.html';
+        // Redirigir a los datos del alumno (no al inicio)
+        window.location.href = 'aplicador.html';
     }
 }
 
