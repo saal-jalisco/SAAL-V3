@@ -417,23 +417,23 @@
     // ============================================================
     // NUEVA EVALUACIÓN - REINICIA TODO EL FLUJO
     // ============================================================
-    function reiniciarEvaluacion() {
-        if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
-            // Limpiar datos del alumno almacenados
-            localStorage.removeItem('nombreAlumno');
-            localStorage.removeItem('curp');
-            localStorage.removeItem('turno');
-            localStorage.removeItem('aplicador');
-            localStorage.removeItem('dispositivo');
-            localStorage.removeItem('cct');
-            localStorage.removeItem('zonaEscolar');
-            localStorage.removeItem('grado');
-            localStorage.removeItem('nivel');
-            
-            // Redirigir a la pantalla de inicio
-            window.location.href = 'index.html';
-        }
+   function reiniciarEvaluacion() {
+    if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
+        // Limpiar datos del alumno almacenados
+        localStorage.removeItem('nombreAlumno');
+        localStorage.removeItem('curp');
+        localStorage.removeItem('turno');
+        localStorage.removeItem('aplicador');
+        localStorage.removeItem('dispositivo');
+        localStorage.removeItem('cct');
+        localStorage.removeItem('zonaEscolar');
+        localStorage.removeItem('grado');
+        localStorage.removeItem('nivel');
+        
+        // Redirigir a los datos del alumno (no al inicio)
+        window.location.href = 'aplicador.html';
     }
+}
 
     cargarTextos();
 </script>
