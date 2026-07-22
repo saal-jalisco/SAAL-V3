@@ -465,18 +465,17 @@
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
         const nivel = total >= 15 ? '⭐ Deseable' : total >= 10 ? '🔄 En progreso' : '🚨 Atención prioritaria';
 
-        // Obtener CCT y Zona escolar desde localStorage
         const cct = localStorage.getItem('cct') || 'No especificado';
         const zonaEscolar = localStorage.getItem('zonaEscolar') || 'No especificado';
 
-        // Enviar datos a CEMEJ
-        enviarDatosACEMEJ(grado, cct, zonaEscolar, total, nivel);
+        // 🔥 CORREGIDO: Usamos GRADO (string) en lugar de una variable "grado" que no existe
+        enviarDatosACEMEJ(GRADO, cct, zonaEscolar, total, nivel);
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
                 <h2 style="color: #e85f2f; margin:0 0 12px 0;">📋 SAAL - Ficha diagnóstica</h2>
                 <p><strong>Alumno(a):</strong> ${nombre}</p>
-                <p><strong>Grado:</strong> ${NOMBRE_GRADO}</p>
+                <p><strong>Grado:</strong> 4° primaria</p>
                 <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
                 <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Fijo' : '🎲 Aleatorio'}</p>
                 <p><strong>Fecha:</strong> ${fecha}</p>
