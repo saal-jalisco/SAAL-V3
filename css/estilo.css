@@ -1061,3 +1061,76 @@ body {
         page-break-inside: avoid !important;
     }
 }
+/* ============================================================
+   PLAN DE INTERVENCIÓN
+   ============================================================ */
+
+.btn-accion.btn-intervencion {
+    background: #8e44ad;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.btn-accion.btn-intervencion:hover {
+    background: #6c3483;
+    transform: scale(1.02);
+}
+
+.plan-intervencion {
+    background: #f0f4f8;
+    padding: 20px;
+    margin-top: 20px;
+    border: 2px solid #3498db;
+    border-radius: 20px;
+    display: none;
+}
+
+.plan-intervencion h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.plan-intervencion table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.plan-intervencion th {
+    background: #ecf0f1;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.plan-intervencion td {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+}
+
+.plan-intervencion hr {
+    margin: 12px 0;
+}
+
+/* ===== RESPONSIVE PARA EL PLAN ===== */
+@media (max-width: 480px) {
+    .plan-intervencion table {
+        font-size: 0.7rem;
+    }
+    .plan-intervencion th,
+    .plan-intervencion td {
+        padding: 4px 6px;
+    }
+    .btn-accion.btn-intervencion {
+        font-size: 0.85rem;
+        padding: 10px 16px;
+    }
+}
