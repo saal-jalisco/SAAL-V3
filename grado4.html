@@ -187,6 +187,79 @@
     let textosDisponibles = [];
     let codigoSesion = null;
 
+    // ============================================================
+    // ENVÍO DE DATOS A CEMEJ CON COLA DE PENDIENTES
+    // ============================================================
+
+    const SCRIPT_URL = "https://script.google.com/a/macros/jaliscoedu.mx/s/AKfycbzBBO9n4RhTWlNVN9GrheL6iulEmrt4zxDaVU4XMxoyyeSfi6CYqNmDfbkYaHGcvoN7/exec";
+
+    function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
+        const payload = {
+            fecha: new Date().toLocaleDateString('es-MX'),
+            curp: localStorage.getItem('curp') || '',
+            cct: cct,
+            zona: zonaEscolar,
+            grado: grado + "° grado",
+            puntajeTotal: puntajeTotal,
+            fluidez: puntajesActuales.fluidez,
+            precision: puntajesActuales.precision,
+            atencion: puntajesActuales.atencionPalabras,
+            usovoz: puntajesActuales.usoVoz,
+            seguridad: puntajesActuales.seguridad,
+            comprension: puntajesActuales.comprension,
+            nivel: nivel
+        };
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            console.log("✅ Datos enviados a CEMEJ correctamente");
+            alert('✅ Datos enviados correctamente a SAAL.');
+        })
+        .catch(() => {
+            const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+            pendientes.push(payload);
+            localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
+            console.warn("⚠️ Sin conexión. Los datos se guardaron y se enviarán automáticamente cuando haya internet.");
+            alert('⚠️ No hay conexión a internet. Los datos se guardaron y se enviarán automáticamente cuando haya señal.');
+        });
+    }
+
+    function reenviarPendientes() {
+        const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+        if (pendientes.length === 0) return;
+
+        console.log(`📤 Reenviando ${pendientes.length} registros pendientes...`);
+
+        pendientes.forEach((payload, index) => {
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                console.log(`✅ Registro ${index + 1} enviado correctamente`);
+                const nuevosPendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+                const filtrados = nuevosPendientes.filter((_, i) => i !== index);
+                localStorage.setItem('enviosPendientes', JSON.stringify(filtrados));
+            })
+            .catch(() => {
+                console.warn(`⚠️ No se pudo reenviar el registro ${index + 1}, se mantiene en cola.`);
+            });
+        });
+    }
+
+    window.addEventListener('load', reenviarPendientes);
+
+    // ============================================================
+    // FUNCIONES DE EVALUACIÓN
+    // ============================================================
+
     function cargarTextos() {
         textosDisponibles = bancoTextos[GRADO] || [];
         if (textosDisponibles.length === 0) {
@@ -391,6 +464,13 @@
         const fecha = new Date().toLocaleDateString('es-MX');
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
         const nivel = total >= 15 ? '⭐ Deseable' : total >= 10 ? '🔄 En progreso' : '🚨 Atención prioritaria';
+
+        // Obtener CCT y Zona escolar desde localStorage
+        const cct = localStorage.getItem('cct') || 'No especificado';
+        const zonaEscolar = localStorage.getItem('zonaEscolar') || 'No especificado';
+
+        // Enviar datos a CEMEJ
+        enviarDatosACEMEJ(grado, cct, zonaEscolar, total, nivel);
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
