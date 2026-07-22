@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SAAL - 4° Primaria</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/actividades.js"></script>
     <style>
         .header h1 { font-size: 1.6rem; }
         .header p { font-size: 0.9rem; }
@@ -38,6 +39,8 @@
         .btn-accion.btn-finalizar:hover { background: #1e8449; }
         .btn-accion.btn-secundario { background: #404f55; }
         .btn-accion.btn-secundario:hover { background: #2c3e50; }
+        .btn-accion.btn-intervencion { background: #8e44ad; }
+        .btn-accion.btn-intervencion:hover { background: #6c3483; }
         .componente { background: #f8f9fa; margin: 12px 0; padding: 14px; border-radius: 18px; border: 1px solid #e0e0e0; }
         .componente h3 { font-size: 1rem; }
         .botones-nivel { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
@@ -57,6 +60,12 @@
         .btn-respuesta { font-size: 0.8rem; padding: 6px 14px; border: 2px solid #ddd; border-radius: 30px; background: white; cursor: pointer; }
         .btn-respuesta.seleccionada { border-color: #e85f2f; background: #fff5f0; }
         .ficha-diagnostico { background: white; padding: 20px; margin-top: 20px; border: 2px dashed #e85f2f; border-radius: 20px; }
+        .plan-intervencion { background: #f0f4f8; padding: 20px; margin-top: 20px; border: 2px solid #3498db; border-radius: 20px; }
+        .plan-intervencion h3 { color: #2c3e50; }
+        .plan-intervencion table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .plan-intervencion th { background: #ecf0f1; padding: 6px 10px; border: 1px solid #ddd; text-align: left; }
+        .plan-intervencion td { padding: 6px 10px; border: 1px solid #ddd; }
+        .plan-intervencion hr { margin: 12px 0; }
         @media (max-width: 480px) {
             .container { padding: 10px; }
             .header { padding: 12px; margin: -10px -10px 10px -10px; }
@@ -75,6 +84,8 @@
             .descripcion-item { font-size: 0.7rem; padding: 4px 8px; }
             .btn-accion { font-size: 0.9rem; padding: 10px 16px; }
             .texto-lectura { font-size: 1rem; padding: 15px; }
+            .plan-intervencion table { font-size: 0.7rem; }
+            .plan-intervencion th, .plan-intervencion td { padding: 4px 6px; }
         }
     </style>
 </head>
@@ -152,8 +163,11 @@
     <div id="ficha-area" style="display:none;" class="ficha-diagnostico">
         <div id="ficha-contenido"></div>
         <button class="btn-accion" onclick="window.print();">🖨️ Guardar como PDF / Imprimir</button>
+        <button class="btn-accion btn-intervencion" onclick="generarYMostrarPlan()">📋 Generar plan de intervención</button>
         <button class="btn-accion btn-secundario" onclick="reiniciarEvaluacion()">🔄 Nueva evaluación</button>
     </div>
+
+    <div id="plan-intervencion" style="display:none;" class="plan-intervencion"></div>
 </div>
 
 <script src="js/datos.js"></script>
@@ -415,25 +429,132 @@
     }
 
     // ============================================================
+    // PLAN DE INTERVENCIÓN
+    // ============================================================
+
+    function generarYMostrarPlan() {
+        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+        if (total === 0) {
+            alert('Primero debes completar la evaluación (seleccionar todos los niveles de la rúbrica).');
+            return;
+        }
+
+        const plan = generarPlanIntervencion(puntajesActuales);
+        const planDiv = document.getElementById('plan-intervencion');
+        planDiv.innerHTML = generarHTMLPlan(plan);
+        planDiv.style.display = 'block';
+        planDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function generarPlanIntervencion(puntajes) {
+        const areas = [
+            { id: 'fluidez', nombre: 'Fluidez' },
+            { id: 'precision', nombre: 'Precisión' },
+            { id: 'atencionPalabras', nombre: 'Atención a palabras complejas' },
+            { id: 'usoVoz', nombre: 'Uso de la voz' },
+            { id: 'seguridad', nombre: 'Seguridad y disposición' },
+            { id: 'comprension', nombre: 'Comprensión lectora' }
+        ];
+
+        const areasPrioritarias = [];
+        const areasSecundarias = [];
+
+        areas.forEach(area => {
+            const nivel = puntajes[area.id] || 0;
+            if (nivel === 1) {
+                areasPrioritarias.push({ ...area, nivel });
+            } else if (nivel === 2) {
+                areasSecundarias.push({ ...area, nivel });
+            }
+        });
+
+        const areasParaTrabajar = areasPrioritarias.length > 0 ? areasPrioritarias : areasSecundarias;
+
+        const plan = {
+            alumno: localStorage.getItem('nombreAlumno') || 'Alumno',
+            grado: '4° primaria',
+            fecha: new Date().toLocaleDateString('es-MX'),
+            semanas: []
+        };
+
+        for (let semana = 1; semana <= 4; semana++) {
+            const dias = [];
+            for (let dia = 1; dia <= 5; dia++) {
+                const actividades = [];
+                const areaIndex = ((semana - 1) * 5 + (dia - 1)) % areasParaTrabajar.length;
+                const areaSeleccionada = areasParaTrabajar[areaIndex];
+                const actividad = seleccionarActividad(areaSeleccionada.nombre, areaSeleccionada.nivel, semana, dia);
+                if (actividad) actividades.push(actividad);
+                dias.push({ dia: dia, actividades: actividades });
+            }
+            plan.semanas.push({ semana: semana, dias: dias });
+        }
+
+        return plan;
+    }
+
+    function seleccionarActividad(area, nivel, semana, dia) {
+        const posibles = bancoActividades.filter(a => a.area === area && a.nivel === nivel);
+        if (posibles.length === 0) {
+            const alternativas = bancoActividades.filter(a => a.area === area && a.nivel === 2);
+            if (alternativas.length === 0) return null;
+            return alternativas[(semana * 3 + dia * 7) % alternativas.length];
+        }
+        const indice = (semana * 3 + dia * 7) % posibles.length;
+        return posibles[indice];
+    }
+
+    function generarHTMLPlan(plan) {
+        if (!plan.semanas || plan.semanas.length === 0) {
+            return `<div style="padding:20px; text-align:center;"><p style="font-size:1.2rem;">🎉 ¡El alumno está en nivel deseable en todos los componentes!</p><p>Se recomienda continuar con la práctica diaria de lectura.</p></div>`;
+        }
+
+        let html = `
+            <h3 style="color:#2c3e50; margin-bottom:10px;">📋 Plan de intervención de 4 semanas</h3>
+            <p><strong>Alumno:</strong> ${plan.alumno}</p>
+            <p><strong>Grado:</strong> ${plan.grado}</p>
+            <p><strong>Fecha:</strong> ${plan.fecha}</p>
+            <p><strong>Duración:</strong> 15 minutos diarios</p>
+            <hr style="margin:12px 0;">
+        `;
+
+        plan.semanas.forEach((semana, idx) => {
+            html += `<h4 style="color:#e85f2f; margin:15px 0 8px 0;">Semana ${idx + 1}</h4>`;
+            html += `<table><tr style="background:#ecf0f1;"><th style="padding:6px 10px; border:1px solid #ddd;">Día</th><th style="padding:6px 10px; border:1px solid #ddd;">Área</th><th style="padding:6px 10px; border:1px solid #ddd;">Actividad</th><th style="padding:6px 10px; border:1px solid #ddd;">Duración</th></tr>`;
+            semana.dias.forEach(dia => {
+                dia.actividades.forEach(act => {
+                    html += `<tr><td style="padding:6px 10px; border:1px solid #ddd;">${dia.dia}</td><td style="padding:6px 10px; border:1px solid #ddd;">${act.area}</td><td style="padding:6px 10px; border:1px solid #ddd;">${act.nombre}</td><td style="padding:6px 10px; border:1px solid #ddd; text-align:center;">${act.duracion} min</td></tr>`;
+                });
+            });
+            html += `</table>`;
+        });
+
+        html += `
+            <hr style="margin:12px 0;">
+            <p style="font-size:0.75rem; color:#777;">Plan generado automáticamente por SAAL basado en los resultados del diagnóstico.</p>
+            <p style="font-size:0.75rem; color:#777;">Actividades extraídas del banco de actividades SAAL.</p>
+        `;
+
+        return html;
+    }
+
+    // ============================================================
     // NUEVA EVALUACIÓN - REINICIA TODO EL FLUJO
     // ============================================================
-   function reiniciarEvaluacion() {
-    if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
-        // Limpiar datos del alumno almacenados
-        localStorage.removeItem('nombreAlumno');
-        localStorage.removeItem('curp');
-        localStorage.removeItem('turno');
-        localStorage.removeItem('aplicador');
-        localStorage.removeItem('dispositivo');
-        localStorage.removeItem('cct');
-        localStorage.removeItem('zonaEscolar');
-        localStorage.removeItem('grado');
-        localStorage.removeItem('nivel');
-        
-        // Redirigir a los datos del alumno (no al inicio)
-        window.location.href = 'aplicador.html';
+    function reiniciarEvaluacion() {
+        if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
+            localStorage.removeItem('nombreAlumno');
+            localStorage.removeItem('curp');
+            localStorage.removeItem('turno');
+            localStorage.removeItem('aplicador');
+            localStorage.removeItem('dispositivo');
+            localStorage.removeItem('cct');
+            localStorage.removeItem('zonaEscolar');
+            localStorage.removeItem('grado');
+            localStorage.removeItem('nivel');
+            window.location.href = 'aplicador.html';
+        }
     }
-}
 
     cargarTextos();
 </script>
