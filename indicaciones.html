@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SAAL - Indicaciones</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <!-- Font Awesome para íconos profesionales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container-indicaciones {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 0;
+        }
+        .header-indicaciones {
+            background: #e85f2f;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        .header-indicaciones h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        .header-indicaciones p {
+            opacity: 0.9;
+            margin: 5px 0 0;
+        }
+        .contenido-indicaciones {
+            padding: 25px 30px;
+        }
+        .contenido-indicaciones h2 {
+            color: #e85f2f;
+            font-size: 1.3rem;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .contenido-indicaciones h2 i {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+        }
+        .contenido-indicaciones ul {
+            list-style: none;
+            padding: 0;
+        }
+        .contenido-indicaciones li {
+            padding: 10px 14px;
+            background: #f8f9fa;
+            margin: 6px 0;
+            border-radius: 12px;
+            border-left: 4px solid #e85f2f;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .contenido-indicaciones li .icono {
+            font-size: 1.2rem;
+            min-width: 28px;
+            text-align: center;
+            color: #e85f2f;
+            margin-top: 2px;
+        }
+        .contenido-indicaciones li .texto {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #404f55;
+        }
+        .contenido-indicaciones li .texto strong {
+            color: #2c3e50;
+        }
+        .contenido-indicaciones .caja-importante {
+            background: #fff3cd;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 4px solid #f1c40f;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .contenido-indicaciones .caja-importante i {
+            color: #856404;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        .contenido-indicaciones .caja-importante strong {
+            color: #856404;
+        }
+        .btn-empezar {
+            background: #e85f2f;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .btn-empezar:hover {
+            background: #d35400;
+            transform: scale(1.01);
+        }
+        .btn-regresar {
+            display: inline-block;
+            margin: 15px 0 0;
+            background: #404f55;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-regresar:hover {
+            background: #2c3e50;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+        .grid-3 .paso {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        .grid-3 .paso .numero {
+            background: #e85f2f;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .grid-3 .paso .titulo {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .grid-3 .paso .desc {
+            font-size: 0.75rem;
+            color: #777;
+        }
+        .codigo-ejemplo {
+            background: #f1f2f6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #2c3e50;
+        }
+        @media (max-width: 600px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .contenido-indicaciones {
+                padding: 18px;
+            }
+            .header-indicaciones {
+                padding: 18px 20px;
+            }
+            .header-indicaciones h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-indicaciones">
+    <!-- Encabezado -->
+    <div class="header-indicaciones">
+        <h1>📖 SAAL</h1>
+        <p>Sistema de Alerta y Acompañamiento LEO</p>
+        <p style="font-size:0.85rem; opacity:0.85;">Instrucciones para la evaluación</p>
+    </div>
+
+    <!-- Contenido -->
+    <div class="contenido-indicaciones">
+
+        <h2><i class="fas fa-info-circle"></i> Antes de empezar</h2>
+        <ul>
+            <li>
+                <span class="icono"><i class="fas fa-chalkboard-teacher"></i></span>
+                <span class="texto"><strong>Explica al alumno:</strong> "Vamos a leer en voz alta. No es un examen, solo quiero ver cómo lees. Lee con calma y haz tu mejor esfuerzo."</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-map-pin"></i></span>
+                <span class="texto"><strong>Prepara el espacio:</strong> Busca un lugar tranquilo, sin ruidos ni distracciones. Asegúrate de tener el texto a la vista (pantalla o impreso).</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-clock"></i></span>
+                <span class="texto"><strong>Duración:</strong> La lectura toma entre 2 y 4 minutos. Puedes detener el cronómetro cuando el alumno termine.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-exclamation-triangle"></i></span>
+                <span class="texto"><strong>Importante:</strong> El tiempo que tarde el alumno en leer <strong>no está asociado con su desempeño</strong>. Lo importante es leer con claridad y comprensión.</span>
+            </li>
+        </ul>
+
+        <div class="caja-importante">
+            <i class="fas fa-bullhorn"></i>
+            <div><strong>Recuerda:</strong> El objetivo es conocer cómo lee el alumno, no presionarlo. La velocidad no es lo que evaluamos.</div>
+        </div>
+
+        <h2><i class="fas fa-play-circle"></i> Durante la evaluación</h2>
+        <ul>
+            <li>
+                <span class="icono"><i class="fas fa-ear-listen"></i></span>
+                <span class="texto"><strong>Escucha con atención</strong> y marca los criterios en la rúbrica mientras el alumno lee.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-ban"></i></span>
+                <span class="texto"><strong>No interrumpas</strong> al alumno mientras lee, ni corrijas sus errores. Solo observa.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-pencil-alt"></i></span>
+                <span class="texto">Puedes tomar <strong>notas rápidas</strong> para recordar detalles al momento de marcar la rúbrica.</span>
+            </li>
+        </ul>
+
+        <h2><i class="fas fa-check-circle"></i> Después de la lectura</h2>
+        <ul>
+            <li>
+                <span class="icono"><i class="fas fa-stop-circle"></i></span>
+                <span class="texto"><strong>Detén el cronómetro</strong> cuando el alumno termine de leer.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-question-circle"></i></span>
+                <span class="texto"><strong>Realiza las preguntas de comprensión</strong> que aparecen al final. El alumno responde oralmente.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-file-alt"></i></span>
+                <span class="texto"><strong>Completa la rúbrica</strong> y genera la ficha diagnóstica.</span>
+            </li>
+        </ul>
+
+        <h2><i class="fas fa-mobile-alt"></i> Si usas dos dispositivos</h2>
+        <ul>
+            <li>
+                <span class="icono"><i class="fas fa-laptop"></i></span>
+                <span class="texto"><strong>Aplicador (docente):</strong> Abre SAAL, selecciona el texto y genera un <strong>código de sesión</strong>.</span>
+            </li>
+            <li>
+                <span class="icono"><i class="fas fa-tablet-alt"></i></span>
+                <span class="texto"><strong>Lector (alumno):</strong> Abre el <strong>modo lector</strong> con el enlace: <br> <span class="codigo-ejemplo">saal-jalisco.github.io/SAAL-V3/lector.html</span> e ingresa el código de sesión.</span>
+            </li>
+        </ul>
+
+        <!-- Botón para comenzar -->
+        <button class="btn-empezar" onclick="irAEvaluacion()">
+            <i class="fas fa-check-circle"></i> Entendido, comenzar evaluación
+        </button>
+
+        <!-- Botón de regreso -->
+        <div style="text-align: center;">
+            <a href="aplicador.html" class="btn-regresar"><i class="fas fa-arrow-left"></i> Volver a datos del alumno</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function irAEvaluacion() {
+        window.location.href = 'nivel.html';
+    }
+</script>
+
+</body>
+</html>
