@@ -16,6 +16,12 @@
             color: #e74c3c;
             font-weight: bold;
         }
+        .campo input:invalid, .campo select:invalid {
+            border-color: #e74c3c;
+        }
+        .campo input:valid, .campo select:valid {
+            border-color: #2ecc71;
+        }
     </style>
 </head>
 <body>
@@ -29,7 +35,7 @@
         <p>Datos del alumno y aplicador</p>
     </div>
 
-    <form id="formDatos" class="form-datos" onsubmit="return guardarDatos()">
+    <form id="formDatos" class="form-datos" onsubmit="return guardarDatos()" novalidate>
         <!-- Nombre del alumno (obligatorio) -->
         <div class="campo obligatorio">
             <label>Nombre completo del alumno</label>
@@ -40,7 +46,7 @@
         <div class="campo obligatorio">
             <label>CURP del alumno</label>
             <input type="text" id="curpAlumno" placeholder="Escribe la CURP (18 caracteres)" maxlength="18" required>
-            <p class="texto-ayuda">ℹ️ La CURP es necesaria para el registro oficial en CEMEJ.</p>
+            <p class="texto-ayuda">ℹ️ La CURP es necesaria para el registro oficial en CEMEJ. Debe tener 18 caracteres.</p>
         </div>
 
         <!-- Turno (opcional) -->
@@ -95,51 +101,57 @@
 
 <script>
     function guardarDatos() {
-        // Validar nombre
+        // === VALIDACIÓN DE NOMBRE ===
         const nombre = document.getElementById('nombreAlumno').value.trim();
         if (!nombre) {
-            alert("Escribe el nombre completo del alumno.");
+            alert("❌ Escribe el nombre completo del alumno.");
             document.getElementById('nombreAlumno').focus();
             return false;
         }
 
-        // Validar CURP
+        // === VALIDACIÓN DE CURP ===
         const curp = document.getElementById('curpAlumno').value.trim().toUpperCase();
         if (!curp) {
-            alert("Escribe la CURP del alumno.");
+            alert("❌ Escribe la CURP del alumno.");
             document.getElementById('curpAlumno').focus();
             return false;
         }
         if (curp.length !== 18) {
-            alert("La CURP debe tener 18 caracteres.");
+            alert("❌ La CURP debe tener 18 caracteres. Tiene " + curp.length + ".");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+        // Verificar que la CURP solo tenga letras y números
+        if (!/^[A-Z0-9]+$/.test(curp)) {
+            alert("❌ La CURP solo debe contener letras mayúsculas y números.");
             document.getElementById('curpAlumno').focus();
             return false;
         }
 
-        // Validar aplicador
+        // === VALIDACIÓN DE APLICADOR ===
         const aplicador = document.getElementById('aplicador').value;
         if (!aplicador) {
-            alert("Selecciona quién aplica la evaluación.");
+            alert("❌ Selecciona quién aplica la evaluación.");
             document.getElementById('aplicador').focus();
             return false;
         }
 
-        // Validar dispositivo
+        // === VALIDACIÓN DE DISPOSITIVO ===
         const dispositivo = document.querySelector('input[name="dispositivo"]:checked');
         if (!dispositivo) {
-            alert("Selecciona desde dónde leerá el alumno.");
+            alert("❌ Selecciona desde dónde leerá el alumno.");
             return false;
         }
 
-        // Validar CCT
+        // === VALIDACIÓN DE CCT ===
         const cct = document.getElementById('cct').value.trim();
         if (!cct) {
-            alert("Escribe el CCT de la escuela.");
+            alert("❌ Escribe el CCT de la escuela.");
             document.getElementById('cct').focus();
             return false;
         }
 
-        // Guardar en localStorage
+        // === GUARDAR EN LOCALSTORAGE ===
         localStorage.setItem('nombreAlumno', nombre);
         localStorage.setItem('curp', curp);
         localStorage.setItem('turno', document.getElementById('turno').value);
@@ -148,12 +160,12 @@
         localStorage.setItem('cct', cct);
         localStorage.setItem('zonaEscolar', document.getElementById('zonaEscolar').value.trim());
 
-        // Ir a la pantalla de indicaciones
+        // === REDIRIGIR A INDICACIONES ===
         window.location.href = 'indicaciones.html';
         return false;
     }
 
-    // Cargar datos guardados si existen (para regresar)
+    // === CARGAR DATOS GUARDADOS (SI EXISTEN) ===
     window.onload = function() {
         if (localStorage.getItem('nombreAlumno')) {
             document.getElementById('nombreAlumno').value = localStorage.getItem('nombreAlumno');
