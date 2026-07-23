@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SAAL - 2° Primaria</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/actividades.js"></script>
     <style>
-        /* Mismos estilos que grado1.html */
         .header h1 { font-size: 1.6rem; }
         .header p { font-size: 0.9rem; }
         .logos .logo-cemej { height: 40px; }
@@ -26,6 +26,8 @@
         .codigo-sesion span { font-size: 1.8rem; font-weight: bold; color: #e85f2f; background: #f0f4f8; padding: 4px 16px; border-radius: 8px; }
         .btn-generar-codigo { font-size: 0.85rem; padding: 6px 14px; background: #27ae60; color: white; border: none; border-radius: 30px; cursor: pointer; }
         .btn-generar-codigo:hover { background: #1e8449; }
+        .btn-imprimir-texto { background: #3498db; color: white; border: none; padding: 6px 14px; border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .btn-imprimir-texto:hover { background: #2c7fb8; transform: scale(1.02); }
         .texto-lectura { font-size: 1.2rem; padding: 20px; background: #fff8e7; border-left: 8px solid #e85f2f; border-radius: 16px; font-family: 'Georgia', serif; line-height: 1.6; }
         .timer { font-size: 2rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
         .btn-timer { font-size: 0.9rem; padding: 6px 16px; background: #2ecc71; color: white; border: none; border-radius: 50px; cursor: pointer; }
@@ -39,6 +41,8 @@
         .btn-accion.btn-finalizar:hover { background: #1e8449; }
         .btn-accion.btn-secundario { background: #404f55; }
         .btn-accion.btn-secundario:hover { background: #2c3e50; }
+        .btn-accion.btn-intervencion { background: #8e44ad; }
+        .btn-accion.btn-intervencion:hover { background: #6c3483; }
         .componente { background: #f8f9fa; margin: 12px 0; padding: 14px; border-radius: 18px; border: 1px solid #e0e0e0; }
         .componente h3 { font-size: 1rem; }
         .botones-nivel { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
@@ -59,6 +63,12 @@
         .btn-respuesta.seleccionada { border-color: #e85f2f; background: #fff5f0; }
         .nota-lectura { background: #fff3cd; padding: 12px; border-radius: 12px; border-left: 4px solid #f1c40f; margin: 12px 0; font-size: 0.9rem; }
         .ficha-diagnostico { background: white; padding: 20px; margin-top: 20px; border: 2px dashed #e85f2f; border-radius: 20px; }
+        .plan-intervencion { background: #f0f4f8; padding: 20px; margin-top: 20px; border: 2px solid #3498db; border-radius: 20px; }
+        .plan-intervencion h3 { color: #2c3e50; }
+        .plan-intervencion table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .plan-intervencion th { background: #ecf0f1; padding: 6px 10px; border: 1px solid #ddd; text-align: left; }
+        .plan-intervencion td { padding: 6px 10px; border: 1px solid #ddd; }
+        .plan-intervencion hr { margin: 12px 0; }
         @media (max-width: 480px) {
             .container { padding: 10px; }
             .header { padding: 12px; margin: -10px -10px 10px -10px; }
@@ -68,6 +78,7 @@
             .codigo-sesion { flex-direction: column; gap: 8px; align-items: stretch; }
             .codigo-sesion span { font-size: 1.8rem; text-align: center; }
             .btn-generar-codigo { width: 100%; }
+            .btn-imprimir-texto { width: 100%; }
             .timer { font-size: 1.8rem; gap: 8px; }
             .btn-timer { font-size: 0.8rem; padding: 4px 12px; }
             .botones-nivel { gap: 8px; }
@@ -77,15 +88,14 @@
             .descripcion-item { font-size: 0.7rem; padding: 4px 8px; }
             .btn-accion { font-size: 0.9rem; padding: 10px 16px; }
             .texto-lectura { font-size: 1rem; padding: 15px; }
+            .plan-intervencion table { font-size: 0.7rem; }
+            .plan-intervencion th, .plan-intervencion td { padding: 4px 6px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Botón de regreso -->
     <a href="primaria.html" class="boton-regresar">← Seleccionar otro grado</a>
-
-    <!-- Encabezado -->
     <div class="header">
         <div class="logos"><img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej"></div>
         <h1>📖 SAAL</h1>
@@ -99,7 +109,6 @@
         <p>📢 <strong>Nota para el docente:</strong> En 1° y 2° de primaria, el docente <strong>puede leer el texto en voz alta</strong> para el estudiante y luego realizar las preguntas de comprensión.</p>
     </div>
 
-    <!-- ===== INSTRUCCIONES INICIALES ===== -->
     <div class="instrucciones-iniciales" id="instruccionesIniciales">
         <div class="mensaje-instruccion">
             <p>📢 <strong>¡Hola! Vamos a leer un texto.</strong></p>
@@ -109,7 +118,6 @@
         </div>
     </div>
 
-    <!-- ===== SELECTOR DE MODO DE TEXTO ===== -->
     <div id="selectorTextoArea">
         <div class="selector-texto">
             <h3>📄 Modo de texto</h3>
@@ -125,20 +133,20 @@
         </div>
     </div>
 
-    <!-- ===== SINCRONIZACIÓN DE DOS DISPOSITIVOS ===== -->
     <div class="sincronizacion-dispositivos">
         <h3>📲 Compartir en otro dispositivo</h3>
         <p class="texto-ayuda" style="font-size:0.8rem;">Genera un código para que el alumno vea el mismo texto.</p>
         <div class="codigo-sesion">
             <span id="codigoSesion">---</span>
             <button class="btn-generar-codigo" onclick="generarCodigoSesion()">🔑 Generar código</button>
+            <button class="btn-imprimir-texto" onclick="imprimirTexto()">🖨️ Imprimir texto</button>
         </div>
         <div class="instrucciones-lector" style="font-size:0.8rem; margin-top:6px;">
             <p>📱 <strong>Alumno:</strong> Abre SAAL → "Modo lector" → ingresa el código.</p>
+            <p>🖨️ <strong>Opción impresa:</strong> Haz clic en "Imprimir texto" y entrega la hoja al alumno.</p>
         </div>
     </div>
 
-    <!-- ===== ÁREA DE LECTURA ===== -->
     <div id="areaLectura" style="display:none;">
         <div class="texto-lectura" id="textoLectura"></div>
         <div class="timer-container">
@@ -196,12 +204,14 @@
         <button class="btn-accion btn-finalizar" onclick="generarFicha()">📄 Generar ficha diagnóstica</button>
     </div>
 
-    <!-- ===== FICHA DIAGNÓSTICA ===== -->
     <div id="ficha-area" style="display:none;" class="ficha-diagnostico">
         <div id="ficha-contenido"></div>
         <button class="btn-accion" onclick="window.print();">🖨️ Guardar como PDF / Imprimir</button>
+        <button class="btn-accion btn-intervencion" onclick="generarYMostrarPlan()">📋 Generar plan de intervención</button>
         <button class="btn-accion btn-secundario" onclick="reiniciarEvaluacion()">🔄 Nueva evaluación</button>
     </div>
+
+    <div id="plan-intervencion" style="display:none;" class="plan-intervencion"></div>
 </div>
 
 <script src="js/datos.js"></script>
@@ -220,6 +230,83 @@
     let indiceTextoActual = 0;
     let textosDisponibles = [];
     let codigoSesion = null;
+
+    // ============================================================
+    // ENVÍO DE DATOS A CEMEJ
+    // ============================================================
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFCLmoNGLZvIay3biu84DeGCbS1dOf9UhOZo9E5aQPUvxuhvuWwFO5OYNIBZur0XG5MQ/exec";
+
+    function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
+        const payload = {
+            fecha: new Date().toLocaleDateString('es-MX'),
+            curp: localStorage.getItem('curp') || '',
+            cct: cct,
+            zona: zonaEscolar,
+            grado: grado,
+            puntajeTotal: puntajeTotal,
+            fluidez: puntajesActuales.fluidez,
+            comprension: puntajesActuales.comprension,
+            nivel: nivel
+        };
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            console.log("✅ Datos enviados a CEMEJ correctamente");
+            const mensajeExito = document.createElement('div');
+            mensajeExito.style.cssText = 'background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #c3e6cb; text-align: center; font-weight: bold;';
+            mensajeExito.textContent = '✅ Datos enviados correctamente a SAAL.';
+            const fichaContenido = document.getElementById('ficha-contenido');
+            if (fichaContenido) {
+                fichaContenido.insertBefore(mensajeExito, fichaContenido.firstChild);
+            }
+        })
+        .catch(() => {
+            const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+            pendientes.push(payload);
+            localStorage.setItem('enviosPendientes', JSON.stringify(pendientes));
+            console.warn("⚠️ Sin conexión. Los datos se guardaron.");
+            const mensajeError = document.createElement('div');
+            mensajeError.style.cssText = 'background: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #ffeeba; text-align: center; font-weight: bold;';
+            mensajeError.textContent = '⚠️ Sin conexión. Los datos se guardarán automáticamente.';
+            const fichaContenido = document.getElementById('ficha-contenido');
+            if (fichaContenido) {
+                fichaContenido.insertBefore(mensajeError, fichaContenido.firstChild);
+            }
+        });
+    }
+
+    function reenviarPendientes() {
+        const pendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+        if (pendientes.length === 0) return;
+        pendientes.forEach((payload, index) => {
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                const nuevosPendientes = JSON.parse(localStorage.getItem('enviosPendientes') || '[]');
+                const filtrados = nuevosPendientes.filter((_, i) => i !== index);
+                localStorage.setItem('enviosPendientes', JSON.stringify(filtrados));
+            })
+            .catch(() => {
+                console.warn(`⚠️ No se pudo reenviar el registro ${index + 1}`);
+            });
+        });
+    }
+
+    window.addEventListener('load', reenviarPendientes);
+
+    // ============================================================
+    // FUNCIONES DE EVALUACIÓN
+    // ============================================================
 
     function cargarTextos() {
         textosDisponibles = bancoTextos[GRADO] || [];
@@ -278,6 +365,102 @@
         alert('✅ Código de sesión generado: ' + codigoSesion + '\n\n📖 Texto: ' + textoActual.titulo + '\n\nCompártelo con el alumno.');
     }
 
+    function imprimirTexto() {
+        if (!textoActual) {
+            alert('Primero selecciona un texto.');
+            return;
+        }
+
+        const ventana = window.open('', '_blank');
+        ventana.document.write(`
+            <html>
+                <head>
+                    <title>SAAL - Texto para imprimir</title>
+                    <style>
+                        body {
+                            font-family: 'Georgia', serif;
+                            font-size: 1.2rem;
+                            line-height: 1.6;
+                            padding: 40px;
+                            max-width: 800px;
+                            margin: auto;
+                            color: #222;
+                        }
+                        .encabezado {
+                            text-align: center;
+                            margin-bottom: 30px;
+                            border-bottom: 2px solid #e85f2f;
+                            padding-bottom: 15px;
+                        }
+                        .encabezado h1 {
+                            color: #e85f2f;
+                            font-size: 1.5rem;
+                            margin: 0;
+                        }
+                        .encabezado p {
+                            color: #777;
+                            font-size: 0.9rem;
+                            margin: 5px 0;
+                        }
+                        .texto-lectura {
+                            white-space: pre-wrap;
+                            font-size: 1.1rem;
+                            line-height: 1.7;
+                        }
+                        .pie {
+                            margin-top: 30px;
+                            padding-top: 15px;
+                            border-top: 1px solid #ddd;
+                            font-size: 0.8rem;
+                            color: #999;
+                            text-align: center;
+                        }
+                        .instrucciones {
+                            background: #f8f9fa;
+                            padding: 12px 16px;
+                            border-radius: 8px;
+                            margin-bottom: 20px;
+                            border-left: 4px solid #e85f2f;
+                            font-size: 0.9rem;
+                        }
+                        @media print {
+                            .no-print { display: none; }
+                            body { padding: 20px; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="encabezado">
+                        <h1>📖 SAAL</h1>
+                        <p>Texto de lectura - ${NOMBRE_GRADO}</p>
+                        <p>${textoActual.titulo} (${textoActual.palabras} palabras)</p>
+                    </div>
+
+                    <div class="instrucciones no-print">
+                        <strong>📋 Instrucciones para el aplicador:</strong>
+                        <p>Entrega esta hoja al alumno para que lea el texto en voz alta. Marca la rúbrica en el dispositivo mientras escuchas.</p>
+                        <button onclick="window.print()" style="background:#e85f2f; color:white; border:none; padding:10px 20px; border-radius:30px; font-size:1rem; cursor:pointer; margin-top:8px;">
+                            🖨️ Imprimir esta hoja
+                        </button>
+                    </div>
+
+                    <div class="texto-lectura">
+                        ${textoActual.contenido}
+                    </div>
+
+                    <div class="pie">
+                        SAAL - Sistema de Alerta y Acompañamiento LEO | Jalisco
+                    </div>
+
+                    <script>
+                        console.log('Texto listo para imprimir');
+                    <\/script>
+                </body>
+            </html>
+        `);
+        ventana.document.close();
+    }
+
     function mostrarTexto() {
         document.getElementById('instruccionesIniciales').style.display = 'none';
         document.getElementById('areaLectura').style.display = 'block';
@@ -286,7 +469,6 @@
         }
     }
 
-    // ===== TEMPORIZADOR =====
     let timerActivo = false, segundos = 0, minutos = 0, intervalo = null;
     function controlarTimer() {
         const btn = document.getElementById('btnTimer');
@@ -404,11 +586,16 @@
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
         const nivel = total >= 5 ? '⭐ Deseable' : total >= 3 ? '🔄 En progreso' : '🚨 Atención prioritaria';
 
+        const cct = localStorage.getItem('cct') || 'No especificado';
+        const zonaEscolar = localStorage.getItem('zonaEscolar') || 'No especificado';
+
+        enviarDatosACEMEJ('2° primaria', cct, zonaEscolar, total, nivel);
+
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
                 <h2 style="color: #e85f2f; margin:0 0 12px 0;">📋 SAAL - Ficha diagnóstica</h2>
                 <p><strong>Alumno(a):</strong> ${nombre}</p>
-                <p><strong>Grado:</strong> ${NOMBRE_GRADO}</p>
+                <p><strong>Grado:</strong> 2° primaria</p>
                 <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
                 <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Fijo' : '🎲 Aleatorio'}</p>
                 <p><strong>Fecha:</strong> ${fecha}</p>
@@ -436,23 +623,147 @@
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    function reiniciarEvaluacion() {
-    if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
-        // Limpiar datos del alumno almacenados
-        localStorage.removeItem('nombreAlumno');
-        localStorage.removeItem('curp');
-        localStorage.removeItem('turno');
-        localStorage.removeItem('aplicador');
-        localStorage.removeItem('dispositivo');
-        localStorage.removeItem('cct');
-        localStorage.removeItem('zonaEscolar');
-        localStorage.removeItem('grado');
-        localStorage.removeItem('nivel');
-        
-        // Redirigir a los datos del alumno (no al inicio)
-        window.location.href = 'aplicador.html';
+    // ============================================================
+    // PLAN DE INTERVENCIÓN
+    // ============================================================
+
+    function generarYMostrarPlan() {
+        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+        if (total === 0) {
+            alert('Primero debes completar la evaluación.');
+            return;
+        }
+
+        const plan = generarPlanIntervencion(puntajesActuales);
+        const planDiv = document.getElementById('plan-intervencion');
+        planDiv.innerHTML = generarHTMLPlan(plan);
+        planDiv.style.display = 'block';
+        planDiv.scrollIntoView({ behavior: 'smooth' });
     }
-}
+
+    function generarPlanIntervencion(puntajes) {
+        const areas = [
+            { id: 'fluidez', nombre: 'Fluidez' },
+            { id: 'comprension', nombre: 'Comprensión lectora' }
+        ];
+
+        const areasPrioritarias = [];
+        const areasSecundarias = [];
+
+        areas.forEach(area => {
+            const nivel = puntajes[area.id] || 0;
+            if (nivel === 1) {
+                areasPrioritarias.push({ ...area, nivel });
+            } else if (nivel === 2) {
+                areasSecundarias.push({ ...area, nivel });
+            }
+        });
+
+        const areasParaTrabajar = areasPrioritarias.length > 0 ? areasPrioritarias : areasSecundarias;
+
+        const plan = {
+            alumno: localStorage.getItem('nombreAlumno') || 'Alumno',
+            grado: '2° primaria',
+            fecha: new Date().toLocaleDateString('es-MX'),
+            semanas: []
+        };
+
+        for (let semana = 1; semana <= 4; semana++) {
+            const dias = [];
+            for (let dia = 1; dia <= 5; dia++) {
+                const actividades = [];
+                const areaIndex = ((semana - 1) * 5 + (dia - 1)) % areasParaTrabajar.length;
+                const areaSeleccionada = areasParaTrabajar[areaIndex];
+                const actividad = seleccionarActividad(areaSeleccionada.nombre, areaSeleccionada.nivel, semana, dia);
+                if (actividad) actividades.push(actividad);
+                dias.push({ dia: dia, actividades: actividades });
+            }
+            plan.semanas.push({ semana: semana, dias: dias });
+        }
+
+        return plan;
+    }
+
+    function seleccionarActividad(area, nivel, semana, dia) {
+        const posibles = bancoActividades.filter(a => a.area === area && a.nivel === nivel);
+        if (posibles.length === 0) {
+            const alternativas = bancoActividades.filter(a => a.area === area && a.nivel === 2);
+            if (alternativas.length === 0) return null;
+            return alternativas[(semana * 3 + dia * 7) % alternativas.length];
+        }
+        const indice = (semana * 3 + dia * 7) % posibles.length;
+        return posibles[indice];
+    }
+
+    function generarHTMLPlan(plan) {
+        if (!plan.semanas || plan.semanas.length === 0) {
+            return `
+                <div style="padding:20px; text-align:center;">
+                    <p style="font-size:1.2rem;">🎉 ¡El alumno está en nivel deseable en todos los componentes!</p>
+                    <p>Se recomienda continuar con la práctica diaria de lectura.</p>
+                </div>
+            `;
+        }
+
+        let html = `
+            <h3 style="color:#2c3e50; margin-bottom:10px;">📋 Plan de intervención de 4 semanas</h3>
+            <p><strong>Alumno:</strong> ${plan.alumno}</p>
+            <p><strong>Grado:</strong> ${plan.grado}</p>
+            <p><strong>Fecha:</strong> ${plan.fecha}</p>
+            <p><strong>Duración:</strong> 15 minutos diarios</p>
+            <hr style="margin:12px 0;">
+        `;
+
+        plan.semanas.forEach((semana, idx) => {
+            html += `<h4 style="color:#e85f2f; margin:15px 0 8px 0;">📌 Semana ${idx + 1}</h4>`;
+            
+            semana.dias.forEach(dia => {
+                if (dia.actividades.length === 0) return;
+                
+                html += `<div style="margin-bottom:10px; background:#f8f9fa; padding:10px; border-radius:10px; border-left:4px solid #3498db;">`;
+                html += `<p style="font-weight:bold; margin:0 0 6px 0;">📅 Día ${dia.dia}</p>`;
+                
+                dia.actividades.forEach(act => {
+                    html += `
+                        <div style="margin:4px 0 0 15px; padding:8px 12px; background:white; border-radius:8px; border:1px solid #e0e0e0;">
+                            <p style="margin:2px 0; font-weight:bold;">${act.area}: ${act.nombre}</p>
+                            <p style="margin:2px 0; font-size:0.85rem; color:#555;">📝 ${act.descripcion}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">📎 Materiales: ${act.materiales.join(', ')}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">⏱️ ${act.duracion} minutos</p>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            });
+        });
+
+        html += `
+            <hr style="margin:12px 0;">
+            <p style="font-size:0.75rem; color:#777;">Plan generado automáticamente por SAAL basado en los resultados del diagnóstico.</p>
+            <p style="font-size:0.75rem; color:#777;">Actividades extraídas del banco de actividades SAAL.</p>
+        `;
+
+        return html;
+    }
+
+    // ============================================================
+    // REINICIO DE EVALUACIÓN
+    // ============================================================
+    function reiniciarEvaluacion() {
+        if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
+            localStorage.removeItem('nombreAlumno');
+            localStorage.removeItem('curp');
+            localStorage.removeItem('turno');
+            localStorage.removeItem('aplicador');
+            localStorage.removeItem('dispositivo');
+            localStorage.removeItem('cct');
+            localStorage.removeItem('zonaEscolar');
+            localStorage.removeItem('grado');
+            localStorage.removeItem('nivel');
+            window.location.href = 'aplicador.html';
+        }
+    }
 
     cargarTextos();
 </script>
