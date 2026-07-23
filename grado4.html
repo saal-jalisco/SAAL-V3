@@ -191,10 +191,16 @@
     // ENVÍO DE DATOS A CEMEJ
     // ============================================================
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBGBs9xmDu30aVHPwadKnWqi9akakmIhigppf0D-j5gPJ3KZD00_bgEwp36fRGDM_4fA/exec";
-    function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
+// ============================================================
+// ENVÍO DE DATOS A CEMEJ - CON CURP
+// ============================================================
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFCLmoNGLZvIay3biu84DeGCbS1dOf9UhOZo9E5aQPUvxuhvuWwFO5OYNIBZur0XG5MQ/exec";
+
+function enviarDatosACEMEJ(grado, cct, zonaEscolar, puntajeTotal, nivel) {
     const payload = {
         fecha: new Date().toLocaleDateString('es-MX'),
+        curp: localStorage.getItem('curp') || '',  // ✅ CURP incluida
         cct: cct,
         zona: zonaEscolar,
         grado: grado,
@@ -216,6 +222,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBGBs9xmDu30aVHPwad
     })
     .then(() => {
         console.log("✅ Datos enviados a CEMEJ correctamente");
+        // Mostrar mensaje en la ficha
         const mensajeExito = document.createElement('div');
         mensajeExito.style.cssText = 'background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #c3e6cb; text-align: center; font-weight: bold;';
         mensajeExito.textContent = '✅ Datos enviados correctamente a SAAL.';
