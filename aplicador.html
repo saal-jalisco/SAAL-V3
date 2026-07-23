@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAAL - Aplicador</title>
+    <title>SAAL - Datos del alumno</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <style>
+        .texto-ayuda {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 4px;
+        }
+        .campo.obligatorio label::after {
+            content: " *";
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -18,16 +30,20 @@
     </div>
 
     <form id="formDatos" class="form-datos" onsubmit="return guardarDatos()">
-        <div class="campo">
-            <label>Nombre completo del alumno *</label>
+        <!-- Nombre del alumno (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>Nombre completo del alumno</label>
             <input type="text" id="nombreAlumno" placeholder="Escribe el nombre completo" required>
         </div>
 
-        <div class="campo">
+        <!-- CURP (obligatorio) -->
+        <div class="campo obligatorio">
             <label>CURP del alumno</label>
-            <input type="text" id="curpAlumno" placeholder="Escribe la CURP (18 caracteres)" maxlength="18">
+            <input type="text" id="curpAlumno" placeholder="Escribe la CURP (18 caracteres)" maxlength="18" required>
+            <p class="texto-ayuda">ℹ️ La CURP es necesaria para el registro oficial en CEMEJ.</p>
         </div>
 
+        <!-- Turno (opcional) -->
         <div class="campo">
             <label>Turno</label>
             <select id="turno">
@@ -37,8 +53,9 @@
             </select>
         </div>
 
-        <div class="campo">
-            <label>¿Quién aplica la evaluación? *</label>
+        <!-- Aplicador (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>¿Quién aplica la evaluación?</label>
             <select id="aplicador" required>
                 <option value="">Selecciona el aplicador</option>
                 <option value="docente">Docente</option>
@@ -49,8 +66,9 @@
             </select>
         </div>
 
-        <div class="campo">
-            <label>¿Desde dónde lee el alumno? *</label>
+        <!-- Dispositivo (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>¿Desde dónde lee el alumno?</label>
             <div class="opciones-dispositivo" required>
                 <label><input type="radio" name="dispositivo" value="chromebook" required> 💻 Chromebook</label>
                 <label><input type="radio" name="dispositivo" value="celular"> 📱 Celular</label>
@@ -58,14 +76,17 @@
             </div>
         </div>
 
-        <div class="campo">
-            <label>CCT de la escuela (opcional)</label>
-            <input type="text" id="cct" placeholder="Ejemplo: 14DPR1234A">
+        <!-- CCT (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>CCT de la escuela</label>
+            <input type="text" id="cct" placeholder="Ejemplo: 14DPR1234A" required>
         </div>
 
+        <!-- Zona escolar (opcional) -->
         <div class="campo">
             <label>Zona escolar (opcional)</label>
             <input type="text" id="zonaEscolar" placeholder="Ejemplo: Zona 05">
+            <p class="texto-ayuda">ℹ️ Si no conoces la zona, puedes dejarlo en blanco.</p>
         </div>
 
         <button type="submit" class="boton-continuar">✅ Continuar a la evaluación</button>
@@ -74,26 +95,65 @@
 
 <script>
     function guardarDatos() {
+        // Validar nombre
         const nombre = document.getElementById('nombreAlumno').value.trim();
+        if (!nombre) {
+            alert("Escribe el nombre completo del alumno.");
+            document.getElementById('nombreAlumno').focus();
+            return false;
+        }
+
+        // Validar CURP
+        const curp = document.getElementById('curpAlumno').value.trim().toUpperCase();
+        if (!curp) {
+            alert("Escribe la CURP del alumno.");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+        if (curp.length !== 18) {
+            alert("La CURP debe tener 18 caracteres.");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+
+        // Validar aplicador
         const aplicador = document.getElementById('aplicador').value;
+        if (!aplicador) {
+            alert("Selecciona quién aplica la evaluación.");
+            document.getElementById('aplicador').focus();
+            return false;
+        }
+
+        // Validar dispositivo
         const dispositivo = document.querySelector('input[name="dispositivo"]:checked');
+        if (!dispositivo) {
+            alert("Selecciona desde dónde leerá el alumno.");
+            return false;
+        }
 
-        if (!nombre) { alert("Escribe el nombre del alumno."); return false; }
-        if (!aplicador) { alert("Selecciona quién aplica la evaluación."); return false; }
-        if (!dispositivo) { alert("Selecciona desde dónde leerá el alumno."); return false; }
+        // Validar CCT
+        const cct = document.getElementById('cct').value.trim();
+        if (!cct) {
+            alert("Escribe el CCT de la escuela.");
+            document.getElementById('cct').focus();
+            return false;
+        }
 
+        // Guardar en localStorage
         localStorage.setItem('nombreAlumno', nombre);
-        localStorage.setItem('curp', document.getElementById('curpAlumno').value.trim());
+        localStorage.setItem('curp', curp);
         localStorage.setItem('turno', document.getElementById('turno').value);
         localStorage.setItem('aplicador', aplicador);
         localStorage.setItem('dispositivo', dispositivo.value);
-        localStorage.setItem('cct', document.getElementById('cct').value.trim());
+        localStorage.setItem('cct', cct);
         localStorage.setItem('zonaEscolar', document.getElementById('zonaEscolar').value.trim());
 
-        window.location.href = 'nivel.html';
+        // Ir a la pantalla de indicaciones
+        window.location.href = 'indicaciones.html';
         return false;
     }
 
+    // Cargar datos guardados si existen (para regresar)
     window.onload = function() {
         if (localStorage.getItem('nombreAlumno')) {
             document.getElementById('nombreAlumno').value = localStorage.getItem('nombreAlumno');
