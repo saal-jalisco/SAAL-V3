@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAAL - Datos del alumno</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         .texto-ayuda {
             font-size: 0.75rem;
             color: #777;
             margin-top: 4px;
+        }
+        .texto-ayuda i {
+            margin-right: 4px;
         }
         .campo.obligatorio label::after {
             content: " *";
@@ -22,6 +27,12 @@
         .campo input:valid, .campo select:valid {
             border-color: #2ecc71;
         }
+        .opciones-dispositivo label i {
+            margin-right: 4px;
+        }
+        .boton-continuar i {
+            margin-right: 6px;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +42,7 @@
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
         </div>
-        <h1>📖 SAAL</h1>
+        <h1><i class="fas fa-book-open"></i> SAAL</h1>
         <p>Datos del alumno y aplicador</p>
     </div>
 
@@ -75,9 +86,9 @@
         <div class="campo obligatorio">
             <label>¿Desde dónde lee el alumno?</label>
             <div class="opciones-dispositivo" required>
-                <label><input type="radio" name="dispositivo" value="chromebook" required> 💻 Chromebook</label>
-                <label><input type="radio" name="dispositivo" value="celular"> 📱 Celular</label>
-                <label><input type="radio" name="dispositivo" value="impreso"> 🖨️ Impreso</label>
+                <label><input type="radio" name="dispositivo" value="chromebook" required> <i class="fas fa-laptop"></i> Chromebook</label>
+                <label><input type="radio" name="dispositivo" value="celular"> <i class="fas fa-mobile-alt"></i> Celular</label>
+                <label><input type="radio" name="dispositivo" value="impreso"> <i class="fas fa-print"></i> Impreso</label>
             </div>
         </div>
 
@@ -91,10 +102,10 @@
         <div class="campo">
             <label>Zona escolar (opcional)</label>
             <input type="text" id="zonaEscolar" placeholder="Ejemplo: Zona 05">
-            <p class="texto-ayuda">ℹ️ Si no conoces la zona, puedes dejarlo en blanco.</p>
+            <p class="texto-ayuda"><i class="fas fa-info-circle"></i> Si no conoces la zona, puedes dejarlo en blanco.</p>
         </div>
 
-        <button type="submit" class="boton-continuar">✅ Continuar a la evaluación</button>
+        <button type="submit" class="boton-continuar"><i class="fas fa-check-circle"></i> Continuar a la evaluación</button>
     </form>
 </div>
 
