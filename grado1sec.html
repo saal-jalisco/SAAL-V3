@@ -619,19 +619,19 @@
     // PLAN DE INTERVENCIÓN - SECUNDARIA (2 semanas + 1 grupal)
     // ============================================================
 
-    function generarYMostrarPlan() {
-        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
-        if (total === 0) {
-            alert('Primero debes completar la evaluación.');
-            return;
-        }
-
-        const plan = generarPlanIntervencionSecundaria(puntajesActuales);
-        const planDiv = document.getElementById('plan-intervencion');
-        planDiv.innerHTML = generarHTMLPlanSecundaria(plan);
-        planDiv.style.display = 'block';
-        planDiv.scrollIntoView({ behavior: 'smooth' });
+   function generarYMostrarPlan() {
+    const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+    if (total === 0) {
+        alert('Primero debes completar la evaluación.');
+        return;
     }
+
+    const plan = generarPlanIntervencionSecundaria(puntajesActuales); // ✅ Función correcta
+    const planDiv = document.getElementById('plan-intervencion');
+    planDiv.innerHTML = generarHTMLPlanSecundaria(plan); // ✅ Función correcta
+    planDiv.style.display = 'block';
+    planDiv.scrollIntoView({ behavior: 'smooth' });
+}
 
     function generarPlanIntervencionSecundaria(puntajes) {
         const areas = [
