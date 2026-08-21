@@ -2,195 +2,138 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAAL - Lector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SAAL - Modo Lector</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e85f2f">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== ESTILOS EXCLUSIVOS PARA LECTOR ===== */
-        body {
-            background: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container-lector {
-            max-width: 480px;
-            width: 100%;
-            background: white;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            padding: 0;
-        }
-
-        .header-lector {
-            background: #3498db;
-            color: white;
-            padding: 30px 25px 25px 25px;
-            text-align: center;
-        }
-
-        .header-lector .volver {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-
-        .header-lector .volver a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.85;
-        }
-
-        .header-lector .volver a:hover {
-            opacity: 1;
-        }
-
-        .header-lector h1 {
-            font-size: 1.8rem;
-            margin: 5px 0 5px 0;
-            font-weight: 700;
-        }
-
-        .header-lector h1 i {
-            color: white;
-            margin-right: 8px;
-        }
-
-        .header-lector p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin: 5px 0;
-        }
-
-        /* ===== MENÚ LECTOR ===== */
-        .menu-lector {
-            padding: 25px 20px 30px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .btn-lector {
-            display: block;
-            padding: 18px 20px;
-            border-radius: 16px;
-            text-decoration: none;
-            text-align: center;
-            transition: 0.25s ease;
-            border: none;
-            cursor: pointer;
-            background: #404f55;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .btn-lector:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-lector .icono-mediano {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .btn-lector .icono-mediano i {
-            color: white;
-        }
-
-        .btn-lector .titulo-boton {
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: block;
-        }
-
-        .btn-lector .descripcion-boton {
-            font-size: 0.8rem;
-            display: block;
-            opacity: 0.8;
-            margin-top: 3px;
-        }
-
-        .btn-lector.primaria {
-            background: linear-gradient(145deg, #e85f2f, #d35400);
-        }
-
-        .btn-lector.secundaria {
-            background: linear-gradient(145deg, #3498db, #2c7fb8);
-        }
-
-        .info-lector {
-            padding: 0 20px 25px 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #b0b0b0;
-        }
-
-        @media (max-width: 480px) {
-            .header-lector {
-                padding: 20px 18px 18px 18px;
-            }
-            .header-lector h1 {
-                font-size: 1.5rem;
-            }
-            .menu-lector {
-                padding: 18px 15px 20px 15px;
-                gap: 12px;
-            }
-            .btn-lector {
-                padding: 14px 16px;
-            }
-            .btn-lector .icono-mediano {
-                font-size: 1.6rem;
-            }
-            .btn-lector .titulo-boton {
-                font-size: 1rem;
-            }
-        }
+        body { background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container-lector { max-width: 700px; width: 100%; background: white; border-radius: 30px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .header-lector { background: #3498db; color: white; padding: 20px; border-radius: 20px 20px 0 0; margin: -25px -25px 20px -25px; }
+        .header-lector h1 { font-size: 1.8rem; margin: 0; }
+        .header-lector h1 i { margin-right: 8px; }
+        .header-lector p { opacity: 0.9; margin: 5px 0 0; }
+        .codigo-input { margin: 20px 0; }
+        .codigo-input label { display: block; font-weight: bold; margin-bottom: 8px; color: #404f55; }
+        .codigo-input input { width: 100%; max-width: 200px; padding: 14px; font-size: 1.5rem; text-align: center; letter-spacing: 8px; border: 2px solid #ddd; border-radius: 12px; font-weight: bold; text-transform: uppercase; }
+        .codigo-input input:focus { border-color: #e85f2f; outline: none; box-shadow: 0 0 0 3px rgba(232,95,47,0.2); }
+        .btn-validar { background: #e85f2f; color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; width: 100%; max-width: 200px; }
+        .btn-validar:hover { background: #d35400; }
+        .btn-validar i { margin-right: 6px; }
+        .texto-lectura-lector { background: #fff8e7; border-left: 8px solid #3498db; padding: 20px; font-size: 1.2rem; line-height: 1.6; margin: 20px 0; font-family: 'Georgia', serif; border-radius: 16px; text-align: left; }
+        .mensaje-error { color: #e74c3c; font-weight: bold; margin-top: 10px; }
+        .instruccion-lector { background: #e8f0fe; padding: 16px; border-radius: 12px; margin: 16px 0; font-size: 0.95rem; }
+        .instruccion-lector i { margin-right: 6px; }
+        .btn-regresar-lector { display: inline-block; margin-top: 15px; background: #404f55; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .btn-regresar-lector:hover { background: #2c3e50; }
+        .btn-regresar-lector i { margin-right: 6px; }
+        .icono-libro-titulo i { margin-right: 4px; }
     </style>
 </head>
 <body>
 
-<div class="container-lector">
-    <!-- ===== ENCABEZADO ===== -->
+<div class="container-lector" id="appLector">
     <div class="header-lector">
-        <div class="volver">
-            <a href="index.html">← Volver</a>
+        <h1><i class="fas fa-book"></i> SAAL</h1>
+        <p>Modo Lector</p>
+    </div>
+
+    <!-- Pantalla de ingreso de código -->
+    <div id="pantallaCodigo">
+        <div class="instruccion-lector">
+            <p><i class="fas fa-mobile-alt"></i> <strong>Ingresa el código de sesión</strong> que te compartió tu maestro o aplicador.</p>
         </div>
-        <h1><i class="fas fa-book"></i> Lector</h1>
-        <p>Selecciona el nivel educativo</p>
+
+        <div class="codigo-input">
+            <label for="codigoSesionInput">Código de sesión</label>
+            <input type="text" id="codigoSesionInput" placeholder="Ej: A3B9" maxlength="4" autofocus>
+        </div>
+
+        <button class="btn-validar" onclick="validarCodigo()"><i class="fas fa-key"></i> Validar código</button>
+        <div id="mensajeValidacion"></div>
+
+        <a href="index.html" class="btn-regresar-lector"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
     </div>
 
-    <!-- ===== BOTONES DE NIVEL ===== -->
-    <div class="menu-lector">
-        <a href="primaria.html" class="btn-lector primaria">
-            <span class="icono-mediano"><i class="fas fa-clipboard-list"></i></span>
-            <span class="titulo-boton">Primaria</span>
-            <span class="descripcion-boton">1° a 6° grado</span>
-        </a>
+    <!-- Pantalla de texto (oculta inicialmente) -->
+    <div id="pantallaTexto" style="display:none;">
+        <div class="instruccion-lector" style="background:#d4edda;">
+            <p><i class="fas fa-bullhorn"></i> <strong>¡Texto cargado!</strong> Lee en voz alta con calma.</p>
+            <p id="tituloTextoMostrado" style="font-size:0.8rem; opacity:0.8;"></p>
+        </div>
 
-        <a href="secundaria.html" class="btn-lector secundaria">
-            <span class="icono-mediano"><i class="fas fa-clipboard-list"></i></span>
-            <span class="titulo-boton">Secundaria</span>
-            <span class="descripcion-boton">1° a 3° grado</span>
-        </a>
-    </div>
+        <div id="textoMostrado" class="texto-lectura-lector"></div>
+        <p style="font-size:0.8rem; color:#777; margin-top:10px;"><i class="fas fa-circle" style="color:#3498db; font-size:0.6rem;"></i> Cuando termines, avísale a tu maestro.</p>
 
-    <!-- ===== PIE ===== -->
-    <div class="info-lector">
-        SAAL · Jalisco LEO
+        <button class="btn-validar" style="background:#404f55;" onclick="volverACodigo()"><i class="fas fa-arrow-left"></i> Volver a ingresar código</button>
+        <a href="index.html" class="btn-regresar-lector"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
     </div>
 </div>
+
+<script src="js/datos.js"></script>
+<script>
+    function buscarTextoPorCodigo(codigo) {
+        for (const grado in bancoTextos) {
+            const textos = bancoTextos[grado];
+            for (const texto of textos) {
+                const tituloLimpio = texto.titulo
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toUpperCase()
+                    .replace(/[^A-Z0-9]/g, '');
+                let codigoGenerado = tituloLimpio.substring(0, 4);
+                while (codigoGenerado.length < 4) {
+                    codigoGenerado += '0';
+                }
+                if (codigoGenerado === codigo) {
+                    return texto;
+                }
+            }
+        }
+        return null;
+    }
+
+    function validarCodigo() {
+        const input = document.getElementById('codigoSesionInput');
+        const codigo = input.value.trim().toUpperCase();
+        const mensaje = document.getElementById('mensajeValidacion');
+
+        if (codigo.length !== 4) {
+            mensaje.innerHTML = '<p class="mensaje-error">⚠️ El código debe tener 4 caracteres.</p>';
+            return;
+        }
+
+        const textoEncontrado = buscarTextoPorCodigo(codigo);
+
+        if (!textoEncontrado) {
+            mensaje.innerHTML = '<p class="mensaje-error">❌ Código no válido. Verifica con tu maestro.</p>';
+            return;
+        }
+
+        document.getElementById('textoMostrado').innerHTML = `<p>${textoEncontrado.contenido}</p>`;
+        document.getElementById('tituloTextoMostrado').textContent = `<i class="fas fa-book icono-libro-titulo"></i> ${textoEncontrado.titulo} (${textoEncontrado.palabras || '?'} palabras)`;
+        document.getElementById('pantallaCodigo').style.display = 'none';
+        document.getElementById('pantallaTexto').style.display = 'block';
+        mensaje.innerHTML = '';
+        input.value = '';
+    }
+
+    function volverACodigo() {
+        document.getElementById('pantallaTexto').style.display = 'none';
+        document.getElementById('pantallaCodigo').style.display = 'block';
+        document.getElementById('codigoSesionInput').focus();
+        document.getElementById('mensajeValidacion').innerHTML = '';
+    }
+
+    document.getElementById('codigoSesionInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') { validarCodigo(); }
+    });
+
+    window.onload = function() {
+        document.getElementById('codigoSesionInput').focus();
+    };
+</script>
 
 </body>
 </html>
