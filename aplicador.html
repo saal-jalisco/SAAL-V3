@@ -3,194 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAAL - Aplicador</title>
+    <title>SAAL - Datos del alumno</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e85f2f">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== ESTILOS EXCLUSIVOS PARA APLICADOR ===== */
-        body {
-            background: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+        .texto-ayuda {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 4px;
         }
-
-        .container-aplicador {
-            max-width: 480px;
-            width: 100%;
-            background: white;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-            padding: 0;
+        .campo.obligatorio label::after {
+            content: " *";
+            color: #e74c3c;
+            font-weight: bold;
         }
-
-        .header-aplicador {
-            background: #e85f2f;
-            color: white;
-            padding: 30px 25px 25px 25px;
-            text-align: center;
+        .campo input:invalid, .campo select:invalid {
+            border-color: #e74c3c;
         }
-
-        .header-aplicador .volver {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-
-        .header-aplicador .volver a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.85;
-        }
-
-        .header-aplicador .volver a:hover {
-            opacity: 1;
-        }
-
-        .header-aplicador h1 {
-            font-size: 1.8rem;
-            margin: 5px 0 5px 0;
-            font-weight: 700;
-        }
-
-        .header-aplicador h1 i {
-            color: white;
-            margin-right: 8px;
-        }
-
-        .header-aplicador p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin: 5px 0;
-        }
-
-        /* ===== MENÚ APLICADOR ===== */
-        .menu-aplicador {
-            padding: 25px 20px 30px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .btn-aplicador {
-            display: block;
-            padding: 18px 20px;
-            border-radius: 16px;
-            text-decoration: none;
-            text-align: center;
-            transition: 0.25s ease;
-            border: none;
-            cursor: pointer;
-            background: #404f55;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .btn-aplicador:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-aplicador .icono-mediano {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .btn-aplicador .icono-mediano i {
-            color: white;
-        }
-
-        .btn-aplicador .titulo-boton {
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: block;
-        }
-
-        .btn-aplicador .descripcion-boton {
-            font-size: 0.8rem;
-            display: block;
-            opacity: 0.8;
-            margin-top: 3px;
-        }
-
-        .btn-aplicador.primaria {
-            background: linear-gradient(145deg, #e85f2f, #d35400);
-        }
-
-        .btn-aplicador.secundaria {
-            background: linear-gradient(145deg, #3498db, #2c7fb8);
-        }
-
-        .info-aplicador {
-            padding: 0 20px 25px 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #b0b0b0;
-        }
-
-        @media (max-width: 480px) {
-            .header-aplicador {
-                padding: 20px 18px 18px 18px;
-            }
-            .header-aplicador h1 {
-                font-size: 1.5rem;
-            }
-            .menu-aplicador {
-                padding: 18px 15px 20px 15px;
-                gap: 12px;
-            }
-            .btn-aplicador {
-                padding: 14px 16px;
-            }
-            .btn-aplicador .icono-mediano {
-                font-size: 1.6rem;
-            }
-            .btn-aplicador .titulo-boton {
-                font-size: 1rem;
-            }
+        .campo input:valid, .campo select:valid {
+            border-color: #2ecc71;
         }
     </style>
 </head>
 <body>
-
-<div class="container-aplicador">
-    <!-- ===== ENCABEZADO ===== -->
-    <div class="header-aplicador">
-        <div class="volver">
-            <a href="index.html">← Volver</a>
+<div class="container">
+    <a href="index.html" class="boton-regresar">← Menú principal</a>
+    <div class="header">
+        <div class="logos">
+            <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
         </div>
-        <h1><i class="fas fa-chalkboard-teacher"></i> Aplicador</h1>
-        <p>Selecciona el nivel educativo</p>
+        <h1>📖 SAAL</h1>
+        <p>Datos del alumno y aplicador</p>
     </div>
 
-    <!-- ===== BOTONES DE NIVEL ===== -->
-    <div class="menu-aplicador">
-        <a href="primaria.html" class="btn-aplicador primaria">
-            <span class="icono-mediano"><i class="fas fa-clipboard-list"></i></span>
-            <span class="titulo-boton">Primaria</span>
-            <span class="descripcion-boton">1° a 6° grado</span>
-        </a>
+    <form id="formDatos" class="form-datos" onsubmit="return guardarDatos()" novalidate>
+        <!-- Nombre del alumno (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>Nombre completo del alumno</label>
+            <input type="text" id="nombreAlumno" placeholder="Escribe el nombre completo" required>
+        </div>
 
-        <a href="secundaria.html" class="btn-aplicador secundaria">
-            <span class="icono-mediano"><i class="fas fa-clipboard-list"></i></span>
-            <span class="titulo-boton">Secundaria</span>
-            <span class="descripcion-boton">1° a 3° grado</span>
-        </a>
-    </div>
-
-    <!-- ===== PIE ===== -->
-    <div class="info-aplicador">
-        SAAL · Jalisco LEO
-    </div>
+        <!-- CURP (obligatorio) -->
+       <div class="campo obligatorio">
+    <label>CURP del alumno</label>
+    <input type="text" id="curpAlumno" placeholder="Escribe la CURP (18 caracteres)" maxlength="18" required>
 </div>
 
+        <!-- Turno (opcional) -->
+        <div class="campo">
+            <label>Turno</label>
+            <select id="turno">
+                <option value="">Selecciona el turno</option>
+                <option value="matutino">Matutino</option>
+                <option value="vespertino">Vespertino</option>
+            </select>
+        </div>
+
+        <!-- Aplicador (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>¿Quién aplica la evaluación?</label>
+            <select id="aplicador" required>
+                <option value="">Selecciona el aplicador</option>
+                <option value="docente">Docente</option>
+                <option value="director">Director</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="padre">Padre de familia</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+
+        <!-- Dispositivo (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>¿Desde dónde lee el alumno?</label>
+            <div class="opciones-dispositivo" required>
+                <label><input type="radio" name="dispositivo" value="chromebook" required> 💻 Chromebook</label>
+                <label><input type="radio" name="dispositivo" value="celular"> 📱 Celular</label>
+                <label><input type="radio" name="dispositivo" value="impreso"> 🖨️ Impreso</label>
+            </div>
+        </div>
+
+        <!-- CCT (obligatorio) -->
+        <div class="campo obligatorio">
+            <label>CCT de la escuela</label>
+            <input type="text" id="cct" placeholder="Ejemplo: 14DPR1234A" required>
+        </div>
+
+        <!-- Zona escolar (opcional) -->
+        <div class="campo">
+            <label>Zona escolar (opcional)</label>
+            <input type="text" id="zonaEscolar" placeholder="Ejemplo: Zona 05">
+            <p class="texto-ayuda">ℹ️ Si no conoces la zona, puedes dejarlo en blanco.</p>
+        </div>
+
+        <button type="submit" class="boton-continuar">✅ Continuar a la evaluación</button>
+    </form>
+</div>
+
+<script>
+    function guardarDatos() {
+        // === VALIDACIÓN DE NOMBRE ===
+        const nombre = document.getElementById('nombreAlumno').value.trim();
+        if (!nombre) {
+            alert("❌ Escribe el nombre completo del alumno.");
+            document.getElementById('nombreAlumno').focus();
+            return false;
+        }
+
+        // === VALIDACIÓN DE CURP ===
+        const curp = document.getElementById('curpAlumno').value.trim().toUpperCase();
+        if (!curp) {
+            alert("❌ Escribe la CURP del alumno.");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+        if (curp.length !== 18) {
+            alert("❌ La CURP debe tener 18 caracteres. Tiene " + curp.length + ".");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+        // Verificar que la CURP solo tenga letras y números
+        if (!/^[A-Z0-9]+$/.test(curp)) {
+            alert("❌ La CURP solo debe contener letras mayúsculas y números.");
+            document.getElementById('curpAlumno').focus();
+            return false;
+        }
+
+        // === VALIDACIÓN DE APLICADOR ===
+        const aplicador = document.getElementById('aplicador').value;
+        if (!aplicador) {
+            alert("❌ Selecciona quién aplica la evaluación.");
+            document.getElementById('aplicador').focus();
+            return false;
+        }
+
+        // === VALIDACIÓN DE DISPOSITIVO ===
+        const dispositivo = document.querySelector('input[name="dispositivo"]:checked');
+        if (!dispositivo) {
+            alert("❌ Selecciona desde dónde leerá el alumno.");
+            return false;
+        }
+
+        // === VALIDACIÓN DE CCT ===
+        const cct = document.getElementById('cct').value.trim();
+        if (!cct) {
+            alert("❌ Escribe el CCT de la escuela.");
+            document.getElementById('cct').focus();
+            return false;
+        }
+
+        // === GUARDAR EN LOCALSTORAGE ===
+        localStorage.setItem('nombreAlumno', nombre);
+        localStorage.setItem('curp', curp);
+        localStorage.setItem('turno', document.getElementById('turno').value);
+        localStorage.setItem('aplicador', aplicador);
+        localStorage.setItem('dispositivo', dispositivo.value);
+        localStorage.setItem('cct', cct);
+        localStorage.setItem('zonaEscolar', document.getElementById('zonaEscolar').value.trim());
+
+        // === REDIRIGIR A INDICACIONES ===
+        window.location.href = 'indicaciones.html';
+        return false;
+    }
+
+    // === CARGAR DATOS GUARDADOS (SI EXISTEN) ===
+    window.onload = function() {
+        if (localStorage.getItem('nombreAlumno')) {
+            document.getElementById('nombreAlumno').value = localStorage.getItem('nombreAlumno');
+            document.getElementById('curpAlumno').value = localStorage.getItem('curp') || '';
+            document.getElementById('turno').value = localStorage.getItem('turno') || '';
+            document.getElementById('aplicador').value = localStorage.getItem('aplicador') || '';
+            document.getElementById('cct').value = localStorage.getItem('cct') || '';
+            document.getElementById('zonaEscolar').value = localStorage.getItem('zonaEscolar') || '';
+            const dispositivo = localStorage.getItem('dispositivo');
+            if (dispositivo) {
+                document.querySelector(`input[name="dispositivo"][value="${dispositivo}"]`).checked = true;
+            }
+        }
+    };
+</script>
 </body>
 </html>
