@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e85f2f">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ===== ESTILOS EXCLUSIVOS PARA LA PÁGINA DE INICIO ===== */
         body {
@@ -53,6 +55,10 @@
             font-size: 2.2rem;
             margin: 10px 0 5px 0;
             font-weight: 700;
+        }
+
+        .header-portada h1 i {
+            margin-right: 8px;
         }
 
         .header-portada p {
@@ -182,7 +188,7 @@
         <div class="logos">
             <img src="assets/cemej.png" alt="CEMEJ" class="logo-cemej">
         </div>
-        <h1>📖 SAAL</h1>
+        <h1><i class="fas fa-book-open"></i> SAAL</h1>
         <p>Sistema de Acompañamiento a la Alfabetización y la Lectura</p>
         <p class="subtitulo">Evaluación de habilidades lectoras</p>
         <p class="version">Versión 3.0</p>
@@ -191,13 +197,13 @@
     <!-- ===== BOTONES DE ROL ===== -->
     <div class="menu-principal">
         <a href="aplicador.html" class="btn-rol-inicio aplicador">
-            <span class="icono-grande">👨‍🏫</span>
+            <span class="icono-grande"><i class="fas fa-chalkboard-teacher"></i></span>
             <span class="titulo-boton">Aplicador</span>
             <span class="descripcion-boton">Docente o encargado de aplicar la evaluación</span>
         </a>
 
         <a href="lector.html" class="btn-rol-inicio lector">
-            <span class="icono-grande">📖</span>
+            <span class="icono-grande"><i class="fas fa-book"></i></span>
             <span class="titulo-boton">Lector</span>
             <span class="descripcion-boton">Alumno que leerá el texto</span>
         </a>
