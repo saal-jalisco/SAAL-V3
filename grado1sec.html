@@ -619,19 +619,19 @@
     // PLAN DE INTERVENCIÓN - SECUNDARIA (2 semanas + 1 grupal)
     // ============================================================
 
-   function generarYMostrarPlan() {
-    const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
-    if (total === 0) {
-        alert('Primero debes completar la evaluación.');
-        return;
-    }
+    function generarYMostrarPlan() {
+        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+        if (total === 0) {
+            alert('Primero debes completar la evaluación.');
+            return;
+        }
 
-    const plan = generarPlanIntervencionSecundaria(puntajesActuales); // ✅ Función correcta
-    const planDiv = document.getElementById('plan-intervencion');
-    planDiv.innerHTML = generarHTMLPlanSecundaria(plan); // ✅ Función correcta
-    planDiv.style.display = 'block';
-    planDiv.scrollIntoView({ behavior: 'smooth' });
-}
+        const plan = generarPlanIntervencionSecundaria(puntajesActuales);
+        const planDiv = document.getElementById('plan-intervencion');
+        planDiv.innerHTML = generarHTMLPlanSecundaria(plan);
+        planDiv.style.display = 'block';
+        planDiv.scrollIntoView({ behavior: 'smooth' });
+    }
 
     function generarPlanIntervencionSecundaria(puntajes) {
         const areas = [
@@ -809,6 +809,17 @@
         `;
 
         return html;
+    }
+
+    function seleccionarActividad(area, nivel, semana, dia) {
+        const posibles = bancoActividades.filter(a => a.area === area && a.nivel === nivel);
+        if (posibles.length === 0) {
+            const alternativas = bancoActividades.filter(a => a.area === area && a.nivel === 2);
+            if (alternativas.length === 0) return null;
+            return alternativas[(semana * 3 + dia * 7) % alternativas.length];
+        }
+        const indice = (semana * 3 + dia * 7) % posibles.length;
+        return posibles[indice];
     }
 
     // ============================================================
