@@ -189,6 +189,11 @@
             <h3>Comprensión lectora</h3>
             <p class="texto-ayuda" style="font-size:0.8rem;">📝 Responde a las preguntas de comprensión.</p>
             <div id="preguntasComprension"></div>
+            <div class="botones-nivel" style="margin-top:12px;">
+                <button class="btn-nivel circular" data-componente="comprension" data-nivel="3" onclick="seleccionarNivel('comprension', 3)"><span class="nivel-icono">🟢</span><span class="nivel-texto">Deseable</span></button>
+                <button class="btn-nivel circular" data-componente="comprension" data-nivel="2" onclick="seleccionarNivel('comprension', 2)"><span class="nivel-icono">🟡</span><span class="nivel-texto">En progreso</span></button>
+                <button class="btn-nivel circular" data-componente="comprension" data-nivel="1" onclick="seleccionarNivel('comprension', 1)"><span class="nivel-icono">🔴</span><span class="nivel-texto">Atención prioritaria</span></button>
+            </div>
             <div class="descripciones-siempre-visibles" style="margin-top:10px; padding:10px; background:#f9f9f9; border-radius:12px; border:1px solid #e0e0e0;">
                 <div class="descripcion-item nivel-3">✅ <strong>Deseable:</strong> Identifica ideas o detalles relevantes. Reconoce personajes, escenarios o resolución.</div>
                 <div class="descripcion-item nivel-2">🔄 <strong>En progreso:</strong> Identifica solo alguna idea o detalles. Recuperación incompleta.</div>
@@ -548,6 +553,20 @@
         const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
         if (total === 0) {
             alert('Primero debes completar la evaluación.');
+            return;
+        }
+
+        // Validación: verificar que todos los componentes tengan puntaje
+        const componentesSinCalificar = [];
+        if (!puntajesActuales.fluidez || puntajesActuales.fluidez === 0) {
+            componentesSinCalificar.push('Fluidez');
+        }
+        if (!puntajesActuales.comprension || puntajesActuales.comprension === 0) {
+            componentesSinCalificar.push('Comprensión lectora');
+        }
+
+        if (componentesSinCalificar.length > 0) {
+            alert('⚠️ Falta calificar los siguientes componentes:\n\n• ' + componentesSinCalificar.join('\n• ') + '\n\nPor favor, regresa a la rúbrica y asígnales un nivel (🟢, 🟡 o 🔴) antes de generar el plan.');
             return;
         }
 
