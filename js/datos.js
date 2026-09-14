@@ -21,7 +21,7 @@ Sus papás se preocuparon. Juan Pablo no quiso cenar, y se fue dormir.
 
 A media noche, los papás escucharon que alguien lloraba. Fueron hasta la habitación de su hijo y observaron que lloraba dormido.
 
-Sus papás lo despertaron y lo abrazaron fuerte. Él les contó porque no quería tener una hermanita les habló de sus temores.`,
+Sus papás lo despertaron y lo abrazaron fuerte. Él les contó por qué no quería tener una hermanita; les habló de sus temores.`,
             preguntas: [
                 "¿De qué trata la lectura?",
                 "Juan Pablo estaba triste porque:",
@@ -57,6 +57,34 @@ Su hocico termina en punta y les sirve para defenderse de sus enemigos, incluso 
                 ["a) Para respirar abajo del agua", "b) Para defenderse de sus enemigos", "c) Para comer peces"]
             ],
             correctas: [null, 2, 1]
+        },
+        {
+            titulo: "La nube que no quería llover",
+            palabras: 118,
+            contenido: `Nubi era una nube blanca que vivía en el cielo. Todas las nubes de su alrededor dejaban caer lluvia, pero ella no quería.
+
+—¿Por qué no llueves? —preguntó el viento.
+
+—Porque me da miedo —respondió Nubi.
+
+Un día, el sol brilló tanto que los ríos se secaron. Los árboles pidieron agua. Los animales tuvieron sed.
+
+Nubi vio todo desde arriba. Sintió tristeza.
+
+—Si no lluevo, todos sufrirán —pensó.
+
+Entonces, cerró los ojos y dejó caer una gota. Luego otra. Y otra más.
+
+La lluvia cayó suave sobre los campos. Los árboles bebieron. Los animales sonrieron.
+
+Nubi entendió que dar agua era su don. Desde entonces, llueve cuando es necesario, feliz de ayudar.`,
+            preguntas: [
+                "¿Por qué Nubi no quería llover?",
+                "¿Qué pasó cuando el sol brilló y los ríos se secaron?",
+                "¿Qué aprendió Nubi al final?"
+            ],
+            opciones: [null, null, null],
+            correctas: [null, null, null]
         }
     ],
 
@@ -69,7 +97,7 @@ Su hocico termina en punta y les sirve para defenderse de sus enemigos, incluso 
 
 Cada vez que Guadalupe quería tomar algún juguete Sofía le decía: - ¡se rompe! ¡no lo toques!... Guadalupe se aburrió muchísimo.
 
-Otro día fue Guadalupe quién invitó a Sofía a su casa a jugar al patio donde Guadalupe había preparado muchos juguetes.
+Otro día fue Guadalupe quien invitó a Sofía a su casa a jugar al patio donde Guadalupe había preparado muchos juguetes.
 
 Sofía estaba asombrada porque podía jugar con todos los juguetes sin que Guadalupe se lo impidiera, compartieron toda la tarde alegremente.
 
@@ -105,6 +133,34 @@ Ramón lo hizo así y durmió muy tranquilo.`,
                 ["a) Puso unos 'quitapesares' debajo de su almohada", "b) Le dio unos muñequitos de madera y tela para que les contara sus preocupaciones", "c) Le dijo que no se preocupara y que se lo contara a sus papás"]
             ],
             correctas: [null, 2, 1]
+        },
+        {
+            titulo: "El colibrí y la flor",
+            palabras: 114,
+            contenido: `En un jardín vivía una flor llamada Rosa. Todos los días, un colibrí llamado Tito venía a visitarla.
+
+—¿Por qué vienes siempre? —preguntó Rosa.
+
+—Porque tu néctar es dulce —respondió Tito.
+
+Rosa se puso triste. Pensó que solo la querían por lo que daba.
+
+—Si no tuviera néctar, ¿vendrías? —preguntó.
+
+Tito se quedó callado. Luego dijo:
+
+—Vengo por tu néctar, sí. Pero también por tu compañía. Me gusta cantarte por las mañanas.
+
+Rosa sonrió. Entendió que dar es importante, pero también lo es ser apreciada por lo que uno es.
+
+Desde entonces, Tito y Rosa fueron amigos. Y cada mañana, el jardín se llenaba de color y de canto.`,
+            preguntas: [
+                "¿Por qué Tito visitaba a Rosa?",
+                "¿Por qué Rosa se puso triste?",
+                "¿Qué aprendió Rosa al final?"
+            ],
+            opciones: [null, null, null],
+            correctas: [null, null, null]
         }
     ],
 
@@ -119,7 +175,7 @@ Grises nubarrones cubrían siempre el cielo y una bruma gris envolvía la ciudad
 
 Un día, en el centro de la plaza de Grisálida, el cemento gris se quebró y por la grieta se asomó tímidamente un brote verde. Todos en Grisálida observaron maravillados el brote que poco a poco comenzó a desplegar sus hojas como si se desperezara después de un largo sueño. El sol, curioso se asomó por encima de las nubes para espiar el brote y lo bañó con una cascada de rayos dorados.
 
-El cielo, entonces descorrió las nubes, y una luz nueva azul celeste lo iluminó. Los niños quitaron los restos de cemento que rodeaba el tallo para que no se dañará y escarbaron en la tierra llenándose los dedos de un húmedo color marrón.
+El cielo, entonces descorrió las nubes, y una luz nueva azul celeste lo iluminó. Los niños quitaron los restos de cemento que rodeaba el tallo para que no se dañara y escarbaron en la tierra llenándose los dedos de un húmedo color marrón.
 
 En ese momento en el extremo del brote apareció un pequeño botón rojo que se convirtió en un capullo y lentamente se abrió en mil pétalos. Y de pronto mariposas con las alas violetas y anaranjada sobrevolaron la plaza y se acercaron a la flor.
 
@@ -153,6 +209,29 @@ Martín estaba seguro de que el ratoncito había sonreído cuando le propuso lla
             ],
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El árbol de los deseos",
+            palabras: 217,
+            contenido: `En el centro del bosque había un árbol muy antiguo. Sus ramas eran tan largas que parecían abrazar el cielo, y sus hojas cambiaban de color según la estación. Los animales del bosque decían que aquel árbol concedía deseos, pero solo a quien lo visitara con el corazón sincero.
+
+Una mañana, una niña llamada Luna se adentró en el bosque. Caminó entre helechos y escuchó el canto de los pájaros. Cuando llegó al árbol, tocó su tronco y sintió un calor suave.
+
+—Quiero que mi mamá se cure —susurró Luna. Su mamá estaba enferma y nada la ayudaba.
+
+El árbol movió sus ramas y una hoja dorada cayó en las manos de Luna. La niña la guardó y regresó a casa. Esa noche, su mamá durmió tranquila por primera vez en semanas.
+
+Días después, la mamá de Luna empezó a mejorar. Los médicos no sabían explicarlo, pero Luna sonreía. Ella sabía que el árbol había escuchado su deseo.
+
+Cuando Luna volvió al bosque para agradecer, el árbol ya no estaba. En su lugar había un pequeño brote. Luna lo cuidó todos los días, y con el tiempo, el brote creció y se convirtió en un árbol nuevo. Desde entonces, Luna supo que los deseos sinceros siempre encuentran la manera de hacerse realidad.`,
+            preguntas: [
+                "¿Qué se decía del árbol del bosque?",
+                "¿Qué deseó Luna y por qué?",
+                "¿Qué pasó cuando Luna volvió a agradecer?",
+                "¿Qué aprendió Luna al final?"
+            ],
+            opciones: [null, null, null, null],
+            correctas: [null, null, null, null]
         }
     ],
 
@@ -167,11 +246,11 @@ Entonces llegaron a su palacio hombres y mujeres de todo el reino y de los lugar
 
 Los primeros en llegar fueron unos hombres sabios que midieron y pesaron al rey y le recomendaron que se diera baños de sales y especies. Pero el rey no se rió.
 
-Luego, llegó un mago que le hizo cosquillas en la nariz con su varita mágica. Pero el rey no se rió. Después llegó el dueño de un circo con sus trapecistas payasos y domadores e hizo una gran función en el palacio. Pero el reino se rió
+Luego, llegó un mago que le hizo cosquillas en la nariz con su varita mágica. Pero el rey no se rió. Después llegó el dueño de un circo con sus trapecistas payasos y domadores e hizo una gran función en el palacio. Pero el rey no se rió.
 
 También se presentó un inventor con una extraña máquina que fabricaba carcajadas. Pero el rey no se rió. Hasta que un día llegó al palacio una joven campesina muy bella, aunque era pobre, dijo que si hacía reír al rey no quería la recompensa, sino que el rey se casara con ella.
 
-El rey acepto. Entonces la joven se acercó al rey, susurro unas palabras en su oído y lo beso y el rey por fin sonrío. Nunca se supo que le dijo la joven al rey, pero cuentan que los dos vivieron felices muchos años y nunca dejaron de reír.`,
+El rey aceptó. Entonces la joven se acercó al rey, susurró unas palabras en su oído y lo besó y el rey por fin sonrió. Nunca se supo qué le dijo la joven al rey, pero cuentan que los dos vivieron felices muchos años y nunca dejaron de reír.`,
             preguntas: [
                 "¿De qué trata la lectura?",
                 "¿Por qué el rey ofreció una recompensa?",
@@ -181,6 +260,78 @@ El rey acepto. Entonces la joven se acercó al rey, susurro unas palabras en su 
             ],
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El concurso de pasteles",
+            palabras: 204,
+            contenido: `En el pueblo de San Miguel se celebraba cada año un concurso de pasteles. Doña Rosa, una panadera famosa por sus recetas, ganaba casi siempre. Pero este año, su nieta Sofía quería participar.
+
+—Abuela, quiero hacer un pastel para el concurso —dijo Sofía.
+
+—¿Tú? —respondió doña Rosa, sorprendida—. Apenas tienes diez años.
+
+—Pero he aprendido mirándote —insistió la niña.
+
+Doña Rosa sonrió y le prestó su delantal. Durante una semana, Sofía practicó. Quemó dos pasteles, se le acabó el azúcar y olvidó la vainilla. Pero no se rindió.
+
+El día del concurso, Sofía presentó un pastel de zanahoria con nueces. Los jueces lo probaron y cerraron los ojos.
+
+—¡Delicioso! —exclamó uno.
+
+Doña Rosa, que también competía, probó el pastel de su nieta. Se quedó callada un momento y luego dijo:
+
+—Sofía, este pastel es mejor que el mío.
+
+Sofía no ganó el primer lugar, pero recibió una mención especial. Lo más importante fue que su abuela le dijo:
+
+—Has aprendido a crear, no solo a copiar. Eso te hace una verdadera panadera.
+
+Desde ese día, Sofía y doña Rosa hornean juntas cada domingo. Y en el pueblo ya se sabe que el concurso de pasteles tiene dos grandes campeonas.`,
+            preguntas: [
+                "¿Quiénes participaban en el concurso de pasteles?",
+                "¿Qué hizo Sofía para prepararse?",
+                "¿Qué dijo doña Rosa al probar el pastel de su nieta?",
+                "¿Qué aprendió Sofía al final?"
+            ],
+            opciones: [null, null, null, null],
+            correctas: [null, null, null, null]
+        },
+        {
+            titulo: "El faro y la tormenta",
+            palabras: 177,
+            contenido: `En una costa rocosa vivía un farero llamado Tomás. Todas las noches encendía la luz de su faro para guiar a los barcos. Su hija Ana lo acompañaba desde pequeña.
+
+Una noche, una tormenta terrible se desató. El viento soplaba tan fuerte que las olas golpeaban el faro.
+
+—Papá, la luz parpadea —dijo Ana, asustada.
+
+—El viento quiere apagarla —respondió Tomás—. Pero no lo logrará.
+
+Tomás subió a la torre y aseguró la lámpara. Ana lo siguió con una linterna.
+
+—¿Qué haces? —preguntó él.
+
+—Si tu luz falla, la mía te ayudará —dijo la niña.
+
+Juntos mantuvieron la luz encendida hasta el amanecer. Un barco que pasaba en la distancia vio las luces y esquivó las rocas.
+
+Al día siguiente, el capitán del barco llegó al faro.
+
+—Gracias a ustedes estamos vivos —dijo.
+
+Tomás miró a Ana con orgullo.
+
+—No fui solo yo —respondió—. Mi hija también iluminó el camino.
+
+Desde entonces, Ana aprendió que la valentía no está en no tener miedo, sino en actuar a pesar de él.`,
+            preguntas: [
+                "¿Qué hacía Tomás todas las noches?",
+                "¿Qué hizo Ana durante la tormenta?",
+                "¿Por qué el capitán fue al faro al día siguiente?",
+                "¿Qué aprendió Ana?"
+            ],
+            opciones: [null, null, null, null],
+            correctas: [null, null, null, null]
         }
     ],
 
@@ -193,11 +344,11 @@ El rey acepto. Entonces la joven se acercó al rey, susurro unas palabras en su 
 
 - ¿Qué quieres comer? -le preguntó el posadero.
 
-- Una hogaza de pan y un jarriillo de vino -respondió el campesino.
+- Una hogaza de pan y un jarrito de vino -respondió el campesino.
 
 Mientras el posadero se alejaba, el campesino fijó sus ojos en una pieza de carne que estaba asándose en la chimenea y que desprendía un olor delicioso.
 
-Después de un rato, el posadero regresó con el pan y con el jarriillo de vino. El campesino empezó a comer sin apartar los ojos de la carne. De pronto tuvo una idea. Se levantó con el pan en la mano y se acercó al fuego. Colocó el pan sobre el humo que desprendía la carne y esperó unos minutos.
+Después de un rato, el posadero regresó con el pan y con el jarrito de vino. El campesino empezó a comer sin apartar los ojos de la carne. De pronto tuvo una idea. Se levantó con el pan en la mano y se acercó al fuego. Colocó el pan sobre el humo que desprendía la carne y esperó unos minutos.
 
 Cuando el pan se impregnó bien de aquel olor suculento, lo retiró del fuego y se dispuso a comer. Pero al ir a morderlo oyó una voz que gritaba:
 
@@ -225,7 +376,7 @@ Entonces el noble se acercó al campesino y le dijo algo en voz baja. El campesi
 
 - ¿Cómo que ya estoy pagado? ¡Dadme las monedas!
 
-- ¿Las monedas? -preguntó el noble-. ¿Acaso se comió la carne el campesino? Él sólo cogió el humo. Pues para pagar el humo de la carne bastará con el ruido de las monedas.
+- ¿Las monedas? -preguntó el noble-. ¿Acaso se comió la carne el campesino? Él solo cogió el humo. Pues para pagar el humo de la carne bastará con el ruido de las monedas.
 
 El posadero no tuvo más remedio que dejar marchar tranquilamente al campesino.`,
             preguntas: [
@@ -237,6 +388,69 @@ El posadero no tuvo más remedio que dejar marchar tranquilamente al campesino.`
             ],
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "La biblioteca olvidada",
+            palabras: 243,
+            contenido: `En una calle estrecha del centro de la ciudad había una biblioteca que nadie visitaba. Sus ventanas estaban cubiertas de polvo y sus libros dormían en estantes oscuros. Los vecinos decían que estaba embrujada, pero en realidad solo estaba olvidada.
+
+Un día, una niña llamada Emilia empujó la puerta. Chirrió, pero se abrió. Dentro, el aire olía a papel viejo y a madera. Emilia recorrió los pasillos y encontró un libro con tapas de cuero. Decía: "Historia de los sueños".
+
+Emilia lo abrió y leyó una historia sobre un niño que quería ser astronauta. Al terminar, sintió que ella también podía soñar. Guardó el libro en su mochila y se lo llevó.
+
+Cada tarde, Emilia volvía a la biblioteca. Leía un libro nuevo y luego lo recomendaba a sus amigos. Pronto, otros niños empezaron a acompañarla. La biblioteca dejó de estar sola.
+
+Un día, la bibliotecaria, una anciana llamada Clara, le dijo:
+
+—Gracias, Emilia. Creí que nadie volvería a leer estos libros.
+
+—Es que son tesoros —respondió la niña—. Solo necesitaban que alguien los abriera.
+
+Clara sonrió y le regaló el libro de cuero. Emilia lo conservó toda su vida. Años después, cuando fue maestra, llevó a sus alumnos a esa misma biblioteca y les contó la historia. Los niños abrieron los libros y los sueños volvieron a volar.
+
+La biblioteca nunca volvió a estar vacía. Porque los libros, como los sueños, solo necesitan a alguien que los descubra.`,
+            preguntas: [
+                "¿Por qué nadie visitaba la biblioteca?",
+                "¿Qué encontró Emilia en la biblioteca?",
+                "¿Qué hizo Emilia para que la biblioteca dejara de estar sola?",
+                "¿Qué le regaló Clara a Emilia y por qué?",
+                "¿Qué aprendizaje deja la historia?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El río que aprendió a escuchar",
+            palabras: 204,
+            contenido: `Hace muchos años, un río bajaba de la montaña y cruzaba el valle. Al principio, su agua era clara y cantarina. Los animales bebían de él y las plantas crecían en sus orillas.
+
+Pero los hombres construyeron fábricas y arrojaron desechos al río. El agua se volvió turbia y el río dejó de cantar.
+
+Un día, una niña llamada Itzel se acercó a la orilla. El río estaba triste.
+
+—¿Por qué no cantas? —preguntó Itzel.
+
+—Porque nadie me escucha —respondió el río con voz débil.
+
+Itzel decidió ayudarlo. Habló con sus vecinos y les contó lo que el río le había dicho. Al principio, nadie le creyó. Pero la niña insistió.
+
+—El río nos da agua. ¿Por qué no le damos cuidado? —dijo.
+
+Los vecinos se reunieron y decidieron limpiar la basura. Dejaron de arrojar desechos y plantaron árboles en las orillas. Poco a poco, el agua volvió a ser clara.
+
+Una mañana, Itzel escuchó un murmullo. Era el río, que había vuelto a cantar.
+
+—Gracias por escucharme —dijo el río.
+
+Itzel sonrió. Aprendió que la naturaleza habla, pero solo si estamos dispuestos a oírla. Y que pequeñas acciones pueden devolver la vida a lo que parecía perdido.`,
+            preguntas: [
+                "¿Cómo era el río al principio?",
+                "¿Qué pasó cuando los hombres construyeron fábricas?",
+                "¿Qué hizo Itzel para ayudar al río?",
+                "¿Qué aprendió Itzel al final?"
+            ],
+            opciones: [null, null, null, null],
+            correctas: [null, null, null, null]
         }
     ],
 
@@ -247,7 +461,7 @@ El posadero no tuvo más remedio que dejar marchar tranquilamente al campesino.`
             palabras: 408,
             contenido: `Madi era una medusa curiosa que, durante uno de sus paseos por el fondo del mar, descubrió una cueva, en cuyo interior había un cofre brillante y misterioso. Aunque el cofre era pesadísimo, Madi se lo llevó a su casa y allí lo abrió llena de nervios y emoción. Pero no contenía joya alguna. Tan sólo un bonito y sencillo vestido. Cuando se recuperó de la desilusión, Madi decidió probárselo y salir a dar un paseo, era un poco pesado y difícil de vestir, pero se sentía más alegre y animada que nunca. Tenía ganas de hablar y saludar a todos.
 
-Unos días después, en el fondo del mar todos corrían a esconderse porque el malvado pulpo Molvorón había vuelto, todos menos Madi, que con su vestido mágico solo sentía alegría e invitó al pulpo a jugar. Molvorón se sintió bastante contrariado al ver que la pequeña medusa no huía como los demás y le preguntó si es que no le tenía miedo. Ella le contestó que como iba a tener miedo estando él allí para defenderle.
+Unos días después, en el fondo del mar todos corrían a esconderse porque el malvado pulpo Molvorón había vuelto, todos menos Madi, que con su vestido mágico solo sentía alegría e invitó al pulpo a jugar. Molvorón se sintió bastante contrariado al ver que la pequeña medusa no huía como los demás y le preguntó si es que no le tenía miedo. Ella le contestó que cómo iba a tener miedo estando él allí para defenderle.
 
 El malvado pulpo mostró sus tentáculos amenazadores, moviéndolos ligeramente a un lado y otro. A Madi aquello, más que asustarle, le recordó una danza india y lo invitó a bailar.
 
@@ -255,13 +469,61 @@ Molvorón, furioso al ver que la niña no hacía caso de sus amenazas, se inclin
 
 Cuando el pulpo se había alejado, todos fueron a felicitarla por su valentía. Ella les contó que todo se debía a los poderes de su nuevo vestido, pero en ese momento se dio cuenta de que no lo llevaba puesto.
 
-La pequeña medusa se había enfrentado a Molvorón llevando únicamente su sonrisa y su alegría. Y ya nunca más necesitó aquel vestido, al comprender que una sonrisa tenía tanto poder como su vestido mágico, pero... ¡¡era mucho más cómoda y fácil de llevar!!`,
+La pequeña medusa se había enfrentado a Molvorón llevando únicamente su sonrisa y su alegría. Y ya nunca más necesitó aquel vestido, al comprender que una sonrisa tenía tanto poder como su vestido mágico, pero... ¡era mucho más cómoda y fácil de llevar!`,
             preguntas: [
                 "¿De qué trata la lectura?",
                 "¿Qué había en el cofre que se encontró Madi?",
                 "¿Cómo se enoja Molvorón?",
                 "¿Por qué se deprimió Molvorón?",
                 "¿Qué hizo Madi cuando se dio cuenta que no llevaba el vestido puesto?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El meteorito que cayó en el desierto",
+            palabras: 285,
+            contenido: `En 1969, un meteorito cayó en el desierto de Chihuahua, México. Los científicos lo llamaron Allende, en honor al pueblo donde fue encontrado. Lo que nadie sabía entonces es que aquella roca espacial se convertiría en uno de los meteoritos más estudiados de la historia.
+
+El meteorito Allende pesaba aproximadamente dos toneladas y se fragmentó al entrar en la atmósfera. Miles de pedazos se dispersaron por el desierto, y los habitantes de la región los recogieron sin saber que tenían un tesoro científico en sus manos.
+
+Los investigadores descubrieron que Allende contenía minerales que se formaron antes que el Sol y los planetas. Es decir, era más antiguo que la Tierra misma. Al estudiarlo, los científicos pudieron entender mejor cómo se formó el sistema solar hace 4,600 millones de años.
+
+Uno de los hallazgos más importantes fue la presencia de aminoácidos, las moléculas que forman las proteínas. Esto sugirió que los ingredientes de la vida podrían haber llegado a la Tierra desde el espacio. Aunque no prueba que la vida vino de fuera, sí muestra que los componentes básicos existen en el universo.
+
+El meteorito Allende también ayudó a desarrollar tecnologías. Los científicos usaron sus fragmentos para calibrar instrumentos y para estudiar la composición de otros cuerpos celestes. Hoy, pedazos de Allende se exhiben en museos de todo el mundo y se conservan en laboratorios para futuras investigaciones.
+
+La caída de Allende fue un accidente cósmico, pero se convirtió en una ventana al pasado. Gracias a él, sabemos más sobre nuestros orígenes y sobre el lugar que ocupamos en el universo. Como dijo un científico: "Allende no solo cayó del cielo, también nos abrió los ojos al cielo".`,
+            preguntas: [
+                "¿Dónde y cuándo cayó el meteorito Allende?",
+                "¿Por qué se dice que Allende es más antiguo que la Tierra?",
+                "¿Qué hallazgo importante se encontró en el meteorito?",
+                "¿Cómo ayudó Allende al desarrollo de tecnologías?",
+                "¿Qué significa la frase final del texto?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "La mariposa monarca: un viaje increíble",
+            palabras: 304,
+            contenido: `Cada otoño, millones de mariposas monarca emprenden un viaje extraordinario. Parten desde Canadá y Estados Unidos y vuelan más de 4,000 kilómetros hasta llegar a los bosques de Michoacán y el Estado de México. Es una de las migraciones más impresionantes del reino animal.
+
+Las mariposas monarca son pequeñas: pesan menos de un gramo y miden unos 10 centímetros con las alas extendidas. Sin embargo, son capaces de volar distancias enormes. ¿Cómo lo logran? Los científicos han descubierto que usan el sol como brújula y que tienen un reloj biológico que les indica cuándo viajar.
+
+El viaje no lo hace una sola mariposa. Las que nacen en otoño son diferentes: viven hasta ocho meses, mientras que las que nacen en verano solo viven unas semanas. Estas mariposas "migratorias" no se reproducen durante el viaje; esperan hasta llegar a México para aparearse y poner huevos.
+
+En México, los bosques de oyamel se convierten en un refugio. Los árboles se cubren de mariposas naranjas y negras, y el suelo se tiñe de color. Los turistas llegan para admirar el espectáculo, y las comunidades locales han desarrollado proyectos de ecoturismo para proteger a las mariposas y generar ingresos.
+
+Sin embargo, la migración está en peligro. La tala ilegal, el uso de pesticidas y el cambio climático han reducido las poblaciones de monarca. En 2020, los científicos reportaron una disminución del 53% respecto al año anterior. Los gobiernos de México, Estados Unidos y Canadá trabajan juntos para protegerlas, pero el desafío es grande.
+
+La mariposa monarca es un símbolo de la conexión entre los ecosistemas. Su viaje nos recuerda que la naturaleza no conoce fronteras y que nuestras acciones en un país afectan a especies que viven en otro. Protegerlas es proteger la biodiversidad del planeta y la maravilla de la migración.`,
+            preguntas: [
+                "¿Cuántos kilómetros recorren las mariposas monarca?",
+                "¿Cómo logran orientarse durante el viaje?",
+                "¿En qué se diferencian las mariposas que nacen en otoño?",
+                "¿Qué peligros enfrenta la migración de la monarca?",
+                "¿Por qué se dice que la mariposa monarca es un símbolo de conexión?"
             ],
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
@@ -407,7 +669,7 @@ Es cierto, señor Ogro, Blancanieves está enamorada de usted. ¡Ni el espejo de
 
 -Yo sé que usted pensará que... ¡claro!, una consentida como yo, qué se va a poner unas botas de hombre; pero es que... señor, así esté con el corazón a punto de estallar por él, una no debe perder su feminidad, ¡pase lo que pase!
 
-¿Sabe qué, señor Ogro? Esa niña lo adora. Me contó que lo ha amado toda su vida, que cuando está despierta se trasnocha pensándolo; y cuando está dormida, soñándolo. También me mandó decirle que aunque usted quiere parecer un insensible, debajo de esa apariencia de Ogro malo hay un niño grandote que tiene miedo de decir “te quiero”.
+¿Sabe qué, señor Ogro? Esa niña lo adora. Me contó que lo ha amado toda su vida, que cuando está despierta se trasnocha pensándolo; y cuando está dormida, soñándolo. También me mandó decirle que aunque usted quiere parecer un insensible, debajo de esa apariencia de Ogro malo hay un niño grandote que tiene miedo de decir "te quiero".
 
 Por último, Ogro (de ahora en adelante le voy a decir Ogro a secas, pues creo que este secreto nos acerca muy especialmente), la dulce niña enamorada me pidió que le demos una oportunidad para demostrarnos a los dos que ella es un típico caso de manipulación, pues dice que en el fondo es trabajadora, hacendosa y un poquito trasnochadora.
 
@@ -447,6 +709,58 @@ Se ha probado que es factible hacer "caminar" un moai de unos tres metros de alt
             ],
             opciones: [null, null, null, null, null],
             correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El poder de las abejas en los ecosistemas",
+            palabras: 491,
+            contenido: `Las abejas son mucho más que productoras de miel. Estos pequeños insectos desempeñan un papel fundamental en la polinización, un proceso esencial para la reproducción de las plantas y la producción de alimentos. Sin ellas, la biodiversidad del planeta estaría en grave riesgo, y la humanidad enfrentaría una crisis alimentaria sin precedentes.
+
+La polinización ocurre cuando el polen de una flor es transportado al órgano reproductor de otra. Aunque el viento y el agua pueden realizar esta tarea, las abejas son los polinizadores más eficientes. Al buscar néctar para alimentarse, visitan cientos de flores al día, transportando polen en sus patas y cuerpos. Este servicio ecológico gratuito es indispensable para la agricultura: se estima que una de cada tres cucharadas de comida que consumimos depende directamente de la polinización.
+
+Sin embargo, las poblaciones de abejas han disminuido drásticamente en las últimas décadas. Los científicos han identificado varias causas: el uso excesivo de pesticidas, la pérdida de hábitats naturales, el cambio climático y las enfermedades. Este fenómeno, conocido como "síndrome de colapso de las colmenas", ha encendido las alarmas en todo el mundo. En algunas regiones, los apicultores han reportado pérdidas de hasta el 40% de sus colmenas en un solo año.
+
+Las consecuencias de esta disminución son graves. Menos abejas significa menos polinización, lo que se traduce en cosechas más pobres y alimentos más caros. Los cultivos que dependen de polinizadores incluyen frutas, verduras, frutos secos y semillas. Sin ellos, nuestra dieta se volvería monótona y menos nutritiva. Además, la pérdida de abejas afecta a otras especies que dependen de las plantas polinizadas para sobrevivir, generando un efecto dominó en los ecosistemas.
+
+Frente a este panorama, han surgido iniciativas para proteger a las abejas. En varios países se han prohibido ciertos pesticidas dañinos, se han creado reservas de polinizadores y se promueve la agricultura orgánica. En las ciudades, cada vez más personas instalan colmenas urbanas en azoteas y jardines, lo que ayuda a mantener las poblaciones. Los científicos también trabajan en el desarrollo de variedades de plantas más resistentes y en el estudio de las enfermedades que afectan a las colmenas.
+
+La educación ambiental es clave. Muchas personas temen a las abejas por su aguijón, pero ignoran que son insectos pacíficos que solo atacan cuando se sienten amenazados. Comprender su importancia es el primer paso para protegerlas. Plantar flores nativas, evitar pesticidas y apoyar a los apicultores locales son acciones al alcance de todos.
+
+El futuro de las abejas está en nuestras manos. Protegerlas no es solo un acto de generosidad hacia la naturaleza, sino una necesidad para garantizar la seguridad alimentaria y la salud del planeta. Como dijo el científico Albert Einstein —aunque la frase no está confirmada—, "si las abejas desaparecieran, al hombre solo le quedarían cuatro años de vida". Más allá de la veracidad de la cita, el mensaje es claro: dependemos de ellas más de lo que creemos.`,
+            preguntas: [
+                "¿Por qué las abejas son importantes para los ecosistemas?",
+                "¿Qué causas han provocado la disminución de las abejas?",
+                "¿Qué consecuencias tiene la pérdida de abejas para la alimentación humana?",
+                "¿Qué iniciativas existen para proteger a las abejas?",
+                "¿Qué significa la frase final del texto?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El derecho a la privacidad en la era digital",
+            palabras: 469,
+            contenido: `Vivimos en una era en la que cada clic, cada búsqueda y cada mensaje deja un rastro digital. Las empresas tecnológicas recopilan datos personales a una escala sin precedentes, y los gobiernos tienen la capacidad de vigilar a sus ciudadanos como nunca antes. En este contexto, el derecho a la privacidad se ha convertido en uno de los debates más urgentes de nuestro tiempo.
+
+La privacidad es un derecho humano reconocido en la Declaración Universal de los Derechos Humanos de 1948. Sin embargo, la tecnología ha desdibujado sus fronteras. Los teléfonos inteligentes registran nuestra ubicación, las redes sociales almacenan nuestros gustos y opiniones, y los asistentes virtuales escuchan nuestras conversaciones. Gran parte de esta información se utiliza para personalizar anuncios, pero también puede ser vendida a terceros o utilizada con fines políticos.
+
+Los defensores de la privacidad advierten sobre los peligros de la vigilancia masiva. Argumentan que cuando las personas saben que están siendo observadas, modifican su comportamiento: dejan de buscar ciertos temas, evitan expresar opiniones controvertidas y limitan su participación en la vida pública. Este fenómeno, conocido como "efecto enfriamiento", debilita la democracia y la libertad de expresión. Además, los datos personales pueden ser utilizados para discriminar: las aseguradoras podrían negar cobertura a personas con ciertos perfiles de salud, o los empleadores podrían rechazar candidatos basándose en su actividad en redes sociales.
+
+Por otro lado, los defensores de la tecnología argumentan que la recopilación de datos tiene beneficios. Los datos permiten personalizar servicios, mejorar la atención médica, optimizar el transporte y prevenir delitos. Durante la pandemia de COVID-19, el rastreo de contactos mediante aplicaciones móviles ayudó a contener los contagios. La clave, dicen, está en encontrar un equilibrio entre la innovación y la protección de los derechos.
+
+En respuesta a estas preocupaciones, han surgido leyes como el Reglamento General de Protección de Datos (GDPR) en Europa, que otorga a los ciudadanos el derecho a saber qué datos se recopilan sobre ellos y a solicitar su eliminación. En México, la Ley Federal de Protección de Datos Personales establece obligaciones similares. Sin embargo, la aplicación de estas normas es desigual, y muchas empresas operan en vacíos legales.
+
+La educación digital es fundamental. Los usuarios deben aprender a proteger su información, configurar la privacidad de sus cuentas y ser conscientes de los términos que aceptan al usar una aplicación. La privacidad no es solo responsabilidad de los gobiernos y las empresas; también es una responsabilidad individual.
+
+El debate sobre la privacidad en la era digital nos obliga a preguntarnos qué tipo de sociedad queremos construir. ¿Una en la que la conveniencia justifica la vigilancia, o una en la que los derechos humanos se mantienen intactos frente al avance tecnológico? La respuesta no es sencilla, pero ignorar el problema no es una opción.`,
+            preguntas: [
+                "¿Por qué la privacidad es un tema urgente en la era digital?",
+                "¿Qué es el 'efecto enfriamiento' y cómo afecta a la sociedad?",
+                "¿Qué beneficios tiene la recopilación de datos según sus defensores?",
+                "¿Qué leyes existen para proteger los datos personales?",
+                "¿Qué responsabilidad tienen los usuarios frente a su privacidad?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
         }
     ],
 
@@ -459,7 +773,7 @@ Se ha probado que es factible hacer "caminar" un moai de unos tres metros de alt
 
 Los investigadores definen muerte clínica como un periodo en el que se da una falta de conciencia por un insuficiente suministro de sangre en el cerebro, debido a que la circulación sanguínea, la respiración, o ambas son inadecuadas. Si en esta situación no se administra una resucitación cardiopulmonar en un lapso de cinco a 10 minutos, el daño al cerebro será irreparable y el paciente morirá. Las NDE son la serie de recuerdos que reportan los pacientes que han estado clínicamente muertos y son resucitados, y que incluyen elementos específicos como experimentar sensaciones muy placenteras, un desdoblamiento en el que ven su cuerpo desde afuera, viajar por un túnel, ver una luz, encontrarse con parientes que han muerto o ver un resumen de su vida, como una película que pasa a gran velocidad. Las NDE se han reportado en muchas circunstancias, por ejemplo en personas que han sufrido paro cardiaco, coma debido a daños cerebrales por traumatismos, hemorragias cerebrales, intentos de suicidio o asfixia, entre otras. También han tenido estas experiencias personas con enfermedades graves, o que sufren depresiones profundas, o personas perfectamente conscientes y sanas, sin ninguna razón aparente.
 
-El estudio se llevó a cabo con 344 pacientes en 10 hospitales de Holanda que sufrieron muerte clínica causada por paros cardiacos y posteriormente fueron resucitados. Unos cuantos días después, en cuanto estuvieron suficientemente restablecidos, los investigadores entrevistaron a los pacientes. También compararon los datos demográficos, médicos, farmacológicos y sicológicos de los que reportaron NDE y los que no lo hicieron. Sesenta y dos pacientes (18 % del total) reportaron haber tenido NDE; todos recordaban algunos hechos que sucedieron ante la muerte clínica y para ninguno de ellos la experiencia fue negativa. En el estudio no se encontró ninguna relación entre la ocurrencia de NDE y la duración o gravedad del paro cardiaco ni con las medicinas usadas; es decir que no se encontraron factores médicos que pudieran explicarlo. Tampoco factores sicológicos (como son el miedo a la muerte o la creencia en ideas religiosas) fueran determinantes para que las personas tuvieran (o no) estas experiencias. La única relación que encontraron fue que los más jóvenes (especialmente aquéllos menores de 60 años) y las mujeres (incluso las que tenían 60 años o más) tuvieron NDE con mayor frecuencia.
+El estudio se llevó a cabo con 344 pacientes en 10 hospitales de Holanda que sufrieron muerte clínica causada por paros cardiacos y posteriormente fueron resucitados. Unos cuantos días después, en cuanto estuvieron suficientemente restablecidos, los investigadores entrevistaron a los pacientes. También compararon los datos demográficos, médicos, farmacológicos y psicológicos de los que reportaron NDE y los que no lo hicieron. Sesenta y dos pacientes (18 % del total) reportaron haber tenido NDE; todos recordaban algunos hechos que sucedieron ante la muerte clínica y para ninguno de ellos la experiencia fue negativa. En el estudio no se encontró ninguna relación entre la ocurrencia de NDE y la duración o gravedad del paro cardiaco ni con las medicinas usadas; es decir que no se encontraron factores médicos que pudieran explicarlo. Tampoco factores psicológicos (como son el miedo a la muerte o la creencia en ideas religiosas) fueron determinantes para que las personas tuvieran (o no) estas experiencias. La única relación que encontraron fue que los más jóvenes (especialmente aquellos menores de 60 años) y las mujeres (incluso las que tenían 60 años o más) tuvieron NDE con mayor frecuencia.
 
 Se han propuesto varias hipótesis sobre el origen de las NDE. Algunos investigadores piensan que éstas las causan cambios fisiológicos del cerebro, como los que suceden a partir de la muerte de células del cerebro por la falta de oxígeno, pero si esto fuera así, todos los pacientes del estudio deberían haberlas experimentado y sólo lo hizo el 18 %.
 
@@ -474,6 +788,58 @@ La duda más importante que plantea la investigación es la siguiente: ¿cómo p
             ],
             opciones: [null, null, null, null, null, null],
             correctas: [null, null, null, null, null, null]
+        },
+        {
+            titulo: "El cerebro adolescente: una obra en construcción",
+            palabras: 464,
+            contenido: `La adolescencia ha sido descrita como una montaña rusa emocional, y la ciencia ha demostrado que esta metáfora tiene bases neurológicas. Durante esta etapa, el cerebro experimenta una transformación profunda que explica por qué los adolescentes buscan emociones intensas, toman riesgos y, a veces, actúan de manera impulsiva.
+
+Hasta hace pocas décadas, se creía que el cerebro terminaba de desarrollarse en la infancia. Sin embargo, los avances en neuroimagen han revelado que la maduración cerebral continúa hasta los 25 años. El proceso más importante ocurre en la corteza prefrontal, la región responsable de funciones ejecutivas como la planificación, el autocontrol y la toma de decisiones. Esta área es la última en madurar, lo que explica por qué los adolescentes pueden razonar como adultos en situaciones tranquilas, pero fallan cuando están bajo presión emocional.
+
+Mientras la corteza prefrontal madura lentamente, el sistema límbico —que regula las emociones y las recompensas— se vuelve hiperactivo. La dopamina, un neurotransmisor asociado con el placer y la motivación, alcanza niveles máximos durante la adolescencia. Esto hace que las experiencias nuevas y emocionantes sean especialmente atractivas. Los estudios muestran que los adolescentes son más propensos a buscar recompensas inmediatas y a subestimar los riesgos, especialmente cuando están con amigos.
+
+Este desequilibrio entre un sistema emocional acelerado y un sistema de control aún en desarrollo no es un defecto, sino una característica evolutiva. Los antropólogos sugieren que la búsqueda de novedades y la independencia fueron esenciales para que los jóvenes exploraran nuevos territorios y aprendieran habilidades fuera del núcleo familiar. En cierto sentido, el cerebro adolescente está diseñado para aprender, adaptarse y arriesgarse.
+
+Sin embargo, esta vulnerabilidad también tiene consecuencias. La adolescencia es la etapa en la que suelen aparecer los primeros síntomas de trastornos mentales como la ansiedad, la depresión y la esquizofrenia. El consumo de alcohol y drogas durante este periodo puede alterar permanentemente el desarrollo cerebral. Además, la falta de sueño —común entre los adolescentes debido a cambios en su ritmo circadiano— afecta la memoria, el estado de ánimo y el rendimiento escolar.
+
+La investigación también ha revelado que el cerebro adolescente es altamente plástico, es decir, moldeable por la experiencia. Esto significa que las intervenciones educativas y emocionales durante esta etapa pueden tener un impacto duradero. Programas que enseñan habilidades socioemocionales, que fomentan el ejercicio físico y que promueven el sueño adecuado han demostrado mejorar el bienestar y el rendimiento académico.
+
+Comprender el cerebro adolescente cambia la forma en que los adultos deberían relacionarse con los jóvenes. En lugar de etiquetarlos como rebeldes o irresponsables, la neurociencia sugiere que necesitan apoyo, estructura y oportunidades para desarrollar su autocontrol. La paciencia y la comprensión no son solo virtudes, sino herramientas basadas en evidencia para acompañarlos en su transición a la adultez.`,
+            preguntas: [
+                "¿Por qué los adolescentes actúan de manera impulsiva?",
+                "¿Qué región del cerebro madura hasta los 25 años?",
+                "¿Qué papel juega la dopamina en la adolescencia?",
+                "¿Por qué el desequilibrio cerebral adolescente no es un defecto?",
+                "¿Qué consecuencias tiene la vulnerabilidad del cerebro adolescente?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
+        },
+        {
+            titulo: "El cambio climático y los océanos",
+            palabras: 529,
+            contenido: `Los océanos cubren más del 70% de la superficie terrestre y desempeñan un papel crucial en la regulación del clima. Absorben aproximadamente un tercio del dióxido de carbono que los humanos liberan a la atmósfera y más del 90% del calor adicional generado por el efecto invernadero. Sin embargo, esta capacidad de absorción tiene un costo: los océanos están cambiando a un ritmo sin precedentes, con consecuencias graves para la vida marina y para la humanidad.
+
+Uno de los efectos más visibles es el aumento de la temperatura del agua. Los océanos han absorbido tanto calor que las olas de calor marinas —periodos de temperaturas anormalmente altas— se han vuelto más frecuentes e intensas. Estas olas de calor provocan la muerte masiva de corales, que son el hogar de miles de especies. Los arrecifes de coral, conocidos como "las selvas del mar", están desapareciendo a un ritmo alarmante. Según los científicos, si la temperatura global aumenta 2°C respecto a los niveles preindustriales, el 99% de los arrecifes podría desaparecer.
+
+Otro fenómeno crítico es la acidificación. Cuando el dióxido de carbono se disuelve en el agua, forma ácido carbónico, lo que reduce el pH del océano. Desde la Revolución Industrial, el pH ha disminuido un 30%, un cambio más rápido que cualquier otro en los últimos 300 millones de años. Esta acidificación dificulta la formación de conchas y esqueletos de organismos como los moluscos, los corales y el plancton. Como el plancton es la base de la cadena alimenticia marina, su declive afecta a todas las especies, desde las sardinas hasta las ballenas.
+
+El aumento del nivel del mar es otra consecuencia directa. El derretimiento de los glaciares y de las capas de hielo de Groenlandia y la Antártida ha acelerado la subida del nivel del mar, que ya ha aumentado unos 20 centímetros desde 1900. Las proyecciones indican que para 2100 podría subir hasta un metro, lo que inundaría ciudades costeras y desplazaría a millones de personas. En México, zonas como la Península de Yucatán y las costas del Golfo serían especialmente vulnerables.
+
+Además, el calentamiento altera las corrientes marinas. Estas corrientes, como la Corriente del Golfo, transportan nutrientes y regulan el clima de regiones enteras. Un cambio en su funcionamiento podría provocar inviernos más extremos en Europa y sequías en otras partes del mundo. Los científicos advierten que el sistema climático global está interconectado, y que alterar una parte puede desestabilizar todo el conjunto.
+
+Frente a esta crisis, existen soluciones. La reducción de emisiones de gases de efecto invernadero es la más urgente. También se promueven la creación de áreas marinas protegidas, la restauración de ecosistemas costeros como los manglares y la investigación en energías renovables. A nivel individual, reducir el consumo de plástico, elegir transporte sostenible y apoyar políticas ambientales son acciones que suman.
+
+Los océanos han sido nuestros aliados silenciosos en la lucha contra el cambio climático. Protegerlos no es solo un deber ecológico, sino una necesidad para la supervivencia humana. Como dijo la oceanógrafa Sylvia Earle: "Sin océanos, no hay vida. Sin vida, no hay océanos". La frase resume la urgencia de actuar antes de que sea demasiado tarde.`,
+            preguntas: [
+                "¿Qué papel juegan los océanos en la regulación del clima?",
+                "¿Qué son las olas de calor marinas y qué consecuencias tienen?",
+                "¿Qué es la acidificación del océano y cómo afecta a la vida marina?",
+                "¿Qué consecuencias tiene el aumento del nivel del mar?",
+                "¿Qué soluciones se proponen para proteger los océanos?"
+            ],
+            opciones: [null, null, null, null, null],
+            correctas: [null, null, null, null, null]
         }
     ]
 };
