@@ -510,4 +510,179 @@
 
         let htmlFicha = `
             <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; border: 2px solid #e85f2f; border-radius: 20px; background:white;">
-                <h
+                <h2 style="color: #e85f2f; margin:0 0 12px 0;">📋 SAAL - Ficha diagnóstica</h2>
+                <p><strong>Alumno(a):</strong> ${nombre}</p>
+                <p><strong>Grado:</strong> 1° primaria</p>
+                <p><strong>Texto:</strong> ${textoActual.titulo} (${textoActual.palabras} palabras)</p>
+                <p><strong>Modo:</strong> ${modoTexto === 'fijo' ? 'Fijo' : '🎲 Aleatorio'}</p>
+                <p><strong>Fecha:</strong> ${fecha}</p>
+                <hr style="margin:12px 0;">
+                <h3>Resultado:</h3>
+                <p style="font-size:1.5rem; margin:6px 0;">Puntaje: ${total} / 6</p>
+                <p style="font-size:1.2rem;">${nivel}</p>
+                <h3>Puntajes:</h3>
+                <ul style="font-size:0.9rem; padding-left:20px;">
+                    <li>Fluidez: ${puntajesActuales.fluidez}/3</li>
+                    <li>Comprensión: ${puntajesActuales.comprension}/3</li>
+                </ul>
+                <h3>Recomendaciones:</h3>
+                <ul style="font-size:0.9rem; padding-left:20px;">
+                    <li>🟢 Sigue practicando la lectura en voz alta.</li>
+                </ul>
+                <hr style="margin:12px 0;">
+                <p style="font-size:0.7rem; color:#777;">SAAL - Jalisco | Versión 3.0</p>
+            </div>
+        `;
+
+        document.getElementById('ficha-contenido').innerHTML = htmlFicha;
+        document.getElementById('ficha-area').style.display = 'block';
+        document.getElementById('areaRubrica').style.display = 'none';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // ============================================================
+    // PLAN DE INTERVENCIÓN
+    // ============================================================
+
+    function generarYMostrarPlan() {
+        const total = Object.values(puntajesActuales).reduce((a, b) => a + b, 0);
+        if (total === 0) {
+            alert('Primero debes completar la evaluación.');
+            return;
+        }
+
+        const plan = generarPlanIntervencion(puntajesActuales);
+        const planDiv = document.getElementById('plan-intervencion');
+        planDiv.innerHTML = generarHTMLPlan(plan);
+        planDiv.style.display = 'block';
+        planDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function generarPlanIntervencion(puntajes) {
+        const areas = [
+            { id: 'fluidez', nombre: 'Fluidez' },
+            { id: 'comprension', nombre: 'Comprensión lectora' }
+        ];
+
+        const areasPrioritarias = [];
+        const areasSecundarias = [];
+
+        areas.forEach(area => {
+            const nivel = puntajes[area.id] || 0;
+            if (nivel === 1) {
+                areasPrioritarias.push({ ...area, nivel });
+            } else if (nivel === 2) {
+                areasSecundarias.push({ ...area, nivel });
+            }
+        });
+
+        const areasParaTrabajar = areasPrioritarias.length > 0 ? areasPrioritarias : areasSecundarias;
+
+        const plan = {
+            alumno: localStorage.getItem('nombreAlumno') || 'Alumno',
+            grado: '1° primaria',
+            fecha: new Date().toLocaleDateString('es-MX'),
+            semanas: []
+        };
+
+        for (let semana = 1; semana <= 4; semana++) {
+            const dias = [];
+            for (let dia = 1; dia <= 5; dia++) {
+                const actividades = [];
+                const areaIndex = ((semana - 1) * 5 + (dia - 1)) % areasParaTrabajar.length;
+                const areaSeleccionada = areasParaTrabajar[areaIndex];
+                const actividad = seleccionarActividad(areaSeleccionada.nombre, areaSeleccionada.nivel, semana, dia);
+                if (actividad) actividades.push(actividad);
+                dias.push({ dia: dia, actividades: actividades });
+            }
+            plan.semanas.push({ semana: semana, dias: dias });
+        }
+
+        return plan;
+    }
+
+    function seleccionarActividad(area, nivel, semana, dia) {
+        const posibles = bancoActividades.filter(a => a.area === area && a.nivel === nivel);
+        if (posibles.length === 0) {
+            const alternativas = bancoActividades.filter(a => a.area === area && a.nivel === 2);
+            if (alternativas.length === 0) return null;
+            return alternativas[(semana * 3 + dia * 7) % alternativas.length];
+        }
+        const indice = (semana * 3 + dia * 7) % posibles.length;
+        return posibles[indice];
+    }
+
+    function generarHTMLPlan(plan) {
+        if (!plan.semanas || plan.semanas.length === 0) {
+            return `
+                <div style="padding:20px; text-align:center;">
+                    <p style="font-size:1.2rem;">🎉 ¡El alumno está en nivel deseable en todos los componentes!</p>
+                    <p>Se recomienda continuar con la práctica diaria de lectura.</p>
+                </div>
+            `;
+        }
+
+        let html = `
+            <h3 style="color:#2c3e50; margin-bottom:10px;">📋 Plan de intervención de 4 semanas</h3>
+            <p><strong>Alumno:</strong> ${plan.alumno}</p>
+            <p><strong>Grado:</strong> ${plan.grado}</p>
+            <p><strong>Fecha:</strong> ${plan.fecha}</p>
+            <p><strong>Duración:</strong> 15 minutos diarios</p>
+            <hr style="margin:12px 0;">
+        `;
+
+        plan.semanas.forEach((semana, idx) => {
+            html += `<h4 style="color:#e85f2f; margin:15px 0 8px 0;">📌 Semana ${idx + 1}</h4>`;
+            
+            semana.dias.forEach(dia => {
+                if (dia.actividades.length === 0) return;
+                
+                html += `<div style="margin-bottom:10px; background:#f8f9fa; padding:10px; border-radius:10px; border-left:4px solid #3498db;">`;
+                html += `<p style="font-weight:bold; margin:0 0 6px 0;">📅 Día ${dia.dia}</p>`;
+                
+                dia.actividades.forEach(act => {
+                    html += `
+                        <div style="margin:4px 0 0 15px; padding:8px 12px; background:white; border-radius:8px; border:1px solid #e0e0e0;">
+                            <p style="margin:2px 0; font-weight:bold;">${act.area}: ${act.nombre}</p>
+                            <p style="margin:2px 0; font-size:0.85rem; color:#555;">📝 ${act.descripcion}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">📎 Materiales: ${act.materiales.join(', ')}</p>
+                            <p style="margin:2px 0; font-size:0.8rem; color:#777;">⏱️ ${act.duracion} minutos</p>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            });
+        });
+
+        html += `
+            <hr style="margin:12px 0;">
+            <p style="font-size:0.75rem; color:#777;">Plan generado automáticamente por SAAL basado en los resultados del diagnóstico.</p>
+            <p style="font-size:0.75rem; color:#777;">Actividades extraídas del banco de actividades SAAL.</p>
+        `;
+
+        return html;
+    }
+
+    // ============================================================
+    // REINICIO DE EVALUACIÓN
+    // ============================================================
+    function reiniciarEvaluacion() {
+        if (confirm('¿Quieres realizar una nueva evaluación con otro alumno?')) {
+            localStorage.removeItem('nombreAlumno');
+            localStorage.removeItem('curp');
+            localStorage.removeItem('turno');
+            localStorage.removeItem('aplicador');
+            localStorage.removeItem('dispositivo');
+            localStorage.removeItem('cct');
+            localStorage.removeItem('zonaEscolar');
+            localStorage.removeItem('grado');
+            localStorage.removeItem('nivel');
+            window.location.href = 'aplicador.html';
+        }
+    }
+
+    cargarTextos();
+</script>
+</body>
+</html>
