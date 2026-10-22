@@ -53,12 +53,6 @@
             <input type="text" id="nombreAlumno" placeholder="Escribe el nombre completo" required>
         </div>
 
-        <!-- CURP (obligatorio) -->
-       <div class="campo obligatorio">
-    <label>CURP del alumno</label>
-    <input type="text" id="curpAlumno" placeholder="Escribe la CURP (18 caracteres)" maxlength="18" required>
-</div>
-
         <!-- Turno (opcional) -->
         <div class="campo">
             <label>Turno</label>
@@ -119,25 +113,6 @@
             return false;
         }
 
-        // === VALIDACIÓN DE CURP ===
-        const curp = document.getElementById('curpAlumno').value.trim().toUpperCase();
-        if (!curp) {
-            alert("❌ Escribe la CURP del alumno.");
-            document.getElementById('curpAlumno').focus();
-            return false;
-        }
-        if (curp.length !== 18) {
-            alert("❌ La CURP debe tener 18 caracteres. Tiene " + curp.length + ".");
-            document.getElementById('curpAlumno').focus();
-            return false;
-        }
-        // Verificar que la CURP solo tenga letras y números
-        if (!/^[A-Z0-9]+$/.test(curp)) {
-            alert("❌ La CURP solo debe contener letras mayúsculas y números.");
-            document.getElementById('curpAlumno').focus();
-            return false;
-        }
-
         // === VALIDACIÓN DE APLICADOR ===
         const aplicador = document.getElementById('aplicador').value;
         if (!aplicador) {
@@ -163,7 +138,6 @@
 
         // === GUARDAR EN LOCALSTORAGE ===
         localStorage.setItem('nombreAlumno', nombre);
-        localStorage.setItem('curp', curp);
         localStorage.setItem('turno', document.getElementById('turno').value);
         localStorage.setItem('aplicador', aplicador);
         localStorage.setItem('dispositivo', dispositivo.value);
@@ -179,7 +153,6 @@
     window.onload = function() {
         if (localStorage.getItem('nombreAlumno')) {
             document.getElementById('nombreAlumno').value = localStorage.getItem('nombreAlumno');
-            document.getElementById('curpAlumno').value = localStorage.getItem('curp') || '';
             document.getElementById('turno').value = localStorage.getItem('turno') || '';
             document.getElementById('aplicador').value = localStorage.getItem('aplicador') || '';
             document.getElementById('cct').value = localStorage.getItem('cct') || '';
